@@ -109,7 +109,7 @@
 
 <header>
   <p class="meta">Jan 30, 2019
-     - 18 minute read 
+     - 19 minute read 
     
 
     
@@ -126,20 +126,6 @@
           
           
 
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elisp" data-lang="elisp">(<span style="color:#268bd2">pyvenv-workon</span> <span style="color:#2aa198">&#34;pymc3&#34;</span>)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">import numpy as np
-import scipy.stats as st
-import pandas as pd
-import theano.tensor as tt
-import pymc3 as pm
-import matplotlib.pyplot as plt
-import matplotlib.tri as tri
-import seaborn as sns
-
-%matplotlib inline
-plt.rcParams[&#39;figure.figsize&#39;] = (14.0, 8.65)
-sns.set()
-sns.set_palette(&#34;Blues_r&#34;)
-sns.set_context(&#34;talk&#34;)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># Out[32]:</code></pre></div>
 <p>Imagine we have some collection of documents. They could be novels, or tweets, or financial reports&mdash;just any collection of text. We want an algorithm that can discover what they are about, and we would like our algorithm to do it automatically, without any hints. (That is, we want our algorithm to be <em>unsupervised</em>.) We will look at several models that probabilistically assign words to topics using <a href="https://en.wikipedia.org/wiki/Bayes%27%5Ftheorem" target="_blank">Bayes&rsquo; Theorem</a>. They are all <a href="https://en.wikipedia.org/wiki/Bayesian%5Fnetwork" target="_blank">Bayesian Graphical Models</a>.</p>
 
 <p>The basic problem in statistics is to infer some unobservable value from observable instances of it. In our case, we want to infer the <em>topics</em> of a document from the actual words in the document. We want to be able to infer that our document is about &ldquo;colors&rdquo; if we observe &ldquo;red&rdquo; and &ldquo;green&rdquo; and &ldquo;blue&rdquo;.</p>
@@ -169,7 +155,7 @@ plt.xlim(-0.5, 1.5)</code></pre></div><div class="highlight"><pre style="color:#
 
 <figure>
     
-        <img src="http://www.mathformachines.com/2019-01-30-bayesian-topic-modeling/obipy-resources/14366tCt.png"/> </figure>
+        <img src="http://www.mathformachines.com/2019-01-30-bayesian-topic-modeling/obipy-resources/14366Vwu.png"/> </figure>
 
 
 <p>Here, 1 represents &ldquo;red&rdquo; and 0 represents &ldquo;blue&rdquo; (or not-&ldquo;red&rdquo;).</p>
@@ -178,7 +164,7 @@ plt.xlim(-0.5, 1.5)</code></pre></div><div class="highlight"><pre style="color:#
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">coding = {0 : &#34;blue&#34;, 1 : &#34;red&#34;}
 W = 50  # number of tokens in the document
 tokens = st.bernoulli.rvs(0.3, size = W)  # choose the tokens
-print(&#39; &#39;.join(str(w) for w in [coding[i] for i in tokens]))</code></pre></div>
+print(&#39; &#39;.join(str(w) for w in [coding[i] for i in tokens]))</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">blue blue blue red blue red red red red blue blue blue blue blue red blue blue blue red blue blue blue blue red blue red red red red blue blue blue red blue blue blue blue red blue red blue blue blue blue blue red blue blue blue red</code></pre></div>
 <p>blue blue red blue red blue blue red red blue blue blue blue blue blue blue blue red blue blue blue blue blue blue blue blue blue red red blue blue blue blue blue blue red blue blue red blue red blue red blue blue blue blue blue red blue</p>
 
 <h3 id="unigram-model">Unigram Model</h3>
@@ -217,6 +203,14 @@ f.suptitle(r&#39;Beta Distributions for $\theta$&#39;, fontsize=20)</code></pre>
 
 <figure>
     
+        <img src="http://www.mathformachines.com/2019-01-30-bayesian-topic-modeling/obipy-resources/14366i60.png"/> </figure>
+
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Text(0.5, 0.98, &#39;Beta Distributions for $\\theta$&#39;)</code></pre></div>
+
+
+
+<figure>
+    
         <img src="http://www.mathformachines.com/2019-01-30-bayesian-topic-modeling/obipy-resources/14366hAi.png"/> </figure>
 
 
@@ -233,23 +227,23 @@ W = 10  # number of tokens in each document
 for t in thetas:
     print(&#39;Theta: &#39;, t)
     tokens = st.bernoulli.rvs(t, size = W)
-    print(&#39;Document: &#39; + &#39; &#39;.join(str(w) for w in [coding[i] for i in tokens]) + &#39;\n&#39;)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Theta:  0.2376299911870814
-Document: blue red blue blue red red blue blue blue blue
+    print(&#39;Document: &#39; + &#39; &#39;.join(str(w) for w in [coding[i] for i in tokens]) + &#39;\n&#39;)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Theta:  0.9302363695290435
+Document: red red red red blue red red red red red
 
-Theta:  0.768902025579346
-Document: red red red red blue red red red blue red
+Theta:  0.11860480575148062
+Document: blue blue blue blue red blue blue blue blue blue
 
-Theta:  0.6339386112711662
-Document: red blue red blue red blue blue blue red blue
+Theta:  0.6974233440265667
+Document: blue red blue blue red red red blue red blue
 
-Theta:  0.889248394241369
-Document: red red red blue red red red red red red
+Theta:  0.8751016129026872
+Document: red red red red red red red red red red
 
-Theta:  0.7522981849896823
-Document: red red red red blue blue red red red red
+Theta:  0.49876849418291125
+Document: red blue red blue red red red red red red
 
-Theta:  0.18416659985533126
-Document: blue red red blue blue blue red red blue blue</code></pre></div>
+Theta:  0.18083582294749095
+Document: blue red blue blue red red red blue red blue</code></pre></div>
 <p>(We could also assign a distribution to W, the number of tokens in each document. (Blei 2003) uses a Poisson distribution.)</p>
 
 <p>Let&rsquo;s look at a couple more.</p>
@@ -293,22 +287,22 @@ for i in range(D):
     else:
         tokens = st.bernoulli.rvs(phi_1, size = W)
         print(&#39;Document: &#39; + &#39; &#39;.join(str(w)
-              for w in [coding_1[i] for i in tokens]))</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Theta: 0.114  Phi_0: 0.973  Phi_1: 0.637
-Document: red red red red red red red red red red
-Document: red red red blue red red red red red red
-Document: red red red red red red red red red red
-Document: red red red red red red red red red red
-Document: red red red red red red red red red red
-Document: red red red red red red red red red red
-Document: red red red red red red red red red red
-Document: red red red red red red red red red red
-Document: dogs dogs cats cats cats cats cats dogs cats dogs
-Document: red red red red red red red red red red
-Document: red red red red red red red red red red
-Document: red red red red red red red red red red
-Document: red red blue red red red red red red red
-Document: red red red red red red red red red red
-Document: red red red red red red red red red red</code></pre></div>
+              for w in [coding_1[i] for i in tokens]))</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Theta: 0.040  Phi_0: 0.574  Phi_1: 0.431
+Document: red blue red blue blue blue blue blue red red
+Document: blue blue red red blue blue blue blue red blue
+Document: blue red blue red red red red blue blue red
+Document: red blue blue blue blue red red blue red blue
+Document: blue red red red red red blue blue blue red
+Document: red blue blue red blue red red red blue red
+Document: red blue red blue red blue red red blue blue
+Document: red blue red red blue blue blue blue red red
+Document: red blue red blue blue red blue red blue red
+Document: cats cats dogs dogs cats cats cats dogs cats dogs
+Document: blue red blue blue blue red red red blue blue
+Document: blue red red red blue red blue red red red
+Document: red red blue blue red blue red blue blue blue
+Document: blue red blue red blue red blue red red red
+Document: blue red red blue red red blue red blue blue</code></pre></div>
 <h3 id="latent-dirichlet-allocation">Latent Dirichlet Allocation</h3>
 
 <p>This time, instead of choosing a single topic for each document, we&rsquo;ll choose a topic for each word. This will make our model much more flexible and its behavior more realistic.</p>
@@ -348,22 +342,22 @@ for i in range(D):
         else:
             token = st.bernoulli.rvs(phi_1, size=1)[0]  # choose a word from topic 1
             print(coding_1[token], end=&#39; &#39;)
-    print()</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Theta: 0.384  Phi_0: 0.127  Phi_1: 0.028
-Document: dogs blue blue blue dogs blue dogs blue blue blue
-Document: blue dogs blue blue dogs dogs dogs dogs blue cats
-Document: blue dogs blue blue blue dogs red dogs blue blue
-Document: dogs dogs red dogs dogs blue dogs blue blue blue
-Document: blue dogs dogs blue blue dogs red dogs dogs red
-Document: dogs blue blue red dogs blue dogs blue blue blue
-Document: blue blue blue dogs blue dogs blue dogs dogs blue
-Document: dogs red dogs red dogs blue dogs dogs blue blue
-Document: dogs dogs blue dogs blue dogs blue blue blue dogs
-Document: dogs blue blue blue blue red blue blue dogs dogs
-Document: dogs dogs blue red dogs dogs blue blue blue blue
-Document: blue blue blue red dogs blue blue blue blue red
-Document: blue blue blue dogs blue dogs red dogs blue dogs
-Document: dogs blue blue dogs dogs dogs blue dogs dogs blue
-Document: dogs dogs dogs red blue dogs red dogs dogs dogs</code></pre></div>
+    print()</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Theta: 0.517  Phi_0: 0.509  Phi_1: 0.681
+Document: red red blue blue cats red cats red dogs cats
+Document: dogs red blue blue red dogs dogs cats cats red
+Document: cats blue cats red cats red cats blue red red
+Document: red red cats cats red cats dogs blue blue dogs
+Document: cats red blue dogs cats red dogs red cats cats
+Document: red dogs cats red cats cats cats red cats blue
+Document: blue dogs blue cats red red dogs dogs red blue
+Document: red dogs blue cats blue red red cats cats red
+Document: red cats cats red dogs blue cats cats cats cats
+Document: cats dogs dogs dogs cats cats cats blue red red
+Document: red blue dogs red red cats red cats cats cats
+Document: dogs dogs blue dogs cats cats cats cats blue dogs
+Document: red dogs cats blue red blue blue blue blue cats
+Document: cats blue blue cats cats blue cats cats cats cats
+Document: red blue blue dogs cats blue cats blue dogs cats</code></pre></div>
 <h3 id="the-dirichlet-distribution">The Dirichlet Distribution</h3>
 
 <p>Before we go on, we need to generalize our model a bit to be able to handle arbitrary numbers of words and topics, instead of being limited to just two. The multivariate generalization of the Bernoulli distribution is the <a href="https://en.wikipedia.org/wiki/Categorical%5Fdistribution" target="_blank">categorical distribution</a>, which simply gives a probability to each of some number of categories. The generalization of the beta distribution is a little trickier. It is called the <a href="https://en.wikipedia.org/wiki/Dirichlet%5Fdistribution" target="_blank">Dirichlet distribution</a>. And just like samples from the beta distribution will give parameters for a Bernoulli RV, samples from the Dirichlet distribution will give parameters for the categorical RV.</p>
@@ -386,6 +380,14 @@ for i, a in enumerate(alphas):
     sp.draw_pdf_contours(sp.Dirichlet(a), border=True, cmap=&#39;Blues&#39;)
     title = r&#39;$\alpha = $ = ({0[0]:.3f}, {0[1]:.3f}, {0[2]:.3f})&#39;.format(a)
     plt.title(title, fontdict={&#39;fontsize&#39;: 14})</code></pre></div>
+
+
+
+<figure>
+    
+        <img src="http://www.mathformachines.com/2019-01-30-bayesian-topic-modeling/obipy-resources/14366UEE.png"/> </figure>
+
+
 
 
 
@@ -474,22 +476,22 @@ with pm.Model() as unigram_model:
     draw = 5000
     unigram_trace = pm.sample(5000, tune=1000, chains=4, progressbar=False)</code></pre></div>
 <p>And now we can see what the model determined the proportion of each word in the corpus was.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">print_top_words(vocab, [unigram_trace.get_values(&#39;phi&#39;)[draw-1]], len(vocab))</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Topic:  0  Word: red         Percent: 0.150
-Topic:  0  Word: watt        Percent: 0.145
-Topic:  0  Word: car         Percent: 0.117
-Topic:  0  Word: green       Percent: 0.080
-Topic:  0  Word: battery     Percent: 0.073
-Topic:  0  Word: volt        Percent: 0.068
-Topic:  0  Word: yellow      Percent: 0.067
-Topic:  0  Word: drive       Percent: 0.059
-Topic:  0  Word: electric    Percent: 0.054
-Topic:  0  Word: gas         Percent: 0.053
-Topic:  0  Word: stop        Percent: 0.048
-Topic:  0  Word: blue        Percent: 0.030
-Topic:  0  Word: engine      Percent: 0.025
-Topic:  0  Word: charge      Percent: 0.021
-Topic:  0  Word: light       Percent: 0.011
-Topic:  0  Word: amp         Percent: 0.002</code></pre></div>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">print_top_words(vocab, [unigram_trace.get_values(&#39;phi&#39;)[draw-1]], len(vocab))</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Topic:  0  Word: drive       Percent: 0.137
+Topic:  0  Word: red         Percent: 0.132
+Topic:  0  Word: car         Percent: 0.101
+Topic:  0  Word: volt        Percent: 0.094
+Topic:  0  Word: stop        Percent: 0.078
+Topic:  0  Word: light       Percent: 0.066
+Topic:  0  Word: engine      Percent: 0.060
+Topic:  0  Word: blue        Percent: 0.060
+Topic:  0  Word: green       Percent: 0.053
+Topic:  0  Word: charge      Percent: 0.046
+Topic:  0  Word: amp         Percent: 0.045
+Topic:  0  Word: yellow      Percent: 0.032
+Topic:  0  Word: electric    Percent: 0.029
+Topic:  0  Word: gas         Percent: 0.028
+Topic:  0  Word: watt        Percent: 0.027
+Topic:  0  Word: battery     Percent: 0.013</code></pre></div>
 <h3 id="mixture-of-unigrams--naive-bayes">Mixture of Unigrams (Naive Bayes)</h3>
 
 <p>In this model, each document is assigned a topic and each topic has its own distribution of words.</p>
@@ -522,28 +524,28 @@ with pm.Model() as naive_model:
     p = phi[z][data_index]
     w = pm.Categorical(&#34;w&#34;, p=p, observed=data)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">with naive_model:
     draw = 5000
-    naive_trace = pm.sample(draw, tune=1000, chains=4, progressbar=False)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">print_top_words(vocab, naive_trace[&#39;phi&#39;][draw-1], 5)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Topic:  0  Word: drive       Percent: 0.177
-Topic:  0  Word: car         Percent: 0.166
-Topic:  0  Word: red         Percent: 0.126
-Topic:  0  Word: blue        Percent: 0.108
-Topic:  0  Word: green       Percent: 0.086
+    naive_trace = pm.sample(draw, tune=1000, chains=4, progressbar=False)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython"># Out[182]:</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">print_top_words(vocab, naive_trace[&#39;phi&#39;][draw-1], 5)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Topic:  0  Word: car         Percent: 0.198
+Topic:  0  Word: amp         Percent: 0.193
+Topic:  0  Word: gas         Percent: 0.150
+Topic:  0  Word: electric    Percent: 0.141
+Topic:  0  Word: volt        Percent: 0.087
 
-Topic:  1  Word: car         Percent: 0.238
-Topic:  1  Word: green       Percent: 0.192
-Topic:  1  Word: watt        Percent: 0.180
-Topic:  1  Word: blue        Percent: 0.070
-Topic:  1  Word: red         Percent: 0.045
+Topic:  1  Word: volt        Percent: 0.196
+Topic:  1  Word: drive       Percent: 0.186
+Topic:  1  Word: battery     Percent: 0.135
+Topic:  1  Word: red         Percent: 0.108
+Topic:  1  Word: blue        Percent: 0.063
 
-Topic:  2  Word: volt        Percent: 0.161
-Topic:  2  Word: car         Percent: 0.123
-Topic:  2  Word: engine      Percent: 0.113
-Topic:  2  Word: electric    Percent: 0.094
-Topic:  2  Word: gas         Percent: 0.081</code></pre></div>
+Topic:  2  Word: green       Percent: 0.250
+Topic:  2  Word: stop        Percent: 0.139
+Topic:  2  Word: engine      Percent: 0.108
+Topic:  2  Word: drive       Percent: 0.100
+Topic:  2  Word: red         Percent: 0.078</code></pre></div>
 <p>We can also see the topic the model assigned to each document.</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">for d, t in enumerate(naive_trace[&#39;z&#39;][draw-1]):
-    print(&#39;Document: {}  Topic: {}&#39;.format(d, t))</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Document: 0  Topic: 0
+    print(&#39;Document: {}  Topic: {}&#39;.format(d, t))</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Document: 0  Topic: 1
 Document: 1  Topic: 2
-Document: 2  Topic: 2
+Document: 2  Topic: 0
 Document: 3  Topic: 1</code></pre></div>
 <h3 id="latent-dirichlet-allocation-1">Latent Dirichlet Allocation</h3>
 
@@ -579,7 +581,29 @@ with pm.Model() as lda_model:
     draw = 5000
     lda_trace = pm.sample(draw, tune=1000, chains=4, progressbar=False)
 
-print_top_words(tokens, lda_trace.get_values(&#39;phi&#39;)[draw-1], 4)</code></pre></div>
+print_top_words(tokens, lda_trace.get_values(&#39;phi&#39;)[draw-1], 4)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Multiprocess sampling (4 chains in 2 jobs)
+CompoundStep
+&gt;NUTS: [phi, theta]
+&gt;CategoricalGibbsMetropolis: [z]
+There were 3 divergences after tuning. Increase `target_accept` or reparameterize.
+There was 1 divergence after tuning. Increase `target_accept` or reparameterize.
+There was 1 divergence after tuning. Increase `target_accept` or reparameterize.
+There were 4 divergences after tuning. Increase `target_accept` or reparameterize.
+The number of effective samples is smaller than 10% for some parameters.
+Topic:  0  Word:          0  Percent: 0.134
+Topic:  0  Word:          1  Percent: 0.129
+Topic:  0  Word:          1  Percent: 0.052
+Topic:  0  Word:          1  Percent: 0.014
+
+Topic:  1  Word:          1  Percent: 0.156
+Topic:  1  Word:          1  Percent: 0.126
+Topic:  1  Word:          0  Percent: 0.112
+Topic:  1  Word:          1  Percent: 0.081
+
+Topic:  2  Word:          0  Percent: 0.291
+Topic:  2  Word:          0  Percent: 0.163
+Topic:  2  Word:          0  Percent: 0.135
+Topic:  2  Word:          0  Percent: 0.087</code></pre></div>
 <p>At the cost of some complexity, we can rewrite our model to handle a corpus with documents of varying lengths.</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">alpha = np.ones([D, K])*0.5  # prior weights for the topics in each document (pseudo-counts)
 beta  = np.ones([K, V])*0.5  # prior weights for the vocab words in each topic (pseudo-counts)
@@ -619,13 +643,13 @@ print_top_words(tokens, sequence_trace.get_values(&#39;phi&#39;)[4999], 4)</code
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">zs = [sequence_trace.get_values(&#39;z_{}&#39;.format(d))[draw-1] for d in range(D)]
 zs = np.array(zs)
 
-print_corpus_topics(corpus_tokenized, zs)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">(red, 2) (blue, 0) (green, 0) (green, 0) (blue, 0) (blue, 0) (red, 2) (red, 0) (blue, 0) (yellow, 0)
+print_corpus_topics(corpus_tokenized, zs)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">(red, 2) (blue, 2) (green, 2) (green, 2) (blue, 2) (blue, 0) (red, 2) (red, 2) (blue, 2) (yellow, 2)
 
-(car, 1) (light, 2) (red, 1) (stop, 1) (stop, 1) (car, 1) (car, 1) (drive, 1) (green, 2) (yellow, 1)
+(car, 0) (light, 1) (red, 0) (stop, 0) (stop, 2) (car, 0) (car, 1) (drive, 0) (green, 0) (yellow, 2)
 
-(car, 1) (engine, 1) (gas, 1) (stop, 1) (battery, 1) (engine, 1) (drive, 1) (car, 0) (electric, 1) (gas, 1)
+(car, 0) (engine, 0) (gas, 0) (stop, 0) (battery, 0) (engine, 0) (drive, 0) (car, 0) (electric, 0) (gas, 0)
 
-(watt, 0) (volt, 0) (volt, 0) (amp, 1) (battery, 1) (watt, 0) (volt, 0) (electric, 0) (volt, 0) (charge, 0)</code></pre></div>
+(watt, 1) (volt, 1) (volt, 1) (amp, 1) (battery, 1) (watt, 1) (volt, 1) (electric, 0) (volt, 1) (charge, 0)</code></pre></div>
 <p>Since we chose to distribute words among three topics, we can examine the distributions of these topics to each document on a simplex. Below, each triangle represents a document and each corner represents a topic. Whenever the sampled points cluster at a corner, that means our model decided that that document was predominantly about the corresponding topic.</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">with sequence_model:
     pps = pm.sample_posterior_predictive(sequence_trace, vars=[theta], samples=1000, progressbar=False)
@@ -642,6 +666,14 @@ for i, ts in enumerate(thetas):
     sp.plot_points(var[:,i], color=blue, marker=&#39;o&#39;, alpha=0.1, markersize=3)
     title = r&#39;$\theta_{0}$ = ({1[0]:.3f}, {1[1]:.3f}, {1[2]:.3f})&#39;.format(i,ts)
     plt.title(title, fontdict={&#39;fontsize&#39;: 14})</code></pre></div>
+
+
+
+<figure>
+    
+        <img src="http://www.mathformachines.com/2019-01-30-bayesian-topic-modeling/obipy-resources/14366hOK.png"/> </figure>
+
+
 
 
 
