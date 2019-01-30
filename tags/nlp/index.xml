@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Nlp on Math for Machines</title>
-    <link>http://mathformachines.github.io/tags/nlp/</link>
+    <link>http://www.mathformachines.com/tags/nlp/</link>
     <description>Recent content in Nlp on Math for Machines</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 30 Jan 2019 05:57:00 -0600</lastBuildDate>
     
-	<atom:link href="http://mathformachines.github.io/tags/nlp/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://www.mathformachines.com/tags/nlp/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Bayesian Topic Modeling</title>
-      <link>http://mathformachines.github.io/2019-01-30-bayesian-topic-modeling/</link>
+      <link>http://www.mathformachines.com/2019-01-30-bayesian-topic-modeling/</link>
       <pubDate>Wed, 30 Jan 2019 05:57:00 -0600</pubDate>
       
-      <guid>http://mathformachines.github.io/2019-01-30-bayesian-topic-modeling/</guid>
+      <guid>http://www.mathformachines.com/2019-01-30-bayesian-topic-modeling/</guid>
       <description>(pyvenv-workon &amp;#34;pymc3&amp;#34;)import numpy as np import scipy.stats as st import pandas as pd import theano.tensor as tt import pymc3 as pm import matplotlib.pyplot as plt import matplotlib.tri as tri import seaborn as sns %matplotlib inline plt.rcParams[&amp;#39;figure.figsize&amp;#39;] = (14.0, 8.65) sns.set() sns.set_palette(&amp;#34;Blues_r&amp;#34;) sns.set_context(&amp;#34;talk&amp;#34;)# Out[32]: Imagine we have some collection of documents. They could be novels, or tweets, or financial reports&amp;mdash;just any collection of text. We want an algorithm that can discover what they are about, and we would like our algorithm to do it automatically, without any hints.</description>
     </item>
     

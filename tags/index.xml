@@ -2,48 +2,48 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Math for Machines</title>
-    <link>http://mathformachines.github.io/tags/</link>
+    <link>http://www.mathformachines.com/tags/</link>
     <description>Recent content in Tags on Math for Machines</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 30 Jan 2019 05:57:00 -0600</lastBuildDate>
     
-	<atom:link href="http://mathformachines.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://www.mathformachines.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Bayesian</title>
-      <link>http://mathformachines.github.io/tags/bayesian/</link>
+      <link>http://www.mathformachines.com/tags/bayesian/</link>
       <pubDate>Wed, 30 Jan 2019 05:57:00 -0600</pubDate>
       
-      <guid>http://mathformachines.github.io/tags/bayesian/</guid>
+      <guid>http://www.mathformachines.com/tags/bayesian/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Mcmc</title>
-      <link>http://mathformachines.github.io/tags/mcmc/</link>
+      <link>http://www.mathformachines.com/tags/mcmc/</link>
       <pubDate>Wed, 30 Jan 2019 05:57:00 -0600</pubDate>
       
-      <guid>http://mathformachines.github.io/tags/mcmc/</guid>
+      <guid>http://www.mathformachines.com/tags/mcmc/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Nlp</title>
-      <link>http://mathformachines.github.io/tags/nlp/</link>
+      <link>http://www.mathformachines.com/tags/nlp/</link>
       <pubDate>Wed, 30 Jan 2019 05:57:00 -0600</pubDate>
       
-      <guid>http://mathformachines.github.io/tags/nlp/</guid>
+      <guid>http://www.mathformachines.com/tags/nlp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Sage</title>
-      <link>http://mathformachines.github.io/tags/sage/</link>
+      <link>http://www.mathformachines.com/tags/sage/</link>
       <pubDate>Tue, 29 Jan 2019 04:11:00 -0600</pubDate>
       
-      <guid>http://mathformachines.github.io/tags/sage/</guid>
+      <guid>http://www.mathformachines.com/tags/sage/</guid>
       <description></description>
     </item>
     

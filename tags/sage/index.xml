@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sage on Math for Machines</title>
-    <link>http://mathformachines.github.io/tags/sage/</link>
+    <link>http://www.mathformachines.com/tags/sage/</link>
     <description>Recent content in Sage on Math for Machines</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 29 Jan 2019 04:11:00 -0600</lastBuildDate>
     
-	<atom:link href="http://mathformachines.github.io/tags/sage/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://www.mathformachines.com/tags/sage/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>A Sage Test</title>
-      <link>http://mathformachines.github.io/2019-01-29-a-sage-test/</link>
+      <link>http://www.mathformachines.com/2019-01-29-a-sage-test/</link>
       <pubDate>Tue, 29 Jan 2019 04:11:00 -0600</pubDate>
       
-      <guid>http://mathformachines.github.io/2019-01-29-a-sage-test/</guid>
+      <guid>http://www.mathformachines.com/2019-01-29-a-sage-test/</guid>
       <description>&lt;p&gt;Here is a sage test.&lt;/p&gt;
 
 &lt;p&gt;Aliquam erat volutpat.  Nunc eleifend leo vitae magna.  In id erat non orci commodo lobortis.  Proin neque massa, cursus ut, gravida ut, lobortis eget, lacus.  Sed diam.  Praesent fermentum tempor tellus.  Nullam tempus.  Mauris ac felis vel velit tristique imperdiet.  Donec at pede.  Etiam vel neque nec dui dignissim bibendum.  Vivamus id enim.  Phasellus neque orci, porta a, aliquet quis, semper a, massa.  Phasellus purus.  Pellentesque tristique imperdiet tortor.  Nam euismod tellus id erat.&lt;/p&gt;
@@ -26,10 +26,10 @@
     
     <item>
       <title>A Sage Test</title>
-      <link>http://mathformachines.github.io/posts/another-sage-test/</link>
+      <link>http://www.mathformachines.com/posts/another-sage-test/</link>
       <pubDate>Mon, 28 Jan 2019 17:00:00 -0600</pubDate>
       
-      <guid>http://mathformachines.github.io/posts/another-sage-test/</guid>
+      <guid>http://www.mathformachines.com/posts/another-sage-test/</guid>
       <description>&lt;p&gt;Here is a sage test.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sage&#34; data-lang=&#34;sage&#34;&gt;plot(sin, [&lt;span style=&#34;color:#719e07&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#2aa198&#34;&gt;2&lt;/span&gt;])&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -37,7 +37,7 @@
 
 &lt;figure&gt;
     
-        &lt;img src=&#34;http://mathformachines.github.io/posts/another-sage-test/images/temp2.png&#34;/&gt; &lt;/figure&gt;
+        &lt;img src=&#34;http://www.mathformachines.com/posts/another-sage-test/images/temp2.png&#34;/&gt; &lt;/figure&gt;
 
 
 &lt;p&gt;This is some stuff.&lt;/p&gt;
