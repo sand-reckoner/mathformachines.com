@@ -1,0 +1,30 @@
+/* https://olivermak.es/2014/10/design-better-responsive-code/ */
+body {
+  word-wrap: break-word; /* force long words to break */
+  overflow-wrap: break-word; /* newer syntax standard that replaces word-wrap */
+}
+
+code,
+pre,
+samp {
+  white-space: pre-wrap; /* force long lines to break */
+}
+
+
+/* better margins */
+h1,
+h2,
+h3 {
+    margin: 1.5em 0 1.0em
+}                    
+
+article img {
+    margin: 1.0em 1.0em 1.0em
+}
+
+code,
+pre,
+samp {
+    white-space: pre-wrap; /* force long lines to break */
+    margin: 1.0em 1.0em 1.0em
+}

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://mathformachines.github.io/2019-01-30-bayesian-topic-modeling/</loc>
+    <lastmod>2019-01-30T05:57:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mathformachines.github.io/2019-01-29-a-sage-test/</loc>
+    <lastmod>2019-01-29T04:11:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mathformachines.github.io/posts/another-sage-test/</loc>
+    <lastmod>2019-01-28T17:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mathformachines.github.io/post/</loc>
+    <lastmod>2019-01-30T05:57:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mathformachines.github.io/tags/bayesian/</loc>
+    <lastmod>2019-01-30T05:57:00-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://mathformachines.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://mathformachines.github.io/</loc>
+    <lastmod>2019-01-30T05:57:00-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://mathformachines.github.io/tags/mcmc/</loc>
+    <lastmod>2019-01-30T05:57:00-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://mathformachines.github.io/tags/nlp/</loc>
+    <lastmod>2019-01-30T05:57:00-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://mathformachines.github.io/posts/</loc>
+    <lastmod>2019-01-28T17:00:00-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://mathformachines.github.io/tags/sage/</loc>
+    <lastmod>2019-01-29T04:11:00-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://mathformachines.github.io/tags/</loc>
+    <lastmod>2019-01-30T05:57:00-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>
