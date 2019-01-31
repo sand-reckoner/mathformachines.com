@@ -115,7 +115,7 @@
     
   </p>
   <h1 class="entry-title">
-    <a href="http://www.mathformachines.com/2019-01-30-bayesian-topic-modeling/">Bayesian Topic Modeling</a>
+     Bayesian Topic Modeling 
   </h1>
 </header>
 
@@ -149,7 +149,7 @@ pmf <span style="color:#719e07">=</span> st<span style="color:#719e07">.</span>b
 plt<span style="color:#719e07">.</span>stem(x, pmf)
 plt<span style="color:#719e07">.</span>xticks([<span style="color:#2aa198">0</span>,<span style="color:#2aa198">1</span>])
 plt<span style="color:#719e07">.</span>ylim(<span style="color:#2aa198">0</span>,<span style="color:#2aa198">1</span>)
-plt<span style="color:#719e07">.</span>xlim(<span style="color:#719e07">-</span><span style="color:#2aa198">0.5</span>, <span style="color:#2aa198">1.5</span>)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">(-0.5, 1.5)</code></pre></div>
+plt<span style="color:#719e07">.</span>xlim(<span style="color:#719e07">-</span><span style="color:#2aa198">0.5</span>, <span style="color:#2aa198">1.5</span>)</code></pre></div>
 
 
 
@@ -195,7 +195,7 @@ f, axarr <span style="color:#719e07">=</span> plt<span style="color:#719e07">.</
         axarr[i, j]<span style="color:#719e07">.</span>set_title(<span style="color:#2aa198">r</span><span style="color:#2aa198">&#39;$\beta_0 =$ &#39;</span> <span style="color:#719e07">+</span> <span style="color:#b58900">str</span>(a) <span style="color:#719e07">+</span> <span style="color:#2aa198">r</span><span style="color:#2aa198">&#39;, $\beta_1 =$ &#39;</span> <span style="color:#719e07">+</span> <span style="color:#b58900">str</span>(b))
 
 f<span style="color:#719e07">.</span>subplots_adjust(hspace<span style="color:#719e07">=</span><span style="color:#2aa198">0.3</span>)
-f<span style="color:#719e07">.</span>suptitle(<span style="color:#2aa198">r</span><span style="color:#2aa198">&#39;Beta Distributions for $\theta$&#39;</span>, fontsize<span style="color:#719e07">=</span><span style="color:#2aa198">20</span>)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Text(0.5, 0.98, &#39;Beta Distributions for $\\theta$&#39;)</code></pre></div>
+f<span style="color:#719e07">.</span>suptitle(<span style="color:#2aa198">r</span><span style="color:#2aa198">&#39;Beta Distributions for $\theta$&#39;</span>, fontsize<span style="color:#719e07">=</span><span style="color:#2aa198">20</span>)</code></pre></div>
 
 
 
@@ -506,7 +506,7 @@ beta <span style="color:#719e07">=</span> np<span style="color:#719e07">.</span>
     p <span style="color:#719e07">=</span> phi[z][data_index]
     w <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>Categorical(<span style="color:#2aa198">&#34;w&#34;</span>, p<span style="color:#719e07">=</span>p, observed<span style="color:#719e07">=</span>data)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#719e07">with</span> naive_model:
     draw <span style="color:#719e07">=</span> <span style="color:#2aa198">5000</span>
-    naive_trace <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>sample(draw, tune<span style="color:#719e07">=</span><span style="color:#2aa198">1000</span>, chains<span style="color:#719e07">=</span><span style="color:#2aa198">4</span>, progressbar<span style="color:#719e07">=</span><span style="color:#cb4b16">False</span>)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#586e75"># Out[182]:</span></code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">print_top_words(vocab, naive_trace[<span style="color:#2aa198">&#39;phi&#39;</span>][draw<span style="color:#719e07">-</span><span style="color:#2aa198">1</span>], <span style="color:#2aa198">5</span>)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Topic:  0  Word: car         Percent: 0.198
+    naive_trace <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>sample(draw, tune<span style="color:#719e07">=</span><span style="color:#2aa198">1000</span>, chains<span style="color:#719e07">=</span><span style="color:#2aa198">4</span>, progressbar<span style="color:#719e07">=</span><span style="color:#cb4b16">False</span>)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">print_top_words(vocab, naive_trace[<span style="color:#2aa198">&#39;phi&#39;</span>][draw<span style="color:#719e07">-</span><span style="color:#2aa198">1</span>], <span style="color:#2aa198">5</span>)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Topic:  0  Word: car         Percent: 0.198
 Topic:  0  Word: amp         Percent: 0.193
 Topic:  0  Word: gas         Percent: 0.150
 Topic:  0  Word: electric    Percent: 0.141
