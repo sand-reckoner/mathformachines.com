@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Math for Machines</title>
-    <link>http://www.mathformachines.com/</link>
+    <link>//mathformachines.com/</link>
     <description>Recent content on Math for Machines</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 30 Jan 2019 05:57:00 -0600</lastBuildDate>
     
-	<atom:link href="http://www.mathformachines.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//mathformachines.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Bayesian Topic Modeling</title>
-      <link>http://www.mathformachines.com/2019-01-30-bayesian-topic-modeling/</link>
+      <link>//mathformachines.com/2019-01-30-bayesian-topic-modeling/</link>
       <pubDate>Wed, 30 Jan 2019 05:57:00 -0600</pubDate>
       
-      <guid>http://www.mathformachines.com/2019-01-30-bayesian-topic-modeling/</guid>
+      <guid>//mathformachines.com/2019-01-30-bayesian-topic-modeling/</guid>
       <description>Imagine we have some collection of documents. They could be novels, or tweets, or financial reports&amp;mdash;just any collection of text. We want an algorithm that can discover what they are about, and we would like our algorithm to do it automatically, without any hints. (That is, we want our algorithm to be unsupervised.) We will look at several models that probabilistically assign words to topics using Bayes&amp;rsquo; Theorem. They are all Bayesian Graphical Models.</description>
     </item>
     
     <item>
       <title>A Sage Test</title>
-      <link>http://www.mathformachines.com/posts/another-sage-test/</link>
+      <link>//mathformachines.com/posts/another-sage-test/</link>
       <pubDate>Mon, 28 Jan 2019 17:00:00 -0600</pubDate>
       
-      <guid>http://www.mathformachines.com/posts/another-sage-test/</guid>
+      <guid>//mathformachines.com/posts/another-sage-test/</guid>
       <description>&lt;p&gt;Here is a sage test.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sage&#34; data-lang=&#34;sage&#34;&gt;plot(sin, [&lt;span style=&#34;color:#719e07&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#2aa198&#34;&gt;2&lt;/span&gt;])&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -33,7 +33,7 @@
 
 &lt;figure&gt;
     
-        &lt;img src=&#34;http://www.mathformachines.com/posts/another-sage-test/images/temp2.png&#34;/&gt; &lt;/figure&gt;
+        &lt;img src=&#34;//mathformachines.com/posts/another-sage-test/images/temp2.png&#34;/&gt; &lt;/figure&gt;
 
 
 &lt;p&gt;This is some stuff.&lt;/p&gt;

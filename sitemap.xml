@@ -3,63 +3,63 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://www.mathformachines.com/2019-01-30-bayesian-topic-modeling/</loc>
+    <loc>//mathformachines.com/2019-01-30-bayesian-topic-modeling/</loc>
     <lastmod>2019-01-30T05:57:00-06:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.mathformachines.com/posts/another-sage-test/</loc>
+    <loc>//mathformachines.com/posts/another-sage-test/</loc>
     <lastmod>2019-01-28T17:00:00-06:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.mathformachines.com/post/</loc>
+    <loc>//mathformachines.com/post/</loc>
     <lastmod>2019-01-30T05:57:00-06:00</lastmod>
   </url>
   
   <url>
-    <loc>http://www.mathformachines.com/tags/bayesian/</loc>
-    <lastmod>2019-01-30T05:57:00-06:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.mathformachines.com/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.mathformachines.com/</loc>
+    <loc>//mathformachines.com/tags/bayesian/</loc>
     <lastmod>2019-01-30T05:57:00-06:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.mathformachines.com/tags/mcmc/</loc>
+    <loc>//mathformachines.com/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//mathformachines.com/</loc>
     <lastmod>2019-01-30T05:57:00-06:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.mathformachines.com/tags/nlp/</loc>
+    <loc>//mathformachines.com/tags/mcmc/</loc>
     <lastmod>2019-01-30T05:57:00-06:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.mathformachines.com/posts/</loc>
-    <lastmod>2019-01-28T17:00:00-06:00</lastmod>
+    <loc>//mathformachines.com/tags/nlp/</loc>
+    <lastmod>2019-01-30T05:57:00-06:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.mathformachines.com/tags/sage/</loc>
+    <loc>//mathformachines.com/posts/</loc>
     <lastmod>2019-01-28T17:00:00-06:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://www.mathformachines.com/tags/</loc>
+    <loc>//mathformachines.com/tags/sage/</loc>
+    <lastmod>2019-01-28T17:00:00-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//mathformachines.com/tags/</loc>
     <lastmod>2019-01-30T05:57:00-06:00</lastmod>
     <priority>0</priority>
   </url>

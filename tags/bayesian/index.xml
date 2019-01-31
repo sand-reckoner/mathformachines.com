@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Bayesian on Math for Machines</title>
-    <link>http://www.mathformachines.com/tags/bayesian/</link>
+    <link>//mathformachines.com/tags/bayesian/</link>
     <description>Recent content in Bayesian on Math for Machines</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 30 Jan 2019 05:57:00 -0600</lastBuildDate>
     
-	<atom:link href="http://www.mathformachines.com/tags/bayesian/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//mathformachines.com/tags/bayesian/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Bayesian Topic Modeling</title>
-      <link>http://www.mathformachines.com/2019-01-30-bayesian-topic-modeling/</link>
+      <link>//mathformachines.com/2019-01-30-bayesian-topic-modeling/</link>
       <pubDate>Wed, 30 Jan 2019 05:57:00 -0600</pubDate>
       
-      <guid>http://www.mathformachines.com/2019-01-30-bayesian-topic-modeling/</guid>
+      <guid>//mathformachines.com/2019-01-30-bayesian-topic-modeling/</guid>
       <description>Imagine we have some collection of documents. They could be novels, or tweets, or financial reports&amp;mdash;just any collection of text. We want an algorithm that can discover what they are about, and we would like our algorithm to do it automatically, without any hints. (That is, we want our algorithm to be unsupervised.) We will look at several models that probabilistically assign words to topics using Bayes&amp;rsquo; Theorem. They are all Bayesian Graphical Models.</description>
     </item>
     
