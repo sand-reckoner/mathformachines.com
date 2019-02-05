@@ -8,11 +8,6 @@
   </url>
   
   <url>
-    <loc>//mathformachines.com/posts/another-sage-test/</loc>
-    <lastmod>2019-01-28T17:00:00-06:00</lastmod>
-  </url>
-  
-  <url>
     <loc>//mathformachines.com/post/</loc>
     <lastmod>2019-01-30T05:57:00-06:00</lastmod>
   </url>
@@ -43,18 +38,6 @@
   <url>
     <loc>//mathformachines.com/tags/nlp/</loc>
     <lastmod>2019-01-30T05:57:00-06:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>//mathformachines.com/posts/</loc>
-    <lastmod>2019-01-28T17:00:00-06:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>//mathformachines.com/tags/sage/</loc>
-    <lastmod>2019-01-28T17:00:00-06:00</lastmod>
     <priority>0</priority>
   </url>
   

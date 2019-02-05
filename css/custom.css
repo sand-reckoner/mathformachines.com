@@ -4,13 +4,6 @@ body {
   overflow-wrap: break-word; /* newer syntax standard that replaces word-wrap */
 }
 
-code,
-pre,
-samp {
-  white-space: pre-wrap; /* force long lines to break */
-}
-
-
 /* better margins */
 h1,
 h2,
@@ -18,13 +11,22 @@ h3 {
     margin: 1.5em 0 1.0em
 }                    
 
-article img {
-    margin: 1.0em 1.0em 1.0em
+
+hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    width: 80%;
 }
+
+/* article img { */
+/*     margin: 1.0em 1.0em 1.0em */
+/* } */
 
 code,
 pre,
 samp {
     white-space: pre-wrap; /* force long lines to break */
-    margin: 1.0em 1.0em 1.0em
+    margin: 0.3em 1.0em 0.3em
 }

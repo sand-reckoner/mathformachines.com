@@ -20,31 +20,5 @@
       <description>Imagine we have some collection of documents. They could be novels, or tweets, or financial reports&amp;mdash;just any collection of text. We want an algorithm that can discover what they are about, and we would like our algorithm to do it automatically, without any hints. (That is, we want our algorithm to be unsupervised.) We will look at several models that probabilistically assign words to topics using Bayes&amp;rsquo; Theorem. They are all Bayesian Graphical Models.</description>
     </item>
     
-    <item>
-      <title>A Sage Test</title>
-      <link>//mathformachines.com/posts/another-sage-test/</link>
-      <pubDate>Mon, 28 Jan 2019 17:00:00 -0600</pubDate>
-      
-      <guid>//mathformachines.com/posts/another-sage-test/</guid>
-      <description>&lt;p&gt;Here is a sage test.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sage&#34; data-lang=&#34;sage&#34;&gt;plot(sin, [&lt;span style=&#34;color:#719e07&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#2aa198&#34;&gt;2&lt;/span&gt;])&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-
-&lt;figure&gt;
-    
-        &lt;img src=&#34;//mathformachines.com/posts/another-sage-test/images/temp2.png&#34;/&gt; &lt;/figure&gt;
-
-
-&lt;p&gt;This is some stuff.&lt;/p&gt;
-
-&lt;p&gt;If \(a_3^2=b\) and \( b=2 \), then the solution must be either
-\[ a_x=+\sqrt{2} \] or \[ a=-\sqrt{2} \]&lt;/p&gt;
-
-&lt;p&gt;I want to talk today about math. We will look at some interesting applications of tensors.
-
-Now then. What do you think about tensors? It&amp;rsquo;s true that they are just arrays.&lt;/p&gt;</description>
-    </item>
-    
   </channel>
 </rss>
