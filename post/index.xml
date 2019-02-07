@@ -6,7 +6,7 @@
     <description>Recent content in A Post on Math for Machines</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 05 Feb 2019 00:00:00 -0600</lastBuildDate>
+    <lastBuildDate>Tue, 05 Feb 2019 12:59:00 -0600</lastBuildDate>
     
 	<atom:link href="//mathformachines.com/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>A Tour of Tensors</title>
       <link>//mathformachines.com/2019-02-05-a-tour-of-tensors/</link>
-      <pubDate>Tue, 05 Feb 2019 00:00:00 -0600</pubDate>
+      <pubDate>Tue, 05 Feb 2019 12:59:00 -0600</pubDate>
       
       <guid>//mathformachines.com/2019-02-05-a-tour-of-tensors/</guid>
       <description>&lt;p&gt;Here are some notes on tensors, starting from basic linear algebra. I&amp;rsquo;ve tried to take a computational focus and to avoid formalism when possible. If you&amp;rsquo;re interested in tensors applied to machine learning, or have wondered why arrays in Tensorflow are called tensors, you might find this useful. I&amp;rsquo;ll do some computations in &lt;a href=&#34;http://www.sagemath.org/&#34; target=&#34;_blank&#34;&gt;Sage&lt;/a&gt; and also in &lt;a href=&#34;http://www.numpy.org/&#34; target=&#34;_blank&#34;&gt;Numpy&lt;/a&gt; for illustration.&lt;/p&gt;
