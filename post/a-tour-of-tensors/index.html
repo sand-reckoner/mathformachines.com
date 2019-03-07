@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-133546767-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  A Tour of Tensors &ndash; Math for Machines
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="Here are some notes on tensors, starting from basic linear algebra. I&amp;rsquo;ve tried to take a computational focus and to avoid formalism when possible. If you&amp;rsquo;re interested in tensors applied to machine learning, or have wondered why arrays in Tensorflow are called tensors, you might find this useful. I&amp;rsquo;ll do some computations in Sage and also in Numpy for illustration.
+
+|It&#39;s about math for machines.">
+    
+
+    <meta name="apple-mobile-web-app-title" content="Math for Machines">
+    
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="//mathformachines.com/">
+    Math for Machines
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    <a class="UnderlineNav-item " href="/post">
+      
+      <span>Archive</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">A Tour of Tensors</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+<a href='/tags/numpy' class="muted-link">
+  <span class="Label Label--gray">numpy</span>
+</a>
+
+<a href='/tags/sage' class="muted-link">
+  <span class="Label Label--gray">sage</span>
+</a>
+
+<a href='/tags/tensors' class="muted-link">
+  <span class="Label Label--gray">tensors</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2019-02-16. Published at: 2019-02-05.">
+        
+          Lastmod: 2019-02-16
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p>Here are some notes on tensors, starting from basic linear algebra. I&rsquo;ve tried to take a computational focus and to avoid formalism when possible. If you&rsquo;re interested in tensors applied to machine learning, or have wondered why arrays in Tensorflow are called tensors, you might find this useful. I&rsquo;ll do some computations in <a href="http://www.sagemath.org/">Sage</a> and also in <a href="http://www.numpy.org/">Numpy</a> for illustration.</p>
+
+<p></p>
+
+<h2 id="abstract-tensors">Abstract Tensors</h2>
+
+<p>First, let&rsquo;s take brief look at tensors in the abstract. This is just to give us an idea of what properties they have and how they function. I&rsquo;ll gloss over most of the details of the construction.</p>
+
+<p>A tensor is a vector. It is an element of a vector space. Being a vector, if we have a basis for the space we can write the tensor as a list of coordinates (or maybe something like a matrix or an array – we&rsquo;ll see how).</p>
+
+<p>A tensor is a vector in a product vector space. This means that part of it comes from one vector space and part of it comes from another. These parts combine in a way that fits with the usual notions of how products should work. Why would we want these tensors, these products of vectors? It turns out that lots of useful things are tensors. Matrices and linear maps are tensors, and so are determinants and inner products and cross products. Tensors give us power to express many useful ideas.</p>
+
+<p>A simple product of vectors looks like \(v \otimes w\) and the product space looks like \(V \otimes W\), where \(V\) and \(W\) are vector spaces. The elements of \(V \otimes W\) are linear combinations of these simple products. So, a typical element of \(V \otimes W\) might look like \(v_1 \otimes w_2 + 5(v_4 \otimes w_1) + 3(v_3 \otimes w_2)\).</p>
+
+<p>Again, \(V \otimes W\) is a vector space. Its vectors are called tensors. Tensors are linear combinations of simple tensors like \(v \otimes w\).</p>
+
+<p>The tensor space \(V \otimes W\) is a vector space, but its vectors have some special properties given to them by \(\otimes\). This product has many of the same useful properties as products of numbers. They are:</p>
+
+<p>\[ \textbf{Distributivity:  } v \otimes (w_1 + w_2) = v \otimes w_1 + v \otimes w_2 \]</p>
+
+<p>(Just like \(x(y + z) = xy + xz\).)</p>
+
+<p>and</p>
+
+<p>\[ \textbf{Scalar Multiples: } a (v \otimes w) = (av) \otimes w = v \otimes (aw) \]</p>
+
+<p>(Just like \(a(xy) = (ax)y = x(ay)\).)</p>
+
+<p>The tensor product also does what we expect with the zero vector, namely: \(v \otimes w = 0\) if and only if \(v = 0\) or \(w = 0\). The tensor product does not have the commutivity property however. A tensor \(v \otimes w\) doesn&rsquo;t have to be the same as \(w \otimes v\). For one, the vector on the left has to come from \(V\) and the vector on the right has to come from \(W\).</p>
+
+<p>Using these properties we can manipulate tensors just like we do polynomials. For instance:</p>
+
+<p>\begin{equation}
+\begin{split}
+&amp; 2(v_1 \otimes w_1) + 3(v_1 + v_2) \otimes w_1 \\<br />
+= &amp; 2(v_1 \otimes w_1) + 3(v_1 \otimes w_1) + 3(v_2 \otimes w_1) \\<br />
+= &amp; 5(v_1 \otimes w_1) + 3(v_2 \otimes w_1)
+\end{split}
+\end{equation}</p>
+
+<p>You could think of an abstract tensor as a sort of polynomial where the odd-looking product \(\otimes\) reminds us that the \(v\) and \(w\) don&rsquo;t generally commute.</p>
+
+<p>Here&rsquo;s an example. <code>FiniteRankFreeModule</code> is creating a vector space of dimension 2 over the quotients \(\mathbb Q\). A module is a kind of generalized vector space.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sage" data-lang="sage">M <span style="color:#719e07">=</span> FiniteRankFreeModule(QQ, <span style="color:#2aa198">2</span>, name<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;M&#39;</span>, start_index<span style="color:#719e07">=</span><span style="color:#2aa198">1</span>)
+v <span style="color:#719e07">=</span> M<span style="color:#719e07">.</span>basis(<span style="color:#2aa198">&#39;v&#39;</span>)
+s <span style="color:#719e07">=</span> M<span style="color:#719e07">.</span>tensor((<span style="color:#2aa198">2</span>, <span style="color:#2aa198">0</span>), name<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;s&#39;</span>)
+s[v,:] <span style="color:#719e07">=</span> [[<span style="color:#2aa198">1</span>, <span style="color:#2aa198">2</span>], [<span style="color:#2aa198">3</span>, <span style="color:#2aa198">4</span>]]
+t <span style="color:#719e07">=</span> M<span style="color:#719e07">.</span>tensor((<span style="color:#2aa198">2</span>, <span style="color:#2aa198">0</span>), name<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;t&#39;</span>)
+t[v,:] <span style="color:#719e07">=</span> [[<span style="color:#2aa198">5</span>, <span style="color:#2aa198">6</span>], [<span style="color:#2aa198">7</span>, <span style="color:#2aa198">8</span>]]
+latex(s<span style="color:#719e07">.</span>display(v))
+latex(t<span style="color:#719e07">.</span>display(v))
+latex((s <span style="color:#719e07">+</span> t)<span style="color:#719e07">.</span>display(v))</code></pre></div>
+<p>\[
+ s = v_{1}\otimes v_{1} + 2 v_{1}\otimes v_{2} + 3 v_{2}\otimes v_{1} + 4 v_{2}\otimes v_{2} \\<br />
+ t = 5 v_{1}\otimes v_{1} + 6 v_{1}\otimes v_{2} + 7 v_{2}\otimes v_{1} + 8 v_{2}\otimes v_{2} \\<br />
+ s+t = 6 v_{1}\otimes v_{1} + 8 v_{1}\otimes v_{2} + 10 v_{2}\otimes v_{1} + 12 v_{2}\otimes v_{2} \\<br />
+ \]</p>
+
+<h3 id="construction-of-the-tensor-space">Construction of the Tensor Space</h3>
+
+<p>This is just a note on how the tensor space \(V \otimes W\) can be constructed from \(V\) and \(W\). It&rsquo;s not essential to anything that follows.</p>
+
+<p>Basically, we can construct \(V \otimes W\) the same way that we can construct the complex numbers from the real numbers. To get the complex numbers from the reals, we just add in some new number \(i\) to the real numbers and then define a simplification rule that says \(i^2 = -1\). To get \(V \otimes W\) from \(V\) and \(W\), we just take all linear combinations of vectors from \(V\) and vectors from \(W\) and then define the Distributivity and Scalar Multiplication rules. The formalism that does this is called a <a href="https://en.wikipedia.org/wiki/">quotient space</a>, or see <a href="https://en.wikipedia.org/wiki/Tensor%5Fproduct#The%5Fdefinition%5Fof%5Fthe%5Fabstract%5Ftensor%5Fproduct">here</a> for the tensor product construction.</p>
+
+<p>By constructing the space \(V \otimes W\) in the most general way possible (meaning, not adding any other rules except distribution and scalar multiplication), we ensure that any kind of space or object that has these kinds of linear or multilinear properties has a representation as a tensor, and any other kind of construction that satisfies these rules will be essentially equivalent to the tensor construction. (The property is called a <a href="https://en.wikipedia.org/wiki/Universal%5Fproperty">universal property</a>. It occurs all the time in mathematics and is very useful.) Tensors are the general language of linearity.</p>
+
+<h2 id="tensors-as-arrays">Tensors as Arrays</h2>
+
+<p>We can represent tensors as arrays, which is nice for doing computations.</p>
+
+<p>If we have a basis for \(V\) and a basis for \(W\), then we can make a basis for \(V \otimes W\) in just the way we should expect: by taking all the products of the basis vectors. Namely, if \((e_i)\) is a basis for \(V\) and \((f_j)\) is a basis for \(W\), then \((e_i \otimes f_j)\) is a basis for \(V \otimes W\). This also means that the dimension of \(V \otimes W\) is the product of the dimensions of \(V\) and \(W\); that is, \(dim(V \otimes W) = dim(V)dim(W)\).</p>
+
+<p>Recall that if we can write a vector in \(V\) as \(v = \sum a_i e_i\), then \((a_i)\) is its representation as a vector of coordinates. A tensor in \(V \otimes W\) will instead have a representation as a matrix. If \(m = dim(V)\) and \(n = dim(W)\), then this will be an \(m \times n\) matrix. If we write a tensor in terms of its basis elements as:</p>
+
+<p>\[\sum_i \sum_j c_{i,j} (e_i \otimes f_j)\]</p>
+
+<p>then its matrix is \([c_{i,j}]\). The subscript of \(e_i\) tells you the row and the subscript of \(f_j\) tells you the column. For example, let&rsquo;s say \(V\) and \(W\) are both two-dimensional. We could write a tensor</p>
+
+<p>\[(e_1 \otimes f_1) + 2(e_1 \otimes f_2) + 3(e_2 \otimes f_1) + 4(e_2 \otimes f_2)\]</p>
+
+<p>as</p>
+
+<p>\begin{bmatrix}
+1 &amp; 2 \\<br />
+3 &amp; 4 \\<br />
+\end{bmatrix}</p>
+
+<p>But what if we have a vector \(v\) in \(V\) and a vector \(w\) in \(W\) and we want to find out what the matrix of \(v \otimes w\) is? This is easy too. Say \(v = \sum a_i e_i\) and \(w = \sum b_j f_j\). Then</p>
+
+<p>\[v \otimes w = \sum_i \sum_j a_i b_j (e_i \otimes f_j)\]</p>
+
+<p>and its matrix is \([a_i b_j]\). In other words, the entry in row \(i\) and column \(j\) will be \(a_i b_j\).</p>
+
+<p>It&rsquo;s easy to find this matrix using matrix multiplication. If we write our coordinate vectors as column vectors, then our tensor product becomes an <a href="https://en.wikipedia.org/wiki/Outer%5Fproduct">outer product</a>:</p>
+
+<p>\[\color{RubineRed}v \color{black}\otimes \color{MidnightBlue}w\color{black} = \color{RubineRed}v\color{MidnightBlue} w^\mathsf{T}\]</p>
+
+<p>For instance,</p>
+
+<p>\[
+ \color{RubineRed}(1, 2, 3)\color{Black} \otimes \color{RoyalBlue}(4, 5, 6)\color{Black} =
+ \color{RubineRed}\begin{bmatrix}
+ 1\\<br />
+ 2\\<br />
+ 3 \end{bmatrix} \color{black}
+ \color{RoyalBlue}[4, 5, 6]\color{black}
+ = \begin{bmatrix}
+ \color{RubineRed}1\color{black}\cdot \color{RoyalBlue}4\color{black} &amp; \color{RubineRed}1\color{black}\cdot \color{RoyalBlue}5\color{black} &amp; \color{RubineRed}1\color{black}\cdot \color{RoyalBlue}6\color{black} \\<br />
+ \color{RubineRed}2\color{black}\cdot \color{RoyalBlue}4\color{black} &amp; \color{RubineRed}2\color{black}\cdot \color{RoyalBlue}5\color{black} &amp; \color{RubineRed}2\color{black}\cdot \color{RoyalBlue}6\color{black} \\<br />
+ \color{RubineRed}3\color{black}\cdot \color{RoyalBlue}4\color{black} &amp; \color{RubineRed}3\color{black}\cdot \color{RoyalBlue}5\color{black} &amp; \color{RubineRed}3\color{black}\cdot \color{RoyalBlue}6\color{black}\end{bmatrix}
+ =\begin{bmatrix}
+ 4 &amp; 5 &amp; 6 \\<br />
+ 8 &amp; 10 &amp; 15 \\<br />
+ 12 &amp; 15 &amp; 18\end{bmatrix}
+ \]</p>
+
+<p>Notice the correspondence between the basis elements and the entries of the matrix in the next example.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sage" data-lang="sage">M <span style="color:#719e07">=</span> FiniteRankFreeModule(QQ, <span style="color:#2aa198">3</span>, name<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;M&#39;</span>, start_index<span style="color:#719e07">=</span><span style="color:#2aa198">1</span>)
+e <span style="color:#719e07">=</span> M<span style="color:#719e07">.</span>basis(<span style="color:#2aa198">&#39;e&#39;</span>)
+v <span style="color:#719e07">=</span> M([<span style="color:#719e07">-</span><span style="color:#2aa198">2</span>, <span style="color:#2aa198">9</span>, <span style="color:#2aa198">5</span>], basis<span style="color:#719e07">=</span>e, name<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;v&#39;</span>)
+w <span style="color:#719e07">=</span> M([<span style="color:#2aa198">1</span>, <span style="color:#2aa198">0</span>, <span style="color:#719e07">-</span><span style="color:#2aa198">2</span>], basis<span style="color:#719e07">=</span>e, name<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;w&#39;</span>)
+latex((v<span style="color:#719e07">*</span>w)<span style="color:#719e07">.</span>display())
+latex((v<span style="color:#719e07">*</span>w)[e,:])</code></pre></div>
+<p>\[
+ v\otimes w = -2 e_{1}\otimes e_{1} + 4 e_{1}\otimes e_{3} + 9 e_{2}\otimes e_{1} -18 e_{2}\otimes e_{3} + 5 e_{3}\otimes e_{1} -10 e_{3}\otimes e_{3} \\<br />
+ \left(\begin{array}{rrr}
+ -2 &amp; 0 &amp; 4 \\<br />
+ 9 &amp; 0 &amp; -18 \\<br />
+ 5 &amp; 0 &amp; -10
+ \end{array}\right)
+ \]</p>
+
+<p>We can extend the tensor product construction to any number of vector spaces. In this way we get multidimensional arrays. We might represent a tensor in a space \(U \otimes V \otimes W\) as a &ldquo;matrix of matricies.&rdquo;</p>
+
+<p>\[
+ \left[\begin{array}{r}
+   \left[\begin{array}{rr}
+   c_{111} &amp; c_{112} \\<br />
+   c_{121} &amp; c_{122}
+   \end{array}\right] \\<br />
+   \left[\begin{array}{rr}
+   c_{211} &amp; c_{212} \\<br />
+   c_{221} &amp; c_{222}
+   \end{array}\right]
+ \end{array}\right]
+ \]</p>
+
+<p>And we use the more general <a href="https://en.wikipedia.org/wiki/Kronecker%5Fproduct">Kronecker product</a> to find the product of tensors:</p>
+
+<p>\[
+ \color{RubineRed}(1, 2)
+   \color{Black} \otimes
+   \color{RoyalBlue}
+   \left[\begin{array}{rr}
+   1 &amp; 2 \\<br />
+   3 &amp; 4
+   \end{array}\right]
+ \color{Black} =
+   \color{RubineRed}
+   \left[\begin{array}{r}
+   1 \\<br />
+   2
+   \end{array}\right]
+   \color{RoyalBlue}
+   \left[\begin{array}{rr}
+   1 &amp; 2 \\<br />
+   3 &amp; 4
+   \end{array}\right]
+ \color{Black} =
+ \left[\begin{array}{r}
+   \color{RubineRed} 1
+   \color{RoyalBlue}
+   \left[\begin{array}{rr}
+   1 &amp; 2 \\<br />
+   3 &amp; 4
+   \end{array}\right] \\<br />
+   \color{RubineRed} 2
+   \color{RoyalBlue}
+   \left[\begin{array}{rr}
+   1 &amp; 2 \\<br />
+   3 &amp; 4
+   \end{array}\right]
+ \color{Black}\end{array}\right] =
+ \left[\begin{array}{r}
+   \left[\begin{array}{rr}
+   1 &amp; 2 \\<br />
+   3 &amp; 4
+   \end{array}\right] \\<br />
+   \left[\begin{array}{rr}
+   2 &amp; 4 \\<br />
+   6 &amp; 8
+   \end{array}\right]
+ \color{Black}\end{array}\right]
+ \]</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sage" data-lang="sage">M <span style="color:#719e07">=</span> FiniteRankFreeModule(QQ, <span style="color:#2aa198">2</span>, name<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;M&#39;</span>, start_index<span style="color:#719e07">=</span><span style="color:#2aa198">1</span>)
+e <span style="color:#719e07">=</span> M<span style="color:#719e07">.</span>basis(<span style="color:#2aa198">&#39;e&#39;</span>)
+u <span style="color:#719e07">=</span> M([<span style="color:#2aa198">1</span>, <span style="color:#2aa198">2</span>], basis<span style="color:#719e07">=</span>e, name<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;u&#39;</span>)
+vw <span style="color:#719e07">=</span> M<span style="color:#719e07">.</span>tensor((<span style="color:#2aa198">2</span>, <span style="color:#2aa198">0</span>), name<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;vw&#39;</span>)
+vw[e,:] <span style="color:#719e07">=</span> [[<span style="color:#2aa198">1</span>, <span style="color:#2aa198">2</span>], [<span style="color:#2aa198">3</span>, <span style="color:#2aa198">4</span>]]
+(u<span style="color:#719e07">*</span>vw)<span style="color:#719e07">.</span>display(e)
+<span style="color:#719e07">print</span>()
+(u<span style="color:#719e07">*</span>vw)[e,:]</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">u*vw = e_1*e_1*e_1 + 2 e_1*e_1*e_2 + 3 e_1*e_2*e_1 + 4 e_1*e_2*e_2 + 2 e_2*e_1*e_1 + 4 e_2*e_1*e_2 + 6 e_2*e_2*e_1 + 8 e_2*e_2*e_2
+
+[[[1, 2], [3, 4]], [[2, 4], [6, 8]]]</code></pre></div>
+<p>The number of vector spaces in the product space is the same as the number of dimensions in the arrays of its tensors (that is, the number of indicies needed to specify a component). This number is called the &ldquo;order&rdquo; of a tensor (or sometimes &ldquo;degree&rdquo;). The order of the tensor above is 3.</p>
+
+<p>We can extend this product to tensors of any order. The components of a tensor \(s \otimes t\) can always be found by taking the product of the respective components of \(s\) and \(t\). For instance, if \(s_{12} = 5\) and \(t_{345} = 7\), then \((s \otimes t)_{12345} = s_{12}t_{345} = 5\cdot7 = 35\).</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sage" data-lang="sage">M <span style="color:#719e07">=</span> FiniteRankFreeModule(QQ, <span style="color:#2aa198">5</span>, name<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;M&#39;</span>, start_index<span style="color:#719e07">=</span><span style="color:#2aa198">1</span>)
+e <span style="color:#719e07">=</span> M<span style="color:#719e07">.</span>basis(<span style="color:#2aa198">&#39;e&#39;</span>)
+s <span style="color:#719e07">=</span> M<span style="color:#719e07">.</span>tensor((<span style="color:#2aa198">2</span>, <span style="color:#2aa198">0</span>), name<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;s&#39;</span>)
+s[e,<span style="color:#2aa198">1</span>,<span style="color:#2aa198">2</span>] <span style="color:#719e07">=</span> <span style="color:#2aa198">5</span>
+t <span style="color:#719e07">=</span> M<span style="color:#719e07">.</span>tensor((<span style="color:#2aa198">3</span>, <span style="color:#2aa198">0</span>), name<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;t&#39;</span>)
+t[e,<span style="color:#2aa198">3</span>,<span style="color:#2aa198">4</span>,<span style="color:#2aa198">5</span>] <span style="color:#719e07">=</span> <span style="color:#2aa198">7</span>
+(s<span style="color:#719e07">*</span>t)[e,<span style="color:#2aa198">1</span>,<span style="color:#2aa198">2</span>,<span style="color:#2aa198">3</span>,<span style="color:#2aa198">4</span>,<span style="color:#2aa198">5</span>]</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">35</code></pre></div>
+<h2 id="tensors-as-maps">Tensors as Maps</h2>
+
+<p>I mentioned earlier that things like cross-products and determinants are tensors. We&rsquo;ll see how that works now. Recall that every vector space \(V\) has a dual vector space \(V^*\) which is the space of all linear maps \(V \rightarrow F\), where \(F\) is the field of scalars of \(V\). In terms of matricies, we might think of elements in \(V\) as column vectors and elements of \(V^*\) as row vectors. Then, we can apply an element of \(V^*\) to an element of \(V\) just like we do when representing linear maps as matricies:</p>
+
+<p>\[
+ \left[a_1, a_2, a_3\right]
+   \left[\begin{array}{r}
+   b_1 \\<br />
+   b_2 \\<br />
+   b_3 \end{array}\right] =
+ a_1b_1 + a_2b_2 + a_3b_3
+ \]</p>
+
+<p>This in fact is just the <a href="https://en.wikipedia.org/wiki/Dot%5Fproduct">dot product</a> of the two vectors.</p>
+
+<p>Let&rsquo;s take a product \(T = V \otimes \cdots \otimes V \otimes V^* \otimes \cdots \otimes V^*\). The number of times \(V\) occurs is called the &ldquo;covariant&rdquo; order of the space and the number of times \(V^*\) occurs is called the &ldquo;contravariant&rdquo; order of the space. (The reason for these names is related to the <a href="https://en.wikipedia.org/wiki/Covariance%5Fand%5Fcontravariance%5Fof%5Fvectors">change-of-basis</a> on vectors of those types). We say that a tensor has &ldquo;type \((k, l)\)&rdquo; when it is of contravariant order \(k\) and covariant order \(l\). So when we had earlier <code>M.tensor((2, 0), name='t')</code>, the <code>(2, 0)</code> was saying that we wanted a tensor with 2 contravariant parts.</p>
+
+<p>Tensors of order \((0, 1)\) are mappings \(V \rightarrow F\). They will map tensors of order \((1, 0)\) (that is, column vectors) to the scalar field, and like above, this will just be the dot product of the two vectors.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sage" data-lang="sage">M <span style="color:#719e07">=</span> FiniteRankFreeModule(QQ, <span style="color:#2aa198">3</span>, name<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;M&#39;</span>, start_index<span style="color:#719e07">=</span><span style="color:#2aa198">1</span>)
+e <span style="color:#719e07">=</span> M<span style="color:#719e07">.</span>basis(<span style="color:#2aa198">&#39;e&#39;</span>)
+
+s <span style="color:#719e07">=</span> M<span style="color:#719e07">.</span>tensor((<span style="color:#2aa198">0</span>, <span style="color:#2aa198">1</span>), name<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;s&#39;</span>)
+s[e, :] <span style="color:#719e07">=</span> [<span style="color:#2aa198">1</span>, <span style="color:#2aa198">2</span>, <span style="color:#2aa198">3</span>]
+t <span style="color:#719e07">=</span> M<span style="color:#719e07">.</span>tensor((<span style="color:#2aa198">1</span>, <span style="color:#2aa198">0</span>), name<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;t&#39;</span>)
+t[e, :] <span style="color:#719e07">=</span> [<span style="color:#2aa198">4</span>, <span style="color:#2aa198">5</span>, <span style="color:#2aa198">6</span>]
+
+v <span style="color:#719e07">=</span> vector([<span style="color:#2aa198">1</span>, <span style="color:#2aa198">2</span>, <span style="color:#2aa198">3</span>])
+w <span style="color:#719e07">=</span> vector([<span style="color:#2aa198">4</span>, <span style="color:#2aa198">5</span>, <span style="color:#2aa198">6</span>])
+
+s(t) <span style="color:#719e07">==</span> v<span style="color:#719e07">.</span>dot_product(w)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">True</code></pre></div>
+<p>Expanding this idea, we can think of a tensor \(t\) of order \((1,1)\) either as a <a href="https://en.wikipedia.org/wiki/Multilinear%5Fform">multilinear form</a> \(t:V^* \otimes V \rightarrow F\) or as a <a href="https://en.wikipedia.org/wiki/Linear%5Fmap">linear map</a>, as \(t:V \rightarrow V\) or as \(t:V^* \rightarrow V^*\). The difference is just in <a href="https://en.wikipedia.org/wiki/Partial%5Fapplication">what and how many</a> arguments we pass in to the tensor. For instance, if we pass a column vector \(v\) into the tensor \(t\) in its second position (the position of \(V\)), then we get a map \(V \rightarrow V\); this is the same as multiplying a vector by a matrix representing a linear map. This partial application is called a &ldquo;contraction.&rdquo;</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sage" data-lang="sage">s <span style="color:#719e07">=</span> M<span style="color:#719e07">.</span>tensor((<span style="color:#2aa198">1</span>, <span style="color:#2aa198">1</span>), name<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;s&#39;</span>)
+s[e, :] <span style="color:#719e07">=</span> [[<span style="color:#2aa198">1</span>, <span style="color:#2aa198">2</span>, <span style="color:#2aa198">3</span>], [<span style="color:#2aa198">4</span>, <span style="color:#2aa198">5</span>, <span style="color:#2aa198">6</span>], [<span style="color:#2aa198">7</span>, <span style="color:#2aa198">8</span>, <span style="color:#2aa198">9</span>]]
+t <span style="color:#719e07">=</span> M<span style="color:#719e07">.</span>tensor((<span style="color:#2aa198">1</span>, <span style="color:#2aa198">0</span>), name<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;t&#39;</span>)
+t[e, :] <span style="color:#719e07">=</span> [<span style="color:#2aa198">4</span>, <span style="color:#2aa198">5</span>, <span style="color:#2aa198">6</span>]
+
+m <span style="color:#719e07">=</span> Matrix([[<span style="color:#2aa198">1</span>, <span style="color:#2aa198">2</span>, <span style="color:#2aa198">3</span>], [<span style="color:#2aa198">4</span>, <span style="color:#2aa198">5</span>, <span style="color:#2aa198">6</span>], [<span style="color:#2aa198">7</span>, <span style="color:#2aa198">8</span>, <span style="color:#2aa198">9</span>]])
+w <span style="color:#719e07">=</span> vector([<span style="color:#2aa198">4</span>, <span style="color:#2aa198">5</span>, <span style="color:#2aa198">6</span>])
+
+s<span style="color:#719e07">.</span>contract(t)[e,:] <span style="color:#719e07">==</span> <span style="color:#b58900">list</span>(m<span style="color:#719e07">*</span>w)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">True</code></pre></div>
+<p>Generally, we can represent any kind of multilinear map \(V^* \times \cdots \times V^* \times V \times \cdots \times V \rightarrow F\) as a tensor in the space \(V \otimes \cdots \otimes V \otimes V^* \otimes \cdots \otimes V^*\). Since determinants and cross-products are multilinear maps, they too are tensors.</p>
+
+<p>Sage makes a distinction between contravariant and covariant parts, but libraries like <code>numpy</code> and <code>tensorflow</code> do not. When using these, we can contract one tensor with another along any axes whose dimensions are the same. Their contraction operation is called <code>tensordot</code>.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sage" data-lang="sage"><span style="color:#719e07">import</span> numpy <span style="color:#719e07">as</span> np
+
+s <span style="color:#719e07">=</span> np<span style="color:#719e07">.</span>ones((<span style="color:#2aa198">2</span>, <span style="color:#2aa198">3</span>, <span style="color:#2aa198">4</span>, <span style="color:#2aa198">5</span>))
+t <span style="color:#719e07">=</span> np<span style="color:#719e07">.</span>ones((<span style="color:#2aa198">5</span>, <span style="color:#2aa198">4</span>, <span style="color:#2aa198">3</span>, <span style="color:#2aa198">2</span>))
+np<span style="color:#719e07">.</span>tensordot(s, t, axes<span style="color:#719e07">=</span>[[<span style="color:#2aa198">0</span>, <span style="color:#2aa198">1</span>, <span style="color:#2aa198">2</span>], [<span style="color:#2aa198">3</span>, <span style="color:#2aa198">2</span>, <span style="color:#2aa198">1</span>]])</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">array([[24., 24., 24., 24., 24.],
+       [24., 24., 24., 24., 24.],
+       [24., 24., 24., 24., 24.],
+       [24., 24., 24., 24., 24.],
+       [24., 24., 24., 24., 24.]])</code></pre></div>
+<p>We could think of the axes in <code>s</code> as representing row vectors (\(V^*\)) and the axes in <code>t</code> as representing column vectors (\(V\)).</p>
+
+<p>We could also do this using <a href="https://en.wikipedia.org/wiki/Einstein%5Fnotation">Einstein notation</a>. Basically, whenever an index appears twice in an expression, it means to sum over that index while multiplying together the respective components (just like a dot product on those two axes).</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sage" data-lang="sage">s <span style="color:#719e07">=</span> np<span style="color:#719e07">.</span>ones((<span style="color:#2aa198">2</span>, <span style="color:#2aa198">3</span>, <span style="color:#2aa198">4</span>))
+t <span style="color:#719e07">=</span> np<span style="color:#719e07">.</span>ones((<span style="color:#2aa198">4</span>, <span style="color:#2aa198">3</span>, <span style="color:#2aa198">2</span>))
+
+np<span style="color:#719e07">.</span>einsum(<span style="color:#2aa198">&#39;ija, bji -&gt; ab&#39;</span>, s, t)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">array([[6., 6., 6., 6.],
+       [6., 6., 6., 6.],
+       [6., 6., 6., 6.],
+       [6., 6., 6., 6.]])</code></pre></div>
+<p>Einstein summations are a convenient way to do lots of different kinds of tensor computations. <a href="https://rockt.github.io/2018/04/30/einsum">Here</a> are a bunch of great examples.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>That&rsquo;s all for now! For anyone reading, I hope you found it informative. Tensors can be hard to get started on, but once you see the idea, I think you&rsquo;ll find them a pleasure to work with.</p>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>A Tour of Tensors</b>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#abstract-tensors">Abstract Tensors</a>
+<ul>
+<li><a href="#construction-of-the-tensor-space">Construction of the Tensor Space</a></li>
+</ul></li>
+<li><a href="#tensors-as-arrays">Tensors as Arrays</a></li>
+<li><a href="#tensors-as-maps">Tensors as Maps</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+            <footer role="contentinfo">
+      <p>Copyright &copy; 2019 Ryan Holbrook - <a href="//mathformachines.com/license/">License</a> -
+        <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
+      </p>
+    </footer>
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+    </script>
+
+
+    <script type="text/x-mathjax-config"> 
+      MathJax.Hub.Config({ 
+         "HTML-CSS": { scale: 90, linebreaks: { automatic: true } }, 
+          SVG: { linebreaks: { automatic:true } }, 
+      });
+    </script>
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133546767-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-133546767-1');
+    </script>
+
+    
+    
+    
+
+    
+
+  </body>
+</html>
+
+      </div>
+    </div>
+
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+  </body>
+</html>
