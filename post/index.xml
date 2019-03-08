@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>A Post on Math for Machines</title>
+    <title>Archive on Math for Machines</title>
     <link>//mathformachines.com/post/</link>
-    <description>Recent content in A Post on Math for Machines</description>
+    <description>Recent content in Archive on Math for Machines</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy;Ryan Holbrook 2019</copyright>
-    <lastBuildDate>Mon, 28 Jan 2019 17:20:22 -0600</lastBuildDate>
+    <lastBuildDate>Thu, 07 Mar 2019 16:16:54 -0600</lastBuildDate>
     
 	<atom:link href="//mathformachines.com/post/index.xml" rel="self" type="application/rss+xml" />
     

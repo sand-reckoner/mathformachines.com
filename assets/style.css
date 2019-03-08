@@ -1,3 +1,7 @@
+a {
+    color: #0074D9
+}
+
 /* custom css here */
 html,
 body {
@@ -19,7 +23,8 @@ body {
     "footer side";
 }
 #header {
-  grid-area: header;
+    grid-area: header;
+    margin-bottom: 2.5rem
 }
 #main {
   grid-area: main;
