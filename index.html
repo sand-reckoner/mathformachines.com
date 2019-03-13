@@ -55,7 +55,14 @@ if (!doNotTrack) {
   <div class="UnderlineNav-body text-bold">
     
     
-    <a class="UnderlineNav-item " href="/post">
+    <a class="UnderlineNav-item " href="/pages/about">
+      
+      <span>About</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="/posts">
       
       <span>Archive</span>
     </a>
@@ -76,12 +83,13 @@ if (!doNotTrack) {
   
 
   
+  
     
     
 <div class="rounded-2 box-shadow-medium px-3 pb-2 pt-2 mb-3">
   <div class="Subhead mb-2">
     <div class="Subhead-heading">
-      <a class ="text-gray-dark" href="/post/a-tour-of-tensors/">
+      <a class ="text-gray-dark" href="/posts/a-tour-of-tensors/">
         <div class="h2 mt-1 mb-1">A Tour of Tensors</div>
       </a>
     </div>
@@ -111,10 +119,12 @@ if (!doNotTrack) {
   </div>
   <div class="text-gray">
     
-    <p>Here are some notes on tensors, starting from basic linear algebra. I&rsquo;ve tried to take a computational focus and to avoid formalism when possible. If you&rsquo;re interested in tensors applied to machine learning, or have wondered why arrays in Tensorflow are called tensors, you might find this useful. I&rsquo;ll do some computations in <a href="http://www.sagemath.org/">Sage</a> and also in <a href="http://www.numpy.org/">Numpy</a> for illustration.</p>
-
-<p></p>
-    <a class="muted-link" href="/post/a-tour-of-tensors/">…</a>
+    Here are some notes on tensors, starting from elementary linear algebra. I&rsquo;ve tried to take a computational focus and to avoid formalism when possible. If you&rsquo;re interested in tensors applied to machine learning, or have wondered why arrays in Tensorflow are called tensors, you might find this useful. I&rsquo;ll do some computations in Sage and also in Numpy for illustration.
+Abstract Tensors First, let&rsquo;s take brief look at tensors in the abstract.
+    <a class="muted-link" href="/posts/a-tour-of-tensors/">…</a>
+  </div>
+  <div class="Subhead-description mt-2">
+    Reading time: 12 minutes<br>
   </div>
 </div>
 
@@ -124,7 +134,7 @@ if (!doNotTrack) {
 <div class="rounded-2 box-shadow-medium px-3 pb-2 pt-2 mb-3">
   <div class="Subhead mb-2">
     <div class="Subhead-heading">
-      <a class ="text-gray-dark" href="/post/bayesian-topic-modeling/">
+      <a class ="text-gray-dark" href="/posts/bayesian-topic-modeling/">
         <div class="h2 mt-1 mb-1">Bayesian Topic Modeling</div>
       </a>
     </div>
@@ -155,7 +165,10 @@ if (!doNotTrack) {
   <div class="text-gray">
     
     Imagine we have some collection of documents. They could be novels, or tweets, or financial reports&mdash;just any collection of text. We want an algorithm that can discover what they are about, and we would like our algorithm to do it automatically, without any hints. (That is, we want our algorithm to be unsupervised.) We will look at several models that probabilistically assign words to topics using Bayes&rsquo; Theorem. They are all Bayesian Graphical Models.
-    <a class="muted-link" href="/post/bayesian-topic-modeling/">…</a>
+    <a class="muted-link" href="/posts/bayesian-topic-modeling/">…</a>
+  </div>
+  <div class="Subhead-description mt-2">
+    Reading time: 18 minutes<br>
   </div>
 </div>
 
@@ -246,17 +259,26 @@ if (!doNotTrack) {
     </script>
 
     
+    
+    
+    
+
+
     <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+         "HTML-CSS": { scale: 90, linebreaks: { automatic: true } },
+          SVG: { linebreaks: { automatic:true } },
+      });
       MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
-    </script>
-
-
-    <script type="text/x-mathjax-config"> 
-      MathJax.Hub.Config({ 
-         "HTML-CSS": { scale: 90, linebreaks: { automatic: true } }, 
-          SVG: { linebreaks: { automatic:true } }, 
+      MathJax.Hub.Config({
+        TeX: {
+          Macros: {
+            formbox: ["\\bbox[15px, border:1px solid PowderBlue]{#1}", 1]
+          }
+        }
       });
     </script>
+
 
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133546767-1"></script>

@@ -54,7 +54,14 @@ if (!doNotTrack) {
   <div class="UnderlineNav-body text-bold">
     
     
-    <a class="UnderlineNav-item " href="/post">
+    <a class="UnderlineNav-item " href="/pages/about">
+      
+      <span>About</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="/posts">
       
       <span>Archive</span>
     </a>
@@ -83,7 +90,7 @@ if (!doNotTrack) {
     </div>
     <div class="text-gray">
       
-      <a class="btn btn-transparent bg-blue-light link-gray mb-2" href="/post/bayesian-topic-modeling/" role="button">Bayesian Topic Modeling</a>
+      <a class="btn btn-transparent bg-blue-light link-gray mb-2" href="/posts/bayesian-topic-modeling/" role="button">Bayesian Topic Modeling</a>
       
 
       
@@ -98,7 +105,7 @@ if (!doNotTrack) {
     </div>
     <div class="text-gray">
       
-      <a class="btn btn-transparent bg-blue-light link-gray mb-2" href="/post/bayesian-topic-modeling/" role="button">Bayesian Topic Modeling</a>
+      <a class="btn btn-transparent bg-blue-light link-gray mb-2" href="/posts/bayesian-topic-modeling/" role="button">Bayesian Topic Modeling</a>
       
 
       
@@ -113,7 +120,7 @@ if (!doNotTrack) {
     </div>
     <div class="text-gray">
       
-      <a class="btn btn-transparent bg-blue-light link-gray mb-2" href="/post/bayesian-topic-modeling/" role="button">Bayesian Topic Modeling</a>
+      <a class="btn btn-transparent bg-blue-light link-gray mb-2" href="/posts/bayesian-topic-modeling/" role="button">Bayesian Topic Modeling</a>
       
 
       
@@ -128,7 +135,7 @@ if (!doNotTrack) {
     </div>
     <div class="text-gray">
       
-      <a class="btn btn-transparent bg-blue-light link-gray mb-2" href="/post/a-tour-of-tensors/" role="button">A Tour of Tensors</a>
+      <a class="btn btn-transparent bg-blue-light link-gray mb-2" href="/posts/a-tour-of-tensors/" role="button">A Tour of Tensors</a>
       
 
       
@@ -143,7 +150,7 @@ if (!doNotTrack) {
     </div>
     <div class="text-gray">
       
-      <a class="btn btn-transparent bg-blue-light link-gray mb-2" href="/post/a-tour-of-tensors/" role="button">A Tour of Tensors</a>
+      <a class="btn btn-transparent bg-blue-light link-gray mb-2" href="/posts/a-tour-of-tensors/" role="button">A Tour of Tensors</a>
       
 
       
@@ -158,7 +165,7 @@ if (!doNotTrack) {
     </div>
     <div class="text-gray">
       
-      <a class="btn btn-transparent bg-blue-light link-gray mb-2" href="/post/a-tour-of-tensors/" role="button">A Tour of Tensors</a>
+      <a class="btn btn-transparent bg-blue-light link-gray mb-2" href="/posts/a-tour-of-tensors/" role="button">A Tour of Tensors</a>
       
 
       
@@ -251,17 +258,26 @@ if (!doNotTrack) {
     </script>
 
     
+    
+    
+    
+
+
     <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+         "HTML-CSS": { scale: 90, linebreaks: { automatic: true } },
+          SVG: { linebreaks: { automatic:true } },
+      });
       MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
-    </script>
-
-
-    <script type="text/x-mathjax-config"> 
-      MathJax.Hub.Config({ 
-         "HTML-CSS": { scale: 90, linebreaks: { automatic: true } }, 
-          SVG: { linebreaks: { automatic:true } }, 
+      MathJax.Hub.Config({
+        TeX: {
+          Macros: {
+            formbox: ["\\bbox[15px, border:1px solid PowderBlue]{#1}", 1]
+          }
+        }
       });
     </script>
+
 
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133546767-1"></script>

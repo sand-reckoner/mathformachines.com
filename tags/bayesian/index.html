@@ -54,7 +54,14 @@ if (!doNotTrack) {
   <div class="UnderlineNav-body text-bold">
     
     
-    <a class="UnderlineNav-item " href="/post">
+    <a class="UnderlineNav-item " href="/pages/about">
+      
+      <span>About</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="/posts">
       
       <span>Archive</span>
     </a>
@@ -80,7 +87,7 @@ if (!doNotTrack) {
 <div class="rounded-2 box-shadow-medium px-3 pb-2 pt-2 mb-3">
   <div class="Subhead mb-2">
     <div class="Subhead-heading">
-      <a class ="text-gray-dark" href="/post/bayesian-topic-modeling/">
+      <a class ="text-gray-dark" href="/posts/bayesian-topic-modeling/">
         <div class="h2 mt-1 mb-1">Bayesian Topic Modeling</div>
       </a>
     </div>
@@ -111,7 +118,10 @@ if (!doNotTrack) {
   <div class="text-gray">
     
     Imagine we have some collection of documents. They could be novels, or tweets, or financial reports&mdash;just any collection of text. We want an algorithm that can discover what they are about, and we would like our algorithm to do it automatically, without any hints. (That is, we want our algorithm to be unsupervised.) We will look at several models that probabilistically assign words to topics using Bayes&rsquo; Theorem. They are all Bayesian Graphical Models.
-    <a class="muted-link" href="/post/bayesian-topic-modeling/">…</a>
+    <a class="muted-link" href="/posts/bayesian-topic-modeling/">…</a>
+  </div>
+  <div class="Subhead-description mt-2">
+    Reading time: 18 minutes<br>
   </div>
 </div>
 
@@ -202,17 +212,26 @@ if (!doNotTrack) {
     </script>
 
     
+    
+    
+    
+
+
     <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+         "HTML-CSS": { scale: 90, linebreaks: { automatic: true } },
+          SVG: { linebreaks: { automatic:true } },
+      });
       MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
-    </script>
-
-
-    <script type="text/x-mathjax-config"> 
-      MathJax.Hub.Config({ 
-         "HTML-CSS": { scale: 90, linebreaks: { automatic: true } }, 
-          SVG: { linebreaks: { automatic:true } }, 
+      MathJax.Hub.Config({
+        TeX: {
+          Macros: {
+            formbox: ["\\bbox[15px, border:1px solid PowderBlue]{#1}", 1]
+          }
+        }
       });
     </script>
+
 
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133546767-1"></script>
