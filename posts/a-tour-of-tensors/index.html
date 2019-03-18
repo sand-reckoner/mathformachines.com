@@ -28,9 +28,6 @@ if (!doNotTrack) {
 Abstract Tensors First, let&amp;rsquo;s take brief look at tensors in the abstract.|It&#39;s about math, for machines.">
     
 
-    <meta name="apple-mobile-web-app-title" content="Math for Machines">
-    
-    
     
     
 
@@ -77,6 +74,7 @@ Abstract Tensors First, let&amp;rsquo;s take brief look at tensors in the abstra
       <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
         
 
+
 <div class="Subhead">
   <div class="Subhead-heading">
     <div class="h1 mt-3 mb-1">A Tour of Tensors</div>
@@ -103,9 +101,9 @@ Abstract Tensors First, let&amp;rsquo;s take brief look at tensors in the abstra
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2019-02-05. Published: 2019-02-05.">
+      <span title="Lastmod: 2019-03-16. Published: 2019-02-05.">
         Published: 2019-02-05<br>
-        Last Modified: 2019-02-05
+        Last Modified: 2019-03-16
         
         
         
@@ -321,7 +319,7 @@ vw[e,:] <span style="color:#719e07">=</span> [[<span style="color:#2aa198">1</sp
 (u<span style="color:#719e07">*</span>vw)[e,:]</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">u*vw = e_1*e_1*e_1 + 2 e_1*e_1*e_2 + 3 e_1*e_2*e_1 + 4 e_1*e_2*e_2 + 2 e_2*e_1*e_1 + 4 e_2*e_1*e_2 + 6 e_2*e_2*e_1 + 8 e_2*e_2*e_2
 
 [[[1, 2], [3, 4]], [[2, 4], [6, 8]]]</code></pre></div>
-<p>The number of vector spaces in the product space is the same as the number of dimensions in the arrays of its tensors (that is, the number of indicies needed to specify a component). This number is called the &ldquo;order&rdquo; of a tensor (or sometimes &ldquo;degree&rdquo;). The order of the tensor above is 3.</p>
+<p>The number of vector spaces in the product space is the same as the number of dimensions in the arrays of its tensors (that is, the number of indices needed to specify a component). This number is called the &ldquo;order&rdquo; of a tensor (or sometimes &ldquo;degree&rdquo;). The order of the tensor above is 3.</p>
 
 <p>We can extend this product to tensors of any order. The components of a tensor \(s \otimes t\) can always be found by taking the product of the respective components of \(s\) and \(t\). For instance, if \(s_{12} = 5\) and \(t_{345} = 7\), then \((s \otimes t)_{12345} = s_{12}t_{345} = 5\cdot7 = 35\).</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sage" data-lang="sage">M <span style="color:#719e07">=</span> FiniteRankFreeModule(QQ, <span style="color:#2aa198">5</span>, name<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;M&#39;</span>, start_index<span style="color:#719e07">=</span><span style="color:#2aa198">1</span>)
@@ -437,6 +435,7 @@ np<span style="color:#719e07">.</span>einsum(<span style="color:#2aa198">&#39;ij
     <div>
       
     </div>
+
   
 
         </aside>
@@ -453,7 +452,16 @@ np<span style="color:#719e07">.</span>einsum(<span style="color:#2aa198">&#39;ij
     <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
   </span>
 
+
+      </div>
+    </div>
+
+
     
+    
+    
+    
+
     
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
@@ -463,7 +471,7 @@ np<span style="color:#719e07">.</span>einsum(<span style="color:#2aa198">&#39;ij
     
     
 
-
+    
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
          "HTML-CSS": { scale: 90, linebreaks: { automatic: true } },
@@ -473,14 +481,14 @@ np<span style="color:#719e07">.</span>einsum(<span style="color:#2aa198">&#39;ij
       MathJax.Hub.Config({
         TeX: {
           Macros: {
-            formbox: ["\\bbox[15px, border:1px solid PowderBlue]{#1}", 1]
+            formbox: ["\\bbox[15px, border:1px solid PowderBlue]{#1}", 1],
+            qed: "\\tag*{$\\Box$}"
           }
         }
       });
     </script>
 
-
-
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133546767-1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -489,16 +497,6 @@ np<span style="color:#719e07">.</span>einsum(<span style="color:#2aa198">&#39;ij
 
       gtag('config', 'UA-133546767-1');
     </script>
-  </body>
-</html>
-
-      </div>
-    </div>
-
-
     
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
   </body>
 </html>

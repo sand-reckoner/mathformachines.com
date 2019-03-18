@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-133546767-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  Change of Basis for Vectors and Covectors &ndash; Math for Machines
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="We share a philosophy about linear algebra: we think basis-free, we write basis-free, but when the chips are down we close the office door and compute with matrices like fury.
+ - Irving Kaplansky  mathoverflow.net/questions/...    Often, the first step in analyzing a problem is to transform it into something more amenable to our analysis. We would like the representation of our problem to reflect as naturally as possible whatever features of it we are most interested in.|It&#39;s about math, for machines.">
+    
+
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions text-gray h1" href="//mathformachines.com/">
+    Math for Machines
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body text-bold">
+    
+    
+    <a class="UnderlineNav-item " href="/pages/about">
+      
+      <span>About</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="/posts">
+      
+      <span>Archive</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">Change of Basis for Vectors and Covectors</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+<a href='/tags/coordinates' class="muted-link">
+  <span class="Label Label--gray">coordinates</span>
+</a>
+
+<a href='/tags/covectors' class="muted-link">
+  <span class="Label Label--gray">covectors</span>
+</a>
+
+<a href='/tags/vectors' class="muted-link">
+  <span class="Label Label--gray">vectors</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2019-03-18. Published: 2019-03-18.">
+        Published: 2019-03-18<br>
+        Last Modified: 2019-03-18
+        
+        
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+
+
+
+
+      
+      
+      
+    
+     
+      
+    
+    
+
+    
+    
+         
+         
+         
+
+         
+        
+        
+        
+        
+      
+      
+    
+  
+
+
+<blockquote>
+  <p>We share a philosophy about linear algebra: we think basis-free, we write basis-free, but when the chips are down we close the office door and compute with matrices like fury.</p>
+  <footer>
+    <strong>- Irving Kaplansky</strong>
+    
+      
+        <cite>
+          <a href="#ZgotmplZ" title="&lt;https://mathoverflow.net/questions/11669/what-is-the-difference-between-matrix-theory-and-linear-algebra/19923&gt;">mathoverflow.net/questions/...</a> 
+        </cite>
+      
+    
+  </footer>
+</blockquote>
+
+
+<p>Often, the first step in analyzing a problem is to <em>transform</em> it into something more amenable to our analysis. We would like the <em>representation</em> of our problem to reflect as naturally as possible whatever features of it we are most interested in. We might normalize data through a scaling transform, for instance, to eliminate spurious differences among like quantities. Or we might rotate data to align some of its salient dimensions with the coordinate axes, simplifying computations. Many matrix decompositions take the form \(M = BNA\). When \(B\) and \(A\) are non-singular, we can think of \(N\) as being a simpler representation of \(M\) under coordinate transforms \(B\) and \(A\). The <a href="https://en.wikipedia.org/wiki/Eigendecomposition%5Fof%5Fa%5Fmatrix">spectral decomposition</a> and the <a href="https://en.wikipedia.org/wiki/Singular%5Fvalue%5Fdecomposition">singular value decomposition</a> are of this form.</p>
+
+<p>All of these kinds of coordinate transformations are <em>linear</em> transformations. Linear coordinate transformations come about from operations on basis vectors that leave any vectors represented by them <a href="https://en.wikipedia.org/wiki/Active%5Fand%5Fpassive%5Ftransformation">unchanged</a>. They are, in other words, a change of basis.</p>
+
+<p>This post came about from my frustration at not finding simple formulas for these transformations with simple explanations to go along with them. So here, I tried to give a simple exposition of coordinate transformations for vectors in vector spaces along with transformations of their cousins, the covectors in the dual space. I&rsquo;ll get into matrices and some applications in a future post.</p>
+
+<h2 id="vectors">Vectors</h2>
+
+<h3 id="example-part-1">Example - Part 1</h3>
+
+<p>Let&rsquo;s go through an example to see how it works. (I&rsquo;ll assume the field is \(\mathbb{R}\) throughout.)</p>
+
+<p>Let \(e\) be the standard basis in \(\mathbb{R}^2\) and let \(e&rsquo;\) be another basis where</p>
+
+<p>\begin{array}{cc}
+e&rsquo;_1 = \frac12 e_1, &amp; e&rsquo;_2 = -e_1 + 2 e_2
+\end{array}</p>
+
+<p>So we have written the basis \(e&rsquo;\) in terms of the standard basis \(e\). As vectors they look like this:</p>
+
+
+
+
+<figure>
+    
+        <img src="//mathformachines.com/posts/change-of-basis/bases.jpg" alt="Drawing of the basis vectors e\_1, e\_2, and e'\_1, e'\_2"/> </figure>
+
+
+<p>And each will induce its own coordinate system, indicating the angle and orientation of each axis, and each axis&rsquo; unit of measure.</p>
+
+
+
+
+<figure>
+    
+        <img src="//mathformachines.com/posts/change-of-basis/coordinates.jpg" alt="Drawing of basis vectors and the coordinates they induce."/> </figure>
+
+
+<p>We can write any vector in \(\mathbb{R}^2\) as a linear combination of these basis elements.</p>
+
+<p>\begin{array}{cc}
+v = e_1 + 2 e_2, &amp; w&rsquo; = 5 e&rsquo;_1 + \frac12 e&rsquo;_2
+\end{array}</p>
+
+
+
+
+<figure>
+    
+        <img src="//mathformachines.com/posts/change-of-basis/vectors.jpg" alt="Drawing of vectors in two coordinate systems."/> </figure>
+
+
+<p>We call the coefficients #?# on the basis elements the <strong>coordinate</strong> of the vector in that basis. So, in basis \(e\) the vector \(v\) has coordinates \((1, 2)\), and in basis \(e&rsquo;\) the vector \(w&rsquo;\) has coordinates \((5, \frac12)\).</p>
+
+<h3 id="formulas">Formulas</h3>
+
+<p>The choice of basis is just a choice of representation, like ###. The vector itself should stay the same. So the question is &ndash; how can we rewrite a vector in a <em>different</em> basis without changing the vector itself?</p>
+
+<p>Let&rsquo;s establish some notation. Our basis elements let&rsquo;s index with subscripts (like \(e_1\)), and coordinates let&rsquo;s index with superscripts (like \(v^1\)). This will help us keep track of which one we&rsquo;re working with. Also, let&rsquo;s write basis elements as row vectors, and coordinates as column vectors. This way we can write a vector as a matrix product of the basis elements and the coordinates:</p>
+
+<p>\[\begin{bmatrix} e_1 &amp; e_2 \end{bmatrix}\begin{bmatrix}v^1 \\<br />
+v^2\end{bmatrix} = v^1 e_1 + v^2 e_2
+\]</p>
+
+<p>Now we can also write the transformation of \(e\) into \(e&rsquo;\) using matrix multiplication.</p>
+
+<p>\[\begin{bmatrix}e&rsquo;_1&amp; e&rsquo;_2\end{bmatrix} = \begin{bmatrix}e_1&amp;  e_2\end{bmatrix}\begin{bmatrix}
+\frac12 &amp; -1 \\<br />
+0 &amp; 2
+\end{bmatrix} = \begin{bmatrix}\frac12 e_1 &amp; -e_1 + 2 e_2\end{bmatrix}\]</p>
+
+<p>The \(2 \times 2\) matrix used in that transformation is called the <strong>transformation matrix</strong> from the basis \(e\) to the basis \(e&rsquo;\).</p>
+
+<p>The general formula is</p>
+
+<p>\[\formbox{e&rsquo; = e A}\]</p>
+
+<p>where \(A\) is the transformation matrix. We can use this <em>same</em> matrix to transform coordinate vectors, but we shouldn&rsquo;t necessarily expect that we can use the same formula. The bases and the coordinates are playing different roles here: the basis elements are vectors that describe the coordinate system, while the coordinates are scalars that describe a vector&rsquo;s position in that system.</p>
+
+<p>Let&rsquo;s think about how this should work. Generally we write \(v = v^1 e_1 + v^2 e_2 \cdots + v^n e_n\). If we make some new basis \(e&rsquo;\) by multiplying all the \(e_i\)&rsquo;s by 2, say, and <em>also</em> multiplied all the \(v_j\)&rsquo;s by 2, then we would end up with a vector <em>four times</em> the size of the original! Instead, we should have multiplied all the \(v_j\)&rsquo;s by \(\frac12\), the inverse of 2, and then we would have \(v&rsquo; = v\), as needed. The vector must be the same in either basis.</p>
+
+<p>So, if we change the \(e\)&rsquo;s by some factor then, the \(v\)&rsquo;s need to change in the <em>inverse</em> manner to maintain equality. This suggests that to change \(v\) into a representation \(v&rsquo;\) in basis \(e&rsquo;\) we should use instead</p>
+
+<p>\[\formbox{v&rsquo; = A^{-1} v}\]</p>
+
+<p>(We&rsquo;ll prove it a little bit later.)</p>
+
+<p>The fact that basis elements change in one way (\(e&rsquo; = e A\)) while coordinates change in the inverse way (\(v&rsquo; = A^{-1} v\)), is why we sometimes call the basis elements <strong>covariant</strong> and the vector coordinates <strong>contravariant</strong>, and distinguish them with the position of their indices.</p>
+
+<h3 id="example-part-2">Example - Part 2</h3>
+
+<p>Let&rsquo;s go back to our example. Using our formula, we get</p>
+
+<p>\[
+v&rsquo; = \begin{bmatrix}2 &amp; 1 \\<br />
+0 &amp; \frac12 \end{bmatrix} \begin{bmatrix}1 \\<br />
+2\end{bmatrix} = \begin{bmatrix}4 \\<br />
+1\end{bmatrix}
+\]</p>
+
+<p>But what about \(w&rsquo;\)? Well, since its representation is in \(e&rsquo;\), to convert in the opposite direction, to \(e\), we need to use the transformation that&rsquo;s the inverse of \(A^{-1}\), namely, \(A\).</p>
+
+<p>\[
+w = \begin{bmatrix}\frac12 &amp; -1 \\<br />
+0 &amp; 1 \end{bmatrix} \begin{bmatrix}5 \\<br />
+\frac12\end{bmatrix} = \begin{bmatrix}2 \\<br />
+1\end{bmatrix}
+\]</p>
+
+<p>And now we have:</p>
+
+
+
+
+<figure>
+    
+        <img src="//mathformachines.com/posts/change-of-basis/transformed.jpg" alt="Drawing of vectors v, v', w, and w'."/> </figure>
+
+
+<p>Each vector is unchanged after a change of basis.</p>
+
+<h2 id="covectors">Covectors</h2>
+
+<p>Recall that the <a href="https://en.wikipedia.org/wiki/Inner%5Fproduct%5Fspace">inner product</a> on a vector space is <strong>&hellip;</strong></p>
+
+<p>We might ask, given some vector \(v\) how does this inner product vary as we range over vectors \(w\)? In this case, we could think of \(\langle v, \cdot\rangle\) as a function of vectors in \(V\) whose outputs are scalars. In fact, these sorts of functions themselves form a vector space, called the <strong>dual space</strong> of \(V\), which we write \(V^*\). The members of \(V^*\) are called <strong>linear functionals</strong> or <strong>covectors</strong>. The covector given by \(\langle v, \cdot\rangle\) we denote \(v^*\).</p>
+
+<p>We&rsquo;ve been working with vectors in \(\mathbb{R}^n\), and in \(\mathbb{R}^n\) the (canonical) inner product is the <a href="https://en.wikipedia.org/wiki/Dot%5Fproduct">dot product</a>. This means that if we denote the covectors in \(V^*\) as <em>rows</em> and (as usual) the vectors in \(V\) as <em>columns</em>, then we can write</p>
+
+<p>\[
+v^*(w) = \begin{bmatrix} v_1 &amp; \cdots &amp; v_n\end{bmatrix}\begin{bmatrix}w^1 \\<br />
+\vdots\\<br />
+w^n\end{bmatrix} = v_1 w^1 + \cdots + v_n w^n
+\]</p>
+
+<p>So, the covectors are functions \(\mathbb{R}^n \to \mathbb{R}\), but we can do computations with them just like we do with vectors, using matrix multiplication. We still write the indices of the row vectors as subscripts and the indices of the column vectors as superscripts.</p>
+
+<p>If we can think about vectors in \(\mathbb{R}^n\) as arrows, how should we think about covectors? To simplify things, let&rsquo;s restrict our attention to the two-dimensional case. Now, consider the action of a covector \(v^*\) on some unknown vector \(w = \begin{bmatrix}x&amp; y\end{bmatrix}^\top\) in \(\mathbb{R}^2\):</p>
+
+<p>\[
+v^*(w) = v_1 x + v_2 y
+\]</p>
+
+<p>Now if we look at the level sets of this function, \(v_1 x + v_2 y = k\), it should start to look familiar&hellip;</p>
+
+<p>It&rsquo;s a family of <a href="https://en.wikipedia.org/wiki/Linear%5Fequation#Two-point%5Fform">lines</a>!</p>
+
+<p>And to find out the value of \(v^*(w)\) we just count how many lines of \(v^*\) the vector \(w\) passes through (including maybe &ldquo;fractional&rdquo; valued lines &ndash; \(k\) doesn&rsquo;t have to just be an integer). More generally, the covectors of \(\mathbb{R}^n\) can be thought of as <a href="https://en.wikipedia.org/wiki/Hyperplane">hyperplanes</a>, and the value of \(v^*(w)\) can be determined by how many hyperplanes of \(v^*\) the vector \(w\) passes through. And furthermore, the vector \(v\) will be the <a href="https://en.wikipedia.org/wiki/Normal%5F(geometry)">normal</a> vector to the hyperplanes given by \(v^*\).</p>
+
+<h3 id="example-part-3">Example - Part 3</h3>
+
+<p>In the standard basis, let \(v^*\) be given by \(\begin{bmatrix}1 &amp; 2\end{bmatrix}\). Its family of lines will then be \(x + 2 y = k\). Now let \(w\) be given by \(\begin{bmatrix}2 &amp; 1\end{bmatrix}\), and count how many lines \(w\) crosses through:</p>
+
+
+
+
+<figure>
+    
+        <img src="//mathformachines.com/posts/change-of-basis/covectors.jpg" alt="Left: Drawing of v and v^\*. Right: Drawing of v^\* and w."/> </figure>
+
+
+<p>It&rsquo;s exactly the same as \(v^*(w) = 2 + 2(1) = 4\)! I think that&rsquo;s pretty cool.</p>
+
+<h3 id="the-dual-basis">The Dual Basis</h3>
+
+<p>Okay, so what about bases in \(V^*\)? We&rsquo;d like to have a basis for \(V^*\) that is the &ldquo;best fit&rdquo; for whatever basis we have in \(V\). This turns out to be the basis given by:
+\[
+e^i(e_j) =
+\begin{cases}
+  1 &amp; \text{if } i = j\\<br />
+  0 &amp; \text{if } i \ne j
+\end{cases}\]</p>
+
+<p>where \((e_j)\) is a basis in \(V\). Or sometimes people write instead \(e^i(e_j) = \delta^i_j\), where \(\delta^i_j\) is the <a href="https://en.wikipedia.org/wiki/Kronecker%5Fdelta">Kronecker delta</a>. We call this basis \((e^i)\) the <strong>dual basis</strong> of \((e_j)\). You can see that a basis and its dual have a kind of &ldquo;bi-orthogonality&rdquo; property that turns out to be very convenient.</p>
+
+<p>Let&rsquo;s look at formulas for changing bases now. If we have a vector \(v\) in \(V\) written as a column, how can we find the corresponding vector \(v^*\) in \(V^*\)? The obvious thing to do would be to take the transposition of \(v\). This will not always work. Recall the definitions of \(v, v&rsquo;, w\) and \(w&rsquo;\) from the <a href="#vectors">first section</a>, and consider:</p>
+
+<p>\[v^\top v = \begin{bmatrix} 1 &amp; 2\end{bmatrix}\begin{bmatrix}1 \\<br />
+2\end{bmatrix} = 1 + 4 = 5\]</p>
+
+<p>\[v&rsquo;^\top v&rsquo; = \begin{bmatrix} 4 &amp; 1\end{bmatrix}\begin{bmatrix}4 \\<br />
+1\end{bmatrix} = 16 + 1 = 17\]</p>
+
+<p>This is no good. We get two different values for \(\bar v^*(\bar w)\) depending on which basis we use, but the values of a function on a vector space shouldn&rsquo;t depend on the basis.$ The trouble is that the dual of \((e&rsquo;_i)\) isn&rsquo;t the transpose of those basis vectors (they don&rsquo;t satisfy the bi-orthogonality property), so the duals of those vectors represented in it won&rsquo;t be the transposes of those vectors either.</p>
+
+<p>This <em>will</em> be true for <a href="https://en.wikipedia.org/wiki/Orthonormality">orthonormal</a> bases, however. The standard basis \((e_i)\) <em>is</em> orthonormal, and the duals of the vectors represented in it will in fact be those transposes.</p>
+
+<p>\[ \formbox{v^* = v^\top \text{for any vector } v \text{ written in an orthonormal basis.}} \]</p>
+
+<h3 id="formulas-1">Formulas</h3>
+
+<p>The next question is, if we perform a change of basis in \(V\), what is the corresponding change in \(V^*\)? Let&rsquo;s use the same reasoning that we did before. For a vector \(w\) in \(\mathbb{R}\) and a covector \(v^*\), we have</p>
+
+<p>\[
+v^*(w) = v_1 w^1 + \cdots + v_n w^n
+\]</p>
+
+<p>And so, like before, if we change the values of the \(w_j\)&rsquo;s, the values of the \(v^i\)&rsquo;s should change in the inverse manner to preserve equality. But \(w\) changes as \(w&rsquo; = A^{-1} w\), so \(v^*\) must change as \(v&rsquo;^* = v^* A\). And its basis (the dual basis) must change as <em>its</em> inverse: \(e&rsquo;^* = A^{-1} e^*\).</p>
+
+<p>\[\formbox{\begin{align}
+e&rsquo;^* &amp;= A^{-1} e^*\\<br />
+v&rsquo;^* &amp;= v^* A
+\end{align}}\]</p>
+
+<p>Notice that this time the basis vectors are playing the <strong>contravariant</strong> part, while the coordinates are playing the <strong>covariant</strong> part with respect to the original vector space.</p>
+
+<h3 id="example-part-4">Example - Part 4</h3>
+
+<p>Lets continue our example. Since \(e\) is the standard basis, it is orthonormal, and we can therefore find the duals of \(v\) and \(w\) by taking transposes. We can then apply our formula to find the duals of \(v&rsquo;^*\) and \(w&rsquo;^*\).</p>
+
+<p>\begin{align}
+v&rsquo;^*(x, y) &amp;= \begin{bmatrix}1 &amp; 2\end{bmatrix}\begin{bmatrix}\frac12 &amp; -1\\<br />
+0 &amp; 2\end{bmatrix}\begin{bmatrix}x\\<br />
+y\end{bmatrix}\\<br />
+&amp;= \begin{bmatrix}\frac12 &amp; 3\end{bmatrix}\begin{bmatrix}x\\<br />
+y\end{bmatrix}\\<br />
+&amp;= \frac12 x + 3y\\<br />
+\\<br />
+w&rsquo;^*(x, y) &amp;= \begin{bmatrix}2 &amp; 1\end{bmatrix}\begin{bmatrix}\frac12 &amp; -1\\<br />
+0 &amp; 2\end{bmatrix}\begin{bmatrix}x\\<br />
+y\end{bmatrix}\\<br />
+&amp;= \begin{bmatrix}1 &amp; 0\end{bmatrix}\begin{bmatrix}x\\<br />
+y\end{bmatrix}\\<br />
+&amp;= 2x + 2y
+\end{align}</p>
+
+<p>The duals too are unchanged after a change of basis.</p>
+
+
+
+
+<figure>
+    
+        <img src="//mathformachines.com/posts/change-of-basis/covectors2.jpg" alt="Left: Drawing of \\(v^\*\\) and \\(w^\*\\). Right: Drawing of \\(v'^\*\\) and \\(w'^\*\\)."/> </figure>
+
+
+<h2 id="summary-of-formulas">Summary of Formulas</h2>
+
+<p>\[\formbox{\begin{array}{llr}
+e&rsquo;   &amp;= e A      &amp; &amp;(1)\\<br />
+v&rsquo;   &amp;= A^{-1} v &amp; &amp;(2)\\<br />
+e&rsquo;^* &amp;= A^{-1} e &amp; &amp;(3)\\<br />
+v&rsquo;^* &amp;= v A      &amp; &amp;(4)
+\end{array} }\]</p>
+
+<p>Suppose \((1)\), that \(e&rsquo; = e A\), where \(A\) is a non-singular matrix.</p>
+
+<p><strong>Proof of (2):</strong> We know \(e v = e&rsquo; v&rsquo;\). Now</p>
+
+<p>\[
+e&rsquo; v&rsquo; = e v = e A A^{-1} v = e&rsquo; (A^{-1} v)
+\]</p>
+
+<p>But then it must be that \(v&rsquo; = A^{-1} v\) since basis representations are unique.</p>
+
+<p><strong>Proof of (4):</strong> We also know \(v&rsquo;^* w&rsquo; = v^* w\) for all vectors \(w\). But then</p>
+
+<p>\[
+v&rsquo;^* w&rsquo; = v^* w = v^* w = v^* A A^{-1} w = (v^* A) w&rsquo;
+\]</p>
+
+<p>for all \(w&rsquo;\). So, \(v&rsquo;^* = v^* A\).</p>
+
+<p><strong>Proof of (3):</strong> Lastly,</p>
+
+<p>\[
+v&rsquo;^* e&rsquo;^* = v^* e^* = v^* A A^{-1} e^* = v&rsquo;^* A^{-1} e^*
+\]</p>
+
+<p>for all \(w&rsquo;\). So, \(e&rsquo;^* = A^{-1}e^*\). \(\qed\)</p>
+
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Change of Basis for Vectors and Covectors</b>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#vectors">Vectors</a>
+<ul>
+<li><a href="#example-part-1">Example - Part 1</a></li>
+<li><a href="#formulas">Formulas</a></li>
+<li><a href="#example-part-2">Example - Part 2</a></li>
+</ul></li>
+<li><a href="#covectors">Covectors</a>
+<ul>
+<li><a href="#example-part-3">Example - Part 3</a></li>
+<li><a href="#the-dual-basis">The Dual Basis</a></li>
+<li><a href="#formulas-1">Formulas</a></li>
+<li><a href="#example-part-4">Example - Part 4</a></li>
+</ul></li>
+<li><a href="#summary-of-formulas">Summary of Formulas</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+  
+
+  
+    <div>
+      
+    </div>
+
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    &copy;Ryan Holbrook 2019 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+
+    
+    
+    
+    
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    
+    
+    
+    
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+         "HTML-CSS": { scale: 90, linebreaks: { automatic: true } },
+          SVG: { linebreaks: { automatic:true } },
+      });
+      MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+      MathJax.Hub.Config({
+        TeX: {
+          Macros: {
+            formbox: ["\\bbox[15px, border:1px solid PowderBlue]{#1}", 1],
+            qed: "\\tag*{$\\Box$}"
+          }
+        }
+      });
+    </script>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133546767-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-133546767-1');
+    </script>
+    
+  </body>
+</html>

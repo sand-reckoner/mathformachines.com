@@ -27,9 +27,6 @@ if (!doNotTrack) {
     <meta name="description" property="og:description" content="Imagine we have some collection of documents. They could be novels, or tweets, or financial reports&amp;mdash;just any collection of text. We want an algorithm that can discover what they are about, and we would like our algorithm to do it automatically, without any hints. (That is, we want our algorithm to be unsupervised.) We will look at several models that probabilistically assign words to topics using Bayes&amp;rsquo; Theorem. They are all Bayesian Graphical Models.|It&#39;s about math, for machines.">
     
 
-    <meta name="apple-mobile-web-app-title" content="Math for Machines">
-    
-    
     
     
 
@@ -75,6 +72,7 @@ if (!doNotTrack) {
 
       <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
         
+
 
 <div class="Subhead">
   <div class="Subhead-heading">
@@ -694,6 +692,7 @@ fig<span style="color:#719e07">.</span>suptitle(<span style="color:#2aa198">&#39
     <div>
       
     </div>
+
   
 
         </aside>
@@ -710,7 +709,16 @@ fig<span style="color:#719e07">.</span>suptitle(<span style="color:#2aa198">&#39
     <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
   </span>
 
+
+      </div>
+    </div>
+
+
     
+    
+    
+    
+
     
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
@@ -720,7 +728,7 @@ fig<span style="color:#719e07">.</span>suptitle(<span style="color:#2aa198">&#39
     
     
 
-
+    
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
          "HTML-CSS": { scale: 90, linebreaks: { automatic: true } },
@@ -730,14 +738,14 @@ fig<span style="color:#719e07">.</span>suptitle(<span style="color:#2aa198">&#39
       MathJax.Hub.Config({
         TeX: {
           Macros: {
-            formbox: ["\\bbox[15px, border:1px solid PowderBlue]{#1}", 1]
+            formbox: ["\\bbox[15px, border:1px solid PowderBlue]{#1}", 1],
+            qed: "\\tag*{$\\Box$}"
           }
         }
       });
     </script>
 
-
-
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133546767-1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -746,16 +754,6 @@ fig<span style="color:#719e07">.</span>suptitle(<span style="color:#2aa198">&#39
 
       gtag('config', 'UA-133546767-1');
     </script>
-  </body>
-</html>
-
-      </div>
-    </div>
-
-
     
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
   </body>
 </html>
