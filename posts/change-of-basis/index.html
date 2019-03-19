@@ -101,9 +101,9 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2019-03-18. Published: 2019-03-18.">
+      <span title="Lastmod: 2019-03-19. Published: 2019-03-18.">
         Published: 2019-03-18<br>
-        Last Modified: 2019-03-18
+        Last Modified: 2019-03-19
         
         
         
@@ -230,21 +230,23 @@ v = e_1 + 2 e_2, &amp; w&rsquo; = 5 e&rsquo;_1 + \frac12 e&rsquo;_2
         <img src="//mathformachines.com/posts/change-of-basis/vectors.jpg" alt="Drawing of vectors in two coordinate systems."/> </figure>
 
 
-<p>We call the coefficients #?# on the basis elements the <strong>coordinate</strong> of the vector in that basis. So, in basis \(e\) the vector \(v\) has coordinates \((1, 2)\), and in basis \(e&rsquo;\) the vector \(w&rsquo;\) has coordinates \((5, \frac12)\).</p>
+<p>We call the coefficients on the basis elements the <strong>coordinates</strong> of the vector in that basis. So, in basis \(e\) the vector \(v\) has coordinates \((1, 2)\), and in basis \(e&rsquo;\) the vector \(w&rsquo;\) has coordinates \((5, \frac12)\).</p>
 
 <h3 id="formulas">Formulas</h3>
 
 <p>The choice of basis is just a choice of representation. The vector itself should stay the same. So the question is &ndash; how can we rewrite a vector in a <em>different</em> basis without changing the vector itself?</p>
 
-<p>Let&rsquo;s establish some notation. Our basis elements let&rsquo;s index with subscripts (like \(e_1\)), and coordinates let&rsquo;s index with superscripts (like \(v^1\)). This will help us keep track of which one we&rsquo;re working with. Also, let&rsquo;s write basis elements as row vectors, and coordinates as column vectors. This way we can write a vector as a matrix product of the basis elements and the coordinates:</p>
+<p>Let&rsquo;s establish some notation. First, whenever we are talking about a vector in the abstract, let&rsquo;s write \(\mathbf{v}\), and whenever we are talking about a vector represented in some basis let&rsquo;s write \(v\). So the same vector \(\mathbf{v}\) might have two different basis representations \(v\) and \(v&rsquo;\), which nevertheless all stand for the same vector: \(\mathbf{v} = v = v&rsquo;\). However, when we write \(e\) for a basis, we mean a list of vectors \(e_i\) that form a basis in some vector space \(V\). So, \(v = v&rsquo;\) always, but in general \(e \neq e&rsquo;\).</p>
 
-<p>\[\begin{bmatrix} e_1 &amp; e_2 \end{bmatrix}\begin{bmatrix}v^1 \\<br />
+<p>Our basis elements let&rsquo;s index with subscripts (like \(e_1\)), and coordinates let&rsquo;s index with superscripts (like \(v^1\)). This will help us keep track of which one we&rsquo;re working with. Also, let&rsquo;s write basis elements as row vectors, and coordinates as column vectors. This way we can write a vector as a matrix product of the basis elements and the coordinates:</p>
+
+<p>\[v = \begin{bmatrix} e_1 &amp; e_2 \end{bmatrix}\begin{bmatrix}v^1 \\<br />
 v^2\end{bmatrix} = v^1 e_1 + v^2 e_2
 \]</p>
 
-<p>Now we can also write the transformation of \(e\) into \(e&rsquo;\) using matrix multiplication.</p>
+<p>Now we can also write the transformation given above of \(e\) into \(e&rsquo;\) using matrix multiplication:</p>
 
-<p>\[\begin{bmatrix}e&rsquo;_1&amp; e&rsquo;_2\end{bmatrix} = \begin{bmatrix}e_1&amp;  e_2\end{bmatrix}\begin{bmatrix}
+<p>\[e&rsquo; = \begin{bmatrix}e&rsquo;_1&amp; e&rsquo;_2\end{bmatrix} = \begin{bmatrix}e_1&amp;  e_2\end{bmatrix}\begin{bmatrix}
 \frac12 &amp; -1 \\<br />
 0 &amp; 2
 \end{bmatrix} = \begin{bmatrix}\frac12 e_1 &amp; -e_1 + 2 e_2\end{bmatrix}\]</p>
@@ -257,7 +259,7 @@ v^2\end{bmatrix} = v^1 e_1 + v^2 e_2
 
 <p>where \(A\) is the transformation matrix. We can use this <em>same</em> matrix to transform coordinate vectors, but we shouldn&rsquo;t necessarily expect that we can use the same formula. The bases and the coordinates are playing different roles here: the basis elements are vectors that describe the coordinate system, while the coordinates are scalars that describe a vector&rsquo;s position in that system.</p>
 
-<p>Let&rsquo;s think about how this should work. Generally we write \(v = v^1 e_1 + v^2 e_2 \cdots + v^n e_n\). If we make some new basis \(e&rsquo;\) by multiplying all the \(e_i\)&rsquo;s by 2, say, and <em>also</em> multiplied all the \(v_j\)&rsquo;s by 2, then we would end up with a vector <em>four times</em> the size of the original! Instead, we should have multiplied all the \(v_j\)&rsquo;s by \(\frac12\), the inverse of 2, and then we would have \(v&rsquo; = v\), as needed. The vector must be the same in either basis.</p>
+<p>Let&rsquo;s think about how this should work. Generally we write \(v = v^1 e_1 + v^2 e_2 \cdots + v^n e_n\). If we make some new basis \(e&rsquo;\) by multiplying all the \(e_i\)&rsquo;s by 2, say, and <em>also</em> multiplied all the \(v_j\)&rsquo;s by 2, then we would end up with a vector <em>four times</em> the size of the original. Instead, we should have multiplied all the \(v_j\)&rsquo;s by \(\frac12\), the inverse of 2, and then we would have \(v&rsquo; = v\), as needed. The vector must be the same in either basis.</p>
 
 <p>So, if we change the \(e\)&rsquo;s by some factor then, the \(v\)&rsquo;s need to change in the <em>inverse</em> manner to maintain equality. This suggests that to change \(v\) into a representation \(v&rsquo;\) in basis \(e&rsquo;\) we should use instead</p>
 
@@ -303,9 +305,9 @@ w = \begin{bmatrix}\frac12 &amp; -1 \\<br />
 
 <p>Recall the <a href="https://en.wikipedia.org/wiki/Inner%5Fproduct%5Fspace">inner product</a> on a vector space.</p>
 
-<p>We might ask, given some vector \(v\) how does this inner product vary as we range over vectors \(w\)? In this case, we could think of \(\langle v, \cdot\rangle\) as a function of vectors in \(V\) whose outputs are scalars. In fact, these sorts of functions themselves form a vector space, called the <strong>dual space</strong> of \(V\), which we write \(V^*\). The members of \(V^*\) are called <strong>linear functionals</strong> or <strong>covectors</strong>. The covector given by \(\langle v, \cdot\rangle\) we denote \(v^*\).</p>
+<p>We might ask, given some vector \(v\) how does an inner product vary as we range over vectors \(w\)? In this case, we could think of \(\langle v, \cdot\rangle\) as a function of vectors in \(V\) whose outputs are scalars. In fact, these sorts of functions themselves form a vector space, called the <strong>dual space</strong> of \(V\), which we write \(V^*\). The members of \(V^*\) are called <strong>linear functionals</strong> or <strong>covectors</strong>. The covector given by \(\langle v, \cdot\rangle\) we denote \(v^*\).</p>
 
-<p>We&rsquo;ve been working with vectors in \(\mathbb{R}^n\), and in \(\mathbb{R}^n\) the (canonical) inner product is the <a href="https://en.wikipedia.org/wiki/Dot%5Fproduct">dot product</a>. This means that if we denote the covectors in \(V^*\) as <em>rows</em> and (as usual) the vectors in \(V\) as <em>columns</em>, then we can write</p>
+<p>We&rsquo;ve been working with vectors in \(\mathbb{R}^n\), and in \(\mathbb{R}^n\) the (canonical) inner product is the <a href="https://en.wikipedia.org/wiki/Dot%5Fproduct">dot product</a>. This means that if we denote the covectors in \(V^*\) as <em>rows</em> and the vectors in \(V\) as <em>columns</em> (as usual), then we can write</p>
 
 <p>\[
 v^*(w) = \begin{bmatrix} v_1 &amp; \cdots &amp; v_n\end{bmatrix}\begin{bmatrix}w^1 \\<br />
@@ -325,7 +327,7 @@ v^*(w) = v_1 x + v_2 y
 
 <p>It&rsquo;s a family of <a href="https://en.wikipedia.org/wiki/Linear%5Fequation#Two-point%5Fform">lines</a>!</p>
 
-<p>And to find out the value of \(v^*(w)\) we just count how many lines of \(v^*\) the vector \(w\) passes through (including maybe &ldquo;fractional&rdquo; valued lines &ndash; \(k\) doesn&rsquo;t have to just be an integer). More generally, the covectors of \(\mathbb{R}^n\) can be thought of as <a href="https://en.wikipedia.org/wiki/Hyperplane">hyperplanes</a>, and the value of \(v^*(w)\) can be determined by how many hyperplanes of \(v^*\) the vector \(w\) passes through. And furthermore, the vector \(v\) will be the <a href="https://en.wikipedia.org/wiki/Normal%5F(geometry)">normal</a> vector to the hyperplanes given by \(v^*\).</p>
+<p>And to find out the value of \(v^*(w)\) we just count how many lines of \(v^*\) the vector \(w\) passes through (including maybe &ldquo;fractional&rdquo; valued lines &ndash; \(k\) doesn&rsquo;t have to just be an integer). More generally, the covectors of \(\mathbb{R}^n\) can be thought of as <a href="https://en.wikipedia.org/wiki/Hyperplane">hyperplanes</a>, and the value of \(v^*(w)\) can be determined by how many hyperplanes of \(v^*\) the vector \(w\) passes through. And furthermore, the vector \(v\) will be the <a href="https://en.wikipedia.org/wiki/Normal%5F(geometry)">normal</a> vector to the hyperplanes given by \(v^*\), that is, they are perpendicular.</p>
 
 <h3 id="example-part-3">Example - Part 3</h3>
 
