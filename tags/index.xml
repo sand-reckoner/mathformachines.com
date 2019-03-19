@@ -2,94 +2,94 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Math for Machines</title>
-    <link>//mathformachines.com/tags/</link>
+    <link>https://mathformachines.com/tags/</link>
     <description>Recent content in Tags on Math for Machines</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy;Ryan Holbrook 2019</copyright>
     <lastBuildDate>Wed, 30 Jan 2019 05:57:00 -0600</lastBuildDate>
     
-	<atom:link href="//mathformachines.com/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://mathformachines.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Bayesian</title>
-      <link>//mathformachines.com/tags/bayesian/</link>
+      <link>https://mathformachines.com/tags/bayesian/</link>
       <pubDate>Wed, 30 Jan 2019 05:57:00 -0600</pubDate>
       
-      <guid>//mathformachines.com/tags/bayesian/</guid>
+      <guid>https://mathformachines.com/tags/bayesian/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Coordinates</title>
-      <link>//mathformachines.com/tags/coordinates/</link>
+      <link>https://mathformachines.com/tags/coordinates/</link>
       <pubDate>Mon, 18 Mar 2019 07:28:00 -0500</pubDate>
       
-      <guid>//mathformachines.com/tags/coordinates/</guid>
+      <guid>https://mathformachines.com/tags/coordinates/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Covectors</title>
-      <link>//mathformachines.com/tags/covectors/</link>
+      <link>https://mathformachines.com/tags/covectors/</link>
       <pubDate>Mon, 18 Mar 2019 07:28:00 -0500</pubDate>
       
-      <guid>//mathformachines.com/tags/covectors/</guid>
+      <guid>https://mathformachines.com/tags/covectors/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Mcmc</title>
-      <link>//mathformachines.com/tags/mcmc/</link>
+      <link>https://mathformachines.com/tags/mcmc/</link>
       <pubDate>Wed, 30 Jan 2019 05:57:00 -0600</pubDate>
       
-      <guid>//mathformachines.com/tags/mcmc/</guid>
+      <guid>https://mathformachines.com/tags/mcmc/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Nlp</title>
-      <link>//mathformachines.com/tags/nlp/</link>
+      <link>https://mathformachines.com/tags/nlp/</link>
       <pubDate>Wed, 30 Jan 2019 05:57:00 -0600</pubDate>
       
-      <guid>//mathformachines.com/tags/nlp/</guid>
+      <guid>https://mathformachines.com/tags/nlp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Numpy</title>
-      <link>//mathformachines.com/tags/numpy/</link>
+      <link>https://mathformachines.com/tags/numpy/</link>
       <pubDate>Tue, 05 Feb 2019 12:59:00 -0600</pubDate>
       
-      <guid>//mathformachines.com/tags/numpy/</guid>
+      <guid>https://mathformachines.com/tags/numpy/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Sage</title>
-      <link>//mathformachines.com/tags/sage/</link>
+      <link>https://mathformachines.com/tags/sage/</link>
       <pubDate>Tue, 05 Feb 2019 12:59:00 -0600</pubDate>
       
-      <guid>//mathformachines.com/tags/sage/</guid>
+      <guid>https://mathformachines.com/tags/sage/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tensors</title>
-      <link>//mathformachines.com/tags/tensors/</link>
+      <link>https://mathformachines.com/tags/tensors/</link>
       <pubDate>Tue, 05 Feb 2019 12:59:00 -0600</pubDate>
       
-      <guid>//mathformachines.com/tags/tensors/</guid>
+      <guid>https://mathformachines.com/tags/tensors/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Vectors</title>
-      <link>//mathformachines.com/tags/vectors/</link>
+      <link>https://mathformachines.com/tags/vectors/</link>
       <pubDate>Mon, 18 Mar 2019 07:28:00 -0500</pubDate>
       
-      <guid>//mathformachines.com/tags/vectors/</guid>
+      <guid>https://mathformachines.com/tags/vectors/</guid>
       <description></description>
     </item>
     
