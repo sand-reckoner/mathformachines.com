@@ -3,18 +3,23 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://mathformachines.com/posts/permitted-and-forbidden-sets/</loc>
+    <lastmod>2019-04-08T06:47:52-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://mathformachines.com/posts/change-of-basis/</loc>
-    <lastmod>2019-03-19T05:39:58-05:00</lastmod>
+    <lastmod>2019-04-07T14:50:49-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://mathformachines.com/posts/a-tour-of-tensors/</loc>
-    <lastmod>2019-03-16T15:34:54-05:00</lastmod>
+    <lastmod>2019-04-07T14:50:46-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://mathformachines.com/posts/bayesian-topic-modeling/</loc>
-    <lastmod>2019-01-30T05:57:00-06:00</lastmod>
+    <lastmod>2019-04-07T14:50:41-05:00</lastmod>
   </url>
   
   <url>
@@ -23,12 +28,12 @@
   
   <url>
     <loc>https://mathformachines.com/posts/</loc>
-    <lastmod>2019-03-19T05:39:58-05:00</lastmod>
+    <lastmod>2019-04-08T06:47:52-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://mathformachines.com/tags/bayesian/</loc>
-    <lastmod>2019-01-30T05:57:00-06:00</lastmod>
+    <lastmod>2019-04-07T14:50:41-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -39,37 +44,73 @@
   
   <url>
     <loc>https://mathformachines.com/tags/coordinates/</loc>
-    <lastmod>2019-03-19T05:39:58-05:00</lastmod>
+    <lastmod>2019-04-07T14:50:49-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://mathformachines.com/tags/covectors/</loc>
-    <lastmod>2019-03-19T05:39:58-05:00</lastmod>
+    <lastmod>2019-04-07T14:50:49-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mathformachines.com/tags/engrams/</loc>
+    <lastmod>2019-04-08T06:47:52-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mathformachines.com/categories/journal-club/</loc>
+    <lastmod>2019-04-08T06:47:52-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mathformachines.com/tags/julia/</loc>
+    <lastmod>2019-04-08T06:47:52-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://mathformachines.com/</loc>
-    <lastmod>2019-03-19T05:39:58-05:00</lastmod>
+    <lastmod>2019-04-08T06:47:52-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://mathformachines.com/tags/mcmc/</loc>
-    <lastmod>2019-01-30T05:57:00-06:00</lastmod>
+    <lastmod>2019-04-07T14:50:41-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mathformachines.com/tags/memory/</loc>
+    <lastmod>2019-04-08T06:47:52-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mathformachines.com/tags/neural-networks/</loc>
+    <lastmod>2019-04-08T06:47:52-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mathformachines.com/tags/neuroscience/</loc>
+    <lastmod>2019-04-08T06:47:52-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://mathformachines.com/tags/nlp/</loc>
-    <lastmod>2019-01-30T05:57:00-06:00</lastmod>
+    <lastmod>2019-04-07T14:50:41-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://mathformachines.com/tags/numpy/</loc>
-    <lastmod>2019-03-16T15:34:54-05:00</lastmod>
+    <lastmod>2019-04-07T14:50:46-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -79,26 +120,38 @@
   </url>
   
   <url>
+    <loc>https://mathformachines.com/tags/relus/</loc>
+    <lastmod>2019-04-08T06:47:52-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mathformachines.com/tags/sage/</loc>
-    <lastmod>2019-03-16T15:34:54-05:00</lastmod>
+    <lastmod>2019-04-07T14:50:46-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://mathformachines.com/tags/</loc>
-    <lastmod>2019-01-30T05:57:00-06:00</lastmod>
+    <lastmod>2019-04-07T14:50:41-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://mathformachines.com/tags/tensors/</loc>
-    <lastmod>2019-03-16T15:34:54-05:00</lastmod>
+    <lastmod>2019-04-07T14:50:46-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mathformachines.com/categories/tutorial/</loc>
+    <lastmod>2019-04-07T14:50:49-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://mathformachines.com/tags/vectors/</loc>
-    <lastmod>2019-03-19T05:39:58-05:00</lastmod>
+    <lastmod>2019-04-07T14:50:49-05:00</lastmod>
     <priority>0</priority>
   </url>
   

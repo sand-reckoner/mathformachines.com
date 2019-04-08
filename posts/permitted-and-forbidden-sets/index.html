@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-133546767-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  MFM Journal Club: Permitted and Forbidden Sets in STLNs &ndash; Math for Machines
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="A Model of Associative Memory How memories are encoded in neural matter is still an open question. The name for these supposed neural correlates of memory is &amp;ldquo;engram&amp;rdquo;, and papers about engrams tend to have titles like Finding the engram, Catching the Engram, In search of the engram, Continuing the search for the engram, which, though I&amp;rsquo;m not an expert, makes me feel like the problem isn&amp;rsquo;t well understood.|It&#39;s about math, for machines.">
+    
+
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions text-gray h1" href="https://mathformachines.com/">
+    Math for Machines
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body text-bold">
+    
+    
+    <a class="UnderlineNav-item " href="/pages/about">
+      
+      <span>About</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="/posts">
+      
+      <span>Archive</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">MFM Journal Club: Permitted and Forbidden Sets in STLNs</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/journal-club' class="muted-link">
+  <span class="Label Label--gray-darker">Journal-Club</span>
+</a>
+
+
+
+<a href='/tags/julia' class="muted-link">
+  <span class="Label Label--gray">julia</span>
+</a>
+
+<a href='/tags/engrams' class="muted-link">
+  <span class="Label Label--gray">engrams</span>
+</a>
+
+<a href='/tags/neuroscience' class="muted-link">
+  <span class="Label Label--gray">neuroscience</span>
+</a>
+
+<a href='/tags/memory' class="muted-link">
+  <span class="Label Label--gray">memory</span>
+</a>
+
+<a href='/tags/relus' class="muted-link">
+  <span class="Label Label--gray">ReLUs</span>
+</a>
+
+<a href='/tags/neural-networks' class="muted-link">
+  <span class="Label Label--gray">neural-networks</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2019-04-08. Published: 2019-04-08.">
+        Published: 2019-04-08<br>
+        Last Modified: 2019-04-08
+        
+        
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    
+
+<h2 id="a-model-of-associative-memory">A Model of Associative Memory</h2>
+
+<p>How memories are encoded in neural matter is still an open question. The name for these supposed neural correlates of memory is &ldquo;engram&rdquo;, and papers about engrams tend to have titles like <a href="https://jflab.ca/pdfs/josselyn-et-al-2015.pdf"><em>Finding the engram</em></a>, <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3462696/"><em>Catching the Engram</em></a>, <a href="https://psycnet.apa.org/record/1952-05966-020"><em>In search of the engram</em></a>, <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2895151/"><em>Continuing the search for the engram</em></a>, which, though I&rsquo;m not an expert, makes me feel like the problem isn&rsquo;t well understood.</p>
+
+<p>(Also, <a href="https://www.ncbi.nlm.nih.gov/pubmed/15450162"><em>Rite of passage of the engram</em></a> and <a href="http://www.jneurosci.org/content/34/42/14115"><em>Manipulating a cocaine engram</em></a>, making the practice of neuroscience sometimes sound like a fraternity hazing. Possibly related, while researching this post I learned that a typical experiment will usually involve things like shocking the feet of a fruit fly, sewing shut one eye of a barn owl, and shaving half the whiskers off a mouse.)</p>
+
+<p>A popular theory is that memories are encoded as patterns of synaptic connections. Perception creates neural activity. Neural activity leaves an impression upon the brain as a pattern of modified synaptic connections (perhaps by <a href="https://en.wikipedia.org/wiki/Dendritic%5Fspine#Importance%5Fto%5Flearning%5Fand%5Fmemory">dendritic spines</a>, which become larger and more numerous to make the connection stronger). A later perception might partly activate this pattern, but this partial activation is often enough to activate the rest of the pattern, too. This is supposed to be a neural model of associative memory. Every time you see <strong>*</strong>, you recall the time <strong>*</strong>, in vivid detail. (The tradition is to cite <a href="https://en.wikipedia.org/wiki/In%5FSearch%5Fof%5FLost%5FTime#Memory">Proust</a> at this point; evidently, a <a href="https://en.wikipedia.org/wiki/Madeleine%5F(cake)">sponge cake</a> was sufficient to activate in him the neural substrate of a <a href="https://en.wikipedia.org/wiki/List%5Fof%5Flongest%5Fnovels">1,267,069</a> word novel. It&rsquo;s a remarkably illustrative, at least.)</p>
+
+<p>Artificial neural networks are often used to model the networks of the brain. <a href="https://en.wikipedia.org/wiki/Feedforward%5Fneural%5Fnetwork">Feedforward networks</a> have typically been used to model the visual system, while <a href="https://en.wikipedia.org/wiki/Recurrent%5Fneural%5Fnetwork">recurrent networks</a> have more often been used to model memory. When an input is applied to certain of these recurrent networks, the neural activity will always converge to a stable <a href="https://en.wikipedia.org/wiki/Steady%5Fstate">steady state</a>. This stable pattern of activity is supposed to be a memory, stored within the connections of the network.</p>
+
+<p>Some of the most studied networks are those that are <em>symmetrically</em> connected, like the <a href="https://en.wikipedia.org/wiki/Hopfield%5Fnetwork">Hopfield network</a>. A network is symmetrically connected if every neuron is connected with the same weight as whatever is connected to it. A symmetrically connected network with a <em>linear</em> <a href="https://en.wikipedia.org/wiki/Activation%5Ffunction">activation function</a> can, for a given set of connection weights, be activated only to a <em>single</em> stable steady state (whose values depend upon the input to the network). The drawback of these networks then is that the activity at future states will be independent of the activity at past states. Past recall cannot influence future recall.</p>
+
+<p><a href="https://papers.nips.cc/paper/1793-permitted-and-forbidden-sets-in-symmetric-threshold-linear-networks.pdf">Hahnloser and Seung</a> present a model of associative memory in symmetrically connected networks using instead a <em>threshold-linear</em> activation function (or <a href="https://en.wikipedia.org/wiki/Rectifier%5F(neural%5Fnetworks)">rectified linear</a> function). 
+
+
+<figure class="floatright">
+    
+        <img src="https://mathformachines.com/posts/permitted-and-forbidden-sets/rectifier.png" alt="Graph of a rectified linear activation function."/> </figure>
+ They show that, due to some nice properties of the rectifier, such networks can in general represent multiple patterns of stable activation even for a single input. What pattern the network will fall into upon new input, depends upon what pattern it was in before. Memories linger.</p>
+
+<p>Their main contribution in this paper is in classifying neurons into what they call &ldquo;permitted&rdquo; and &ldquo;forbidden&rdquo; sets, which describe what sets of neurons may be activated together in a stable steady-state. They describe a method of determining what patterns of stable activity the network can achieve.</p>
+
+<blockquote>
+<p>The existence of permitted and forbidden sets suggests a new way of thinking about
+memory in neural networks. When an input is applied, the network must select a set
+of active neurons, and this selection is constrained to be one of the permitted sets.
+Therefore the permitted sets can be regarded as memories stored in the synaptic
+connections.</p>
+</blockquote>
+
+<h2 id="symmetric-threshold-linear-networks--a-dot-k-dot-a-dot-symmetric-rectifier-networks">Symmetric Threshold-Linear Networks (a.k.a. Symmetric Rectifier Networks)</h2>
+
+<p>A threshold-linear network has the form</p>
+
+<p>\[
+\dot{x} = -x + \bigg[W x + b \bigg]_+ \tag 1 \label 1
+\]</p>
+
+<p>where \(x\) is a vector with \(n\) components representing neural activation, \(W\) an \(n \times n\) matrix representing the connection weights between neurons, \(b\) is a vector representing (constant) external input, and \([\cdot]_+ = \operatorname{max}\{0, \cdot\}\), the rectifier function. Hahnloser and Seung assume the weight matrix \(W\) is symmetric (meaning, neurons are connected symmetrically).</p>
+
+<p>For a single neuron we can write</p>
+
+<p>\[
+\dot{x}_i = -x_i + \bigg[\sum_{j=1}^n w_{ij} x_j + b_i\bigg]_+ \tag 2 \label 2
+\]</p>
+
+<p>Whenever \(\sum_{j=1}^n w_{ij} x_j + b_i \leq 0\) the input to the neuron is 0. Its dynamics become \(\dot x_i = -x_i\) and its activation will decay exponentially to 0; it is &ldquo;off&rdquo;. What this means is that generally only a subset of neurons will be active at any time, and which neurons are active may change as the system evolves.</p>
+
+<p>It helps to think about neurons as being active within &ldquo;chambers&rdquo; of the activation space. (These chambers can be found by considering when the expression inside \([\cdot]_+\) is equal to 0.) In each chamber, some of the neurons will be active and some will be inactive. Within each chamber, the network will evolve according to that chamber&rsquo;s <em>linear</em> equations:
+\[
+\dot{x} = -x + W_\sigma x + b_\sigma \tag 3 \label 3
+\]</p>
+
+<p>(Here, \(\sigma\) means the set of neurons that are currently active, and \(W_\sigma\) and \(b_\sigma\) have entries set to 0 for those neurons not in \(\sigma\).) Whenever the system enters a new chamber, some neurons will switch on and some will switch off, and a new set of linear equations takes over. Each chamber has a set of eigenvectors given by \(W_\sigma\). These eigenvectors show straight line flows within that chamber.</p>
+
+<p>Let&rsquo;s take a look at the dynamics of a two neuron system with weight matrix \(\begin{bmatrix}0 &amp; -\frac12 \\<br />
+-\frac12 &amp; 0\end{bmatrix}\).</p>
+
+<p>First, the rectified version. The activation space is divided into four chambers; the labels indicate which neurons are active in that chamber. Each curve represents different initialization values for the neurons; the input vector \(b\) is always the same. On the right is a plot for one initialization. In this example, the network always converges to a single steady state, though in other networks there may be more than one.</p>
+
+
+
+
+<figure>
+    
+        <img src="https://mathformachines.com/posts/permitted-and-forbidden-sets/rectified.png" alt="graphs showing dynamics of a rectifier network"/> </figure>
+
+
+<p>Notice how the dynamics change when the system enters in innermost chamber \(\{1,2\}\). Compare this to the same system lacking the rectifier \([\cdot]_+\); it is a linear system.</p>
+
+
+
+
+<figure>
+    
+        <img src="https://mathformachines.com/posts/permitted-and-forbidden-sets/linear.png" alt="graphs showing dynamics of a network with linear activation"/> </figure>
+
+
+<h2 id="three-theorems">Three Theorems</h2>
+
+<p>The authors prove three theorems. The first gives the conditions under which a network will have a set of global, stable steady states (aka. globally asypmtotic fixed points, equilibrium points), depending on connection weights and input. These steady states, when they exist, are fixed points of activation to which the network will always converge.</p>
+
+<p>Assuming these conditions, in the second and third theorems the authors give two possibilities for this set of steady states. The first possibility is that the network contains <em>forbidden sets</em> of neurons, neurons that may not be activated together at a steady state; in this case the network will be <em>multistable</em>: for a given input, it may converge to one of several steady states depending on initial activations. The second possibility is that there are <em>no</em> forbidden sets; in this case, for a given input, the network will always converge to the same steady state; as far as stable points go, it is just like a linear system, without the rectifier.</p>
+
+<h3 id="theorem-1-steady-states">Theorem 1 - Steady States</h3>
+
+<p>Again, this theorem gives the conditions under which a network may have a set of stable steady states.</p>
+
+<p>The authors present their results in terms of the matrix \(I-W\). We can rewrite the linear system \(\ref 3\) as</p>
+
+<p>\[ \dot x = (-I + W)x + b \tag 4 \]</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Hurwitz%5Fmatrix#Hurwitz%5Fstable%5Fmatrices">stability</a> of the system can be determined from the eigenvalues of the matrix \(-I + W\); specifically, the system is <a href="https://en.wikipedia.org/wiki/Lyapunov%5Fstability">globally asymptotically stable</a> if the real parts of the matrix are all <em>negative</em>. Since \(-I + W\) is symmetric and real, its eigenvalues will all be real; so, we are looking for negative eigenvalues. It is, however, usually more convenient to work with positive numbers, so instead we can look for <em>positive</em> eigenvalues of \(I - W\) (or even eigenvalues of \(W\) that are less than 1).</p>
+
+<blockquote>
+<p><strong>Theorem 1</strong> If W is symmetric, then the following conditions are equivalent:</p>
+
+<ol>
+<li><p>All nonnegative eigenvectors of all principal submatrices of \(I - W\) have
+n&gt; positive eigenvalues.</p></li>
+
+<li><p>The matrix \(I - W\) is copositive. That is, \(x^\top (I - W)x
+\gt 0\) for all nonnegative \(x\), except \(x = 0\).</p></li>
+
+<li><p>For all \(b\), the network has a nonempty set of steady states that are globally
+asymptotically stable.</p></li>
+</ol>
+</blockquote>
+
+
+
+
+<figure class="floatright">
+    
+        <img src="https://mathformachines.com/posts/permitted-and-forbidden-sets/lagrange.png" alt="plot of the Lagrange function for non-negative v on the unit circle"/> <figcaption>
+                
+                <p>
+                    \(R(v)\) for \(\left\lVert v \right\rVert = 1\)
+                    
+                        
+                        </p>
+                
+            </figcaption></figure>
+
+
+<p>One of the things I liked about this paper was that they proved their results using methods from both <a href="https://en.wikipedia.org/wiki/Lyapunov%5Ffunction">Lyanpunov functions</a> and <a href="https://en.wikipedia.org/wiki/Quadratic%5Fprogramming">quadratic programming</a>. They prove that \((1)\) implies \((2)\), for instance, by minimizing \(v^\top (I - W) v\) (a quadratic function) for nonnegative vectors \(v\) on the unit sphere (that is, \(\left\lVert v \right\rVert = 1\)). The quantity \(R(v) = v^\top (I - W) v\) is equivalent to the <a href="https://en.wikipedia.org/wiki/Rayleigh%5Fquotient">Rayleigh quotient</a>. Optimizing \(R\) will find the eigenvectors of the matrix \(I - W\). Because of the rectifier, neural activations (provided they start above 0) can never fall below 0. Any steady state therefore will occur along a non-negative eigenvector. This, I think, is one of the most important insights about the effect of the rectification.</p>
+
+<p>Here are the authors again:</p>
+
+<blockquote>
+<p>The meaning of these stability conditions is best appreciated by comparing with
+the analogous conditions for the purely linear network obtained by dropping the
+rectification from (1). In a linear network, all eigenvalues of W would have to be
+smaller than unity to ensure asymptotic stability. Here only nonnegative eigenvectors
+are able to grow without bound, due to the rectification, so that only their
+eigenvalues must be less than unity. All principal submatrices of W must be considered
+because different sets of feedback connections are active, depending on the
+set of neurons that are above threshold. In a linear network, \(I - W\) would have to
+be positive definite to ensure asymptotic stability, but because of the rectification,
+here this condition is replaced by the weaker condition of copositivity.</p>
+</blockquote>
+
+<p>So, the tradeoff for the rectification is that we get stability for more general sets of weight matricies, but we have to analyze all \(2^n\) <a href="https://en.wikipedia.org/wiki/Matrix%5F(mathematics)#Submatrix">principal submatrices</a> to find out if we get it.</p>
+
+<h3 id="theorems-2-and-3-permitted-and-forbidden-sets">Theorems 2 and 3 - Permitted and Forbidden Sets</h3>
+
+<p>These two theorems classify the permitted and forbidden sets of a network.</p>
+
+<p>The first theorem tells us that if a network has a set of global, stable steady states, then all of the nonnegative eigenvectors of all principal submatrices of \(I-W\) will have positive eigenvalues. When the system begins with positive activations, the activation will flow along time-varying superpositions of the (nonnegative) eigenvectors toward some fixed point. We might think that <em>every</em> subsystem has to have a fixed point, then. But this is not so. It could turn out that what would be the fixed point for the subsystem lies outside of its chamber, and then the dynamics will have changed before the system ever reaches it. In this case the system has a forbidden set, because the neurons in that subsystem cannot be coactivated together at a stable steady state.</p>
+
+<blockquote>
+<p><strong>Theorem 2</strong> If the matrix \(I - W\) is copositive, then the following statements are
+equivalent:</p>
+
+<ol>
+<li><p>The matrix \(I - W\) is not positive definite.</p></li>
+
+<li><p>There exists a forbidden set.</p></li>
+
+<li><p>The network is conditionally multistable. That is, there exists an input \(b\)
+such that there is more than one stable steady state.</p></li>
+</ol>
+</blockquote>
+
+
+
+
+<figure class="large">
+    
+        <img src="https://mathformachines.com/posts/permitted-and-forbidden-sets/twofp.png" alt="Plots of a three neuron system with two stable points."/> <figcaption>
+                
+                <p>
+                    A three neuron system with two steady states.
+                    
+                        
+                        </p>
+                
+            </figcaption></figure>
+
+
+<p>They prove that (2) implies (3) by examining a Lyapunov function \(V(x) = \frac12 x^\top (I - W) x - b^\top x\). They argue as follows: a forbidden set implies the existence of a negative eigenvalue of \(I - W\) in the corresponding active submatrix. The function \(V\) therefore forms a saddle. The system can be initially activated on either side of the saddle, and will descend to a different minimum on each side. These are two different stable steady states.</p>
+
+
+
+
+<figure>
+    
+        <img src="https://mathformachines.com/posts/permitted-and-forbidden-sets/multistable.png" alt="3D plot of Lyapunov function and a contour plot with line given by a positive eigenvector"/> <figcaption>
+                
+                <p>
+                    The Lyapunov function for a two neuron system with connection weights equal to 2. On the right, a line in the direction of an eigenvector with positive eigenvalue is in red.
+                    
+                        
+                        </p>
+                
+            </figcaption></figure>
+
+
+<blockquote>
+<p><strong>Theorem 3</strong> If \(W\) is symmetric, then the following conditions are equivalent:</p>
+
+<ol>
+<li><p>The matrix \(I - W\) is positive definite.</p></li>
+
+<li><p>All sets are permitted.</p></li>
+
+<li><p>For all \(b\) there is a unique steady state, and it is stable.</p></li>
+</ol>
+</blockquote>
+
+<p>A linear system, like \(\ref 3\), will have a global steady state if \(I-W\) is positive definite (all eigenvalues are positive). So, in a rectified system if <em>all</em> the neurons may be activated together at a stable steady state, the system behaves much like a linear system in regard to its steady states. Rectified systems are more interesting when they have some forbidden sets.</p>
+
+<p>If I am understanding the paper correctly, we could characterize permitted and forbidden sets like this:</p>
+
+<table>
+<thead>
+<tr>
+<th>permitted set</th>
+<th>forbidden set</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>principal submatrix with only positive eigenvalues</td>
+<td>principal submatrix with a negative eigenvalue</td>
+</tr>
+
+<tr>
+<td>neurons that can be coactivated at a stable steady state</td>
+<td>neurons that cannot be coactivated at a stable steady state</td>
+</tr>
+
+<tr>
+<td>positive eigenvectors and positive eigenvalues</td>
+<td>eigenvectors with negative components that give negative eigenvalues</td>
+</tr>
+</tbody>
+</table>
+
+<p>Finally, they show with the <a href="https://en.wikipedia.org/wiki/Min-max%5Ftheorem#Cauchy%5Finterlacing%5Ftheorem">interlacing theorem</a> that the sets of neurons that may be coactivated together at stable states are constant in some sense throughout the system, for the reason that eigenvalues of a submatrix have to be contained in the radius of eigenvalues of the parent matrix.</p>
+
+<blockquote>
+<p><strong>Theorem 4</strong> Any subset of a permitted set is permitted. Any superset of a forbidden
+set is forbidden.</p>
+</blockquote>
+
+<p>Here for instance are the permitted sets for a network of ten neurons with randomly generated weights.</p>
+
+
+
+
+<figure>
+    
+        <img src="https://mathformachines.com/posts/permitted-and-forbidden-sets/permitted.png" alt="Diagram of permitted sets for a ten neuron network."/> <figcaption>
+                
+                <p>
+                    Permitted sets for a ten neuron network.
+                    
+                        
+                        </p>
+                
+            </figcaption></figure>
+
+
+<p>(This only shows &ldquo;maximal&rdquo; permitted sets; that is, those permitted sets not contained in any other permitted set.)</p>
+
+<p>And this shows the steady state of the topmost permitted set with each neuron receiving an input of 1.</p>
+
+
+
+
+<figure>
+    
+        <img src="https://mathformachines.com/posts/permitted-and-forbidden-sets/steadystate.png" alt="Left: Neural activations. Right: Steady states."/> <figcaption>
+                
+                <p>
+                    <em>Left:</em> Neural activations. <em>Right:</em> Steady states.
+                    
+                        
+                        </p>
+                
+            </figcaption></figure>
+
+
+<p>And here is the network transitioning through stable states as activations change.</p>
+
+
+
+
+<figure>
+    
+        <img src="https://mathformachines.com/posts/permitted-and-forbidden-sets/transition.gif"/> </figure>
+
+
+<h2 id="summary">Summary</h2>
+
+<p>If a connection pattern in a network is a memory, then multistability allows the brain to store memories much more efficiently. Patterns of activation can overlap within a network. One neuron can partake of several memories, much like a single gene can be implicated in the expression of a multitude of traits or behaviors. I imagine that whatever process the brain uses for memory storage, it must make a tradeoff between robustness and efficiency. It wants to minimize the cost of storing memories and so should use as few neurons as possible to do so, yet the death of a single neuron shouldn&rsquo;t disrupt the system as a whole. The model of overlapping patterns seems to me like a plausible solution.</p>
+
+<p>(I decided to read this paper after becoming interested in <a href="http://www.personal.psu.edu/cpc16/">Carina</a> <a href="https://www.quantamagazine.org/mathematician-carina-curto-thinks-like-a-physicist-to-solve-neuroscience-problems-20180619/">Curto</a>&rsquo;s work on <a href="http://sites.psu.edu/mathneurolab/ctln/">combinatorial threshold networks</a>. She and her collaborators have extended the ideas presented here to more general threshold networks that can display various kind of dynamic behavior. I hope I can review some of her work in the future.)</p>
+
+<h2 id="appendix-computing-permitted-sets-in-julia">Appendix - Computing Permitted Sets in Julia</h2>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#719e07">using</span> Combinatorics
+<span style="color:#719e07">using</span> LinearAlgebra
+
+<span style="color:#2aa198">&#34;&#34;&#34;Determine whether the list `l1` is a numerical translation of the
+</span><span style="color:#2aa198">list `l2`. The function will return `true` when `l1 == k+.l2` for some `k`
+</span><span style="color:#2aa198">modulo `n+1`.&#34;&#34;&#34;</span>
+<span style="color:#719e07">function</span> istranslation(l1, l2, n<span style="color:#719e07">::</span><span style="color:#dc322f">Int</span>)
+    any([l1 <span style="color:#719e07">==</span> map(x <span style="color:#719e07">-&gt;</span> mod(x<span style="color:#719e07">+</span>i, n<span style="color:#719e07">+</span><span style="color:#2aa198">1</span>), l2) <span style="color:#719e07">for</span> i <span style="color:#719e07">in</span> <span style="color:#2aa198">1</span><span style="color:#719e07">:</span>n])
+<span style="color:#719e07">end</span>
+
+<span style="color:#2aa198">&#34;&#34;&#34;Returns a maximal set of lists from `lists` that are unique up to translation.&#34;&#34;&#34;</span>
+<span style="color:#719e07">function</span> removetranslations(lists, n<span style="color:#719e07">::</span><span style="color:#dc322f">Int</span>)
+    ls <span style="color:#719e07">=</span> []
+    <span style="color:#719e07">for</span> l <span style="color:#719e07">in</span> lists
+        <span style="color:#719e07">if</span> <span style="color:#719e07">!</span>any(map(x<span style="color:#719e07">-&gt;</span>istranslation(l, x, n), ls))
+            push!(ls, l)
+        <span style="color:#719e07">end</span>
+    <span style="color:#719e07">end</span>
+    <span style="color:#719e07">return</span> ls
+<span style="color:#719e07">end</span>
+
+<span style="color:#2aa198">&#34;&#34;&#34;Returns a set of lists from `lists` that are not properly contained in
+</span><span style="color:#2aa198">any other list.&#34;&#34;&#34;</span>
+<span style="color:#719e07">function</span> removesubsets(lists)
+    isproper(a, b) <span style="color:#719e07">=</span> issubset(a, b) <span style="color:#719e07">&amp;&amp;</span> a <span style="color:#719e07">!=</span> b
+    ls <span style="color:#719e07">=</span> []
+    <span style="color:#719e07">for</span> a <span style="color:#719e07">in</span> lists
+        <span style="color:#719e07">if</span> <span style="color:#719e07">!</span>any(map(b <span style="color:#719e07">-&gt;</span> isproper(a, b), lists))
+            push!(ls, a)
+        <span style="color:#719e07">end</span>
+    <span style="color:#719e07">end</span>
+    <span style="color:#719e07">return</span> ls
+<span style="color:#719e07">end</span>
+
+<span style="color:#2aa198">&#34;&#34;&#34;Determines whether a matrix `A` represents a permitted set of neurons. `A`
+</span><span style="color:#2aa198">should be of the form `I-W`, where `W` is the weight matrix.&#34;&#34;&#34;</span>
+<span style="color:#719e07">function</span> ispermitted(A)
+    all(map(x <span style="color:#719e07">-&gt;</span> x<span style="color:#719e07">&gt;</span><span style="color:#2aa198">0</span>, eigvals(A)))
+<span style="color:#719e07">end</span>
+
+<span style="color:#2aa198">&#34;&#34;&#34;Returns a matrix `P` of all permitted sets represented by a matrix
+</span><span style="color:#2aa198">`A` of the form `I-W`. If neuron `j` is contained in permitted set
+</span><span style="color:#2aa198">`i`, then `P[i,j] == 1`; otherwise, `P[i,j] == 0`. Each permitted set
+</span><span style="color:#2aa198">is unique up to translation, and is not contained in any other
+</span><span style="color:#2aa198">permitted set in `P`.&#34;&#34;&#34;</span>
+<span style="color:#719e07">function</span> permittedparents(A)
+    ps <span style="color:#719e07">=</span> []
+    n <span style="color:#719e07">=</span> length(A[<span style="color:#719e07">:</span>,<span style="color:#2aa198">1</span>])
+    idxs <span style="color:#719e07">=</span> removetranslations(powerset(<span style="color:#2aa198">1</span><span style="color:#719e07">:</span>n), n)
+    filter!(<span style="color:#719e07">!</span>isempty, idxs)
+    <span style="color:#719e07">for</span> idx <span style="color:#719e07">in</span> idxs
+        submatrix <span style="color:#719e07">=</span> A[idx, idx]
+        <span style="color:#719e07">if</span> ispermitted(submatrix)
+            push!(ps, idx)
+        <span style="color:#719e07">end</span>
+    <span style="color:#719e07">end</span>
+    ps <span style="color:#719e07">=</span> removesubsets(ps)
+    P <span style="color:#719e07">=</span> zeros(length(ps), n)
+    <span style="color:#719e07">for</span> (i, pp) <span style="color:#719e07">in</span> enumerate(ps)
+        <span style="color:#719e07">for</span> j <span style="color:#719e07">in</span> pp
+            P[i, j] <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span>
+        <span style="color:#719e07">end</span>
+    <span style="color:#719e07">end</span>
+    <span style="color:#719e07">return</span> P
+<span style="color:#719e07">end</span></code></pre></div>
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>MFM Journal Club: Permitted and Forbidden Sets in STLNs</b>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#a-model-of-associative-memory">A Model of Associative Memory</a></li>
+<li><a href="#symmetric-threshold-linear-networks--a-dot-k-dot-a-dot-symmetric-rectifier-networks">Symmetric Threshold-Linear Networks (a.k.a. Symmetric Rectifier Networks)</a></li>
+<li><a href="#three-theorems">Three Theorems</a>
+<ul>
+<li><a href="#theorem-1-steady-states">Theorem 1 - Steady States</a></li>
+<li><a href="#theorems-2-and-3-permitted-and-forbidden-sets">Theorems 2 and 3 - Permitted and Forbidden Sets</a></li>
+</ul></li>
+<li><a href="#summary">Summary</a></li>
+<li><a href="#appendix-computing-permitted-sets-in-julia">Appendix - Computing Permitted Sets in Julia</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+  
+
+  
+    <div>
+      
+    </div>
+
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    &copy;Ryan Holbrook 2019 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+
+    
+    
+    
+    
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    
+    
+    
+    
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+         "HTML-CSS": { scale: 90, linebreaks: { automatic: true } },
+          SVG: { linebreaks: { automatic:true } },
+      });
+      MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+      MathJax.Hub.Config({
+        TeX: {
+          Macros: {
+            formbox: ["\\bbox[15px, border:1px solid PowderBlue]{#1}", 1],
+            qed: "\\tag*{$\\Box$}"
+          }
+        }
+      });
+    </script>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133546767-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-133546767-1');
+    </script>
+    
+  </body>
+</html>

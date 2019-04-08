@@ -40,11 +40,56 @@
     </item>
     
     <item>
+      <title>Engrams</title>
+      <link>https://mathformachines.com/tags/engrams/</link>
+      <pubDate>Mon, 08 Apr 2019 06:47:00 -0500</pubDate>
+      
+      <guid>https://mathformachines.com/tags/engrams/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Julia</title>
+      <link>https://mathformachines.com/tags/julia/</link>
+      <pubDate>Mon, 08 Apr 2019 06:47:00 -0500</pubDate>
+      
+      <guid>https://mathformachines.com/tags/julia/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Mcmc</title>
       <link>https://mathformachines.com/tags/mcmc/</link>
       <pubDate>Wed, 30 Jan 2019 05:57:00 -0600</pubDate>
       
       <guid>https://mathformachines.com/tags/mcmc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Memory</title>
+      <link>https://mathformachines.com/tags/memory/</link>
+      <pubDate>Mon, 08 Apr 2019 06:47:00 -0500</pubDate>
+      
+      <guid>https://mathformachines.com/tags/memory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Neural Networks</title>
+      <link>https://mathformachines.com/tags/neural-networks/</link>
+      <pubDate>Mon, 08 Apr 2019 06:47:00 -0500</pubDate>
+      
+      <guid>https://mathformachines.com/tags/neural-networks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Neuroscience</title>
+      <link>https://mathformachines.com/tags/neuroscience/</link>
+      <pubDate>Mon, 08 Apr 2019 06:47:00 -0500</pubDate>
+      
+      <guid>https://mathformachines.com/tags/neuroscience/</guid>
       <description></description>
     </item>
     
@@ -63,6 +108,15 @@
       <pubDate>Tue, 05 Feb 2019 12:59:00 -0600</pubDate>
       
       <guid>https://mathformachines.com/tags/numpy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Relus</title>
+      <link>https://mathformachines.com/tags/relus/</link>
+      <pubDate>Mon, 08 Apr 2019 06:47:00 -0500</pubDate>
+      
+      <guid>https://mathformachines.com/tags/relus/</guid>
       <description></description>
     </item>
     

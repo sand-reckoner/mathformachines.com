@@ -2,6 +2,20 @@ a {
     color: #0074D9
 }
 
+figure.floatright {
+	max-width: 40%;
+	width: auto\9*0.3; /* ie8 */
+	height: auto;
+	float: right;
+}
+
+figure.floatleft {
+	max-width: 40%;
+	width: auto\9*0.3; /* ie8 */
+	height: auto;
+	float: left;
+}
+
 /* custom css here */
 html,
 body {
@@ -102,4 +116,37 @@ aside {
   #side {
     display: none;
   }
+}
+
+
+/* Sidenotes */
+/* incomplete */
+
+article sidenote {
+    float: right;
+    clear: right;
+    margin-right: -60%;
+    margin-left: 0%;
+    width: 50%;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.0rem;
+    line-height: 1.3;
+    vertical-align: baseline;
+    position: relative;
+}
+
+
+@media screen and (max-width: 1012px) {
+article sidenote {
+        display: none
+        border: solid 1px #333;
+        border-width: 1px ;
+        float: right;
+        clear: right;
+        display: inline-block;
+        margin: 0.25rem -4rem 0.75rem 1rem;
+        padding: 0.25rem 0.5rem;
+        width: 230px;
+    }
 }

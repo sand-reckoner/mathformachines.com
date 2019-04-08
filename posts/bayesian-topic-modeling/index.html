@@ -82,6 +82,10 @@ if (!doNotTrack) {
     
 
 
+<a href='/categories/tutorial' class="muted-link">
+  <span class="Label Label--gray-darker">Tutorial</span>
+</a>
+
 
 
 <a href='/tags/mcmc' class="muted-link">
@@ -100,9 +104,9 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2019-01-30. Published: 2019-01-30.">
+      <span title="Lastmod: 2019-04-07. Published: 2019-01-30.">
         Published: 2019-01-30<br>
-        Last Modified: 2019-01-30
+        Last Modified: 2019-04-07
         
         
         
@@ -116,7 +120,7 @@ if (!doNotTrack) {
   <section class="pb-6 mb-3 border-bottom">
     
 
-<p>Imagine we have some collection of documents. They could be novels, or tweets, or financial reports&mdash;just any collection of text. We want an algorithm that can discover what they are about, and we would like our algorithm to do it automatically, without any hints. (That is, we want our algorithm to be <em>unsupervised</em>.) We will look at several models that probabilistically assign words to topics using <a href="https://en.wikipedia.org/wiki/Bayes%27%5Ftheorem">Bayes&rsquo; Theorem</a>. They are all <a href="https://en.wikipedia.org/wiki/Bayesian%5Fnetwork">Bayesian Graphical Models</a>.</p>
+<p>Imagine we have some collection of documents. They could be novels, or tweets, or financial reports&mdash;just any collection of text. We want an algorithm that can discover what they are about, and we would like our algorithm to do it automatically, without any hints. (That is, we want our algorithm to be <em>unsupervised</em>.) We will look at several models that probabilistically assign words to topics using <a href="https://en.wikipedia.org/wiki/Bayes'%5Ftheorem">Bayes&rsquo; Theorem</a>. They are all <a href="https://en.wikipedia.org/wiki/Bayesian%5Fnetwork">Bayesian Graphical Models</a>.</p>
 
 <p>The basic problem in statistics is to infer some unobservable value from observable instances of it. In our case, we want to infer the <em>topics</em> of a document from the actual words in the document. We want to be able to infer that our document is about &ldquo;colors&rdquo; if we observe &ldquo;red&rdquo; and &ldquo;green&rdquo; and &ldquo;blue&rdquo;.</p>
 
@@ -133,28 +137,30 @@ if (!doNotTrack) {
 <p>Let&rsquo;s say our two words are &ldquo;blue&rdquo; and &ldquo;red&rdquo;, and that the probability of any given word (any token) being &ldquo;red&rdquo; is \(\phi\): \(P(W = red) = \phi\). This is the same as saying our random variable of tokens \(W\) has a Bernoulli distribution with parameter \(\phi\): \(W \sim Bernoulli(\phi)\).</p>
 
 <p>The distribution looks like this:</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">x <span style="color:#719e07">=</span> [<span style="color:#2aa198">0</span>, <span style="color:#2aa198">1</span>]
-pmf <span style="color:#719e07">=</span> st<span style="color:#719e07">.</span>bernoulli<span style="color:#719e07">.</span>pmf(x, <span style="color:#2aa198">0.3</span>)
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">x = [0, 1]
+pmf = st.bernoulli.pmf(x, 0.3)
 
-plt<span style="color:#719e07">.</span>stem(x, pmf)
-plt<span style="color:#719e07">.</span>xticks([<span style="color:#2aa198">0</span>,<span style="color:#2aa198">1</span>])
-plt<span style="color:#719e07">.</span>ylim(<span style="color:#2aa198">0</span>,<span style="color:#2aa198">1</span>)
-plt<span style="color:#719e07">.</span>xlim(<span style="color:#719e07">-</span><span style="color:#2aa198">0.5</span>, <span style="color:#2aa198">1.5</span>)</code></pre></div>
+plt.stem(x, pmf)
+plt.xticks([0,1])
+plt.ylim(0,1)
+plt.xlim(-0.5, 1.5)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">(-0.5, 1.5)</code></pre></div>
 
 
 
 <figure>
     
-        <img src="https://mathformachines.com/posts/bayesian-topic-modeling/obipy-resources/14366Vwu.png"/> </figure>
+        <img src="https://mathformachines.com/posts/bayesian-topic-modeling/./obipy-resources/14366tCt.png"/> </figure>
 
 
 <p>Here, 1 represents &ldquo;red&rdquo; and 0 represents &ldquo;blue&rdquo; (or not-&ldquo;red&rdquo;).</p>
 
 <p>And here is how we could generate a document with this model:</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">coding <span style="color:#719e07">=</span> {<span style="color:#2aa198">0</span> : <span style="color:#2aa198">&#34;blue&#34;</span>, <span style="color:#2aa198">1</span> : <span style="color:#2aa198">&#34;red&#34;</span>}
-W <span style="color:#719e07">=</span> <span style="color:#2aa198">50</span>  <span style="color:#586e75"># number of tokens in the document</span>
-tokens <span style="color:#719e07">=</span> st<span style="color:#719e07">.</span>bernoulli<span style="color:#719e07">.</span>rvs(<span style="color:#2aa198">0.3</span>, size <span style="color:#719e07">=</span> W)  <span style="color:#586e75"># choose the tokens</span>
-<span style="color:#b58900">print</span>(<span style="color:#2aa198">&#39; &#39;</span><span style="color:#719e07">.</span>join(<span style="color:#b58900">str</span>(w) <span style="color:#719e07">for</span> w <span style="color:#719e07">in</span> [coding[i] <span style="color:#719e07">for</span> i <span style="color:#719e07">in</span> tokens]))</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">blue blue blue red blue red red red red blue blue blue blue blue red blue blue blue red blue blue blue blue red blue red red red red blue blue blue red blue blue blue blue red blue red blue blue blue blue blue red blue blue blue red</code></pre></div>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">coding = {0 : &#34;blue&#34;, 1 : &#34;red&#34;}
+W = 50  # number of tokens in the document
+tokens = st.bernoulli.rvs(0.3, size = W)  # choose the tokens
+print(&#39; &#39;.join(str(w) for w in [coding[i] for i in tokens]))</code></pre></div>
+<p>blue blue red blue red blue blue red red blue blue blue blue blue blue blue blue red blue blue blue blue blue blue blue blue blue red red blue blue blue blue blue blue red blue blue red blue red blue red blue blue blue blue blue red blue</p>
+
 <h3 id="unigram-model">Unigram Model</h3>
 
 <p>For the general model, we will also choose the distribution of words within the topic randomly. That is, we will assign a probability distribution to \(\phi\).</p>
@@ -168,62 +174,62 @@ tokens <span style="color:#719e07">=</span> st<span style="color:#719e07">.</spa
 <p>\(W \sim Bernoulli(\phi)\)</p>
 
 <p>where \(\beta_0\) and \(\beta_1\) are the &ldquo;shape parameters&rdquo; of the beta distribution. We can think of them as the assumed counts of each word, or the &ldquo;pseudo-counts.&rdquo; Let&rsquo;s see how different values of these parameters affect the shape of the distribution.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">beta_0 <span style="color:#719e07">=</span> [<span style="color:#2aa198">0.8</span>, <span style="color:#2aa198">1</span>, <span style="color:#2aa198">2</span>, <span style="color:#2aa198">10</span>]
-beta_1 <span style="color:#719e07">=</span> [<span style="color:#2aa198">0.8</span>, <span style="color:#2aa198">1</span>, <span style="color:#2aa198">2</span>, <span style="color:#2aa198">10</span>]
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">beta_0 = [0.8, 1, 2, 10]
+beta_1 = [0.8, 1, 2, 10]
 
-x <span style="color:#719e07">=</span> np<span style="color:#719e07">.</span>array(np<span style="color:#719e07">.</span>linspace(<span style="color:#2aa198">0</span>, <span style="color:#2aa198">1</span>, <span style="color:#2aa198">1000</span>))
+x = np.array(np.linspace(0, 1, 1000))
 
-f, axarr <span style="color:#719e07">=</span> plt<span style="color:#719e07">.</span>subplots(<span style="color:#b58900">len</span>(beta_0), <span style="color:#b58900">len</span>(beta_1), sharex<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;all&#39;</span>, sharey<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;none&#39;</span>)
+f, axarr = plt.subplots(len(beta_0), len(beta_1), sharex=&#39;all&#39;, sharey=&#39;none&#39;)
 
-<span style="color:#719e07">for</span> i <span style="color:#719e07">in</span> <span style="color:#b58900">range</span>(<span style="color:#b58900">len</span>(beta_0)):
-    <span style="color:#719e07">for</span> j <span style="color:#719e07">in</span> <span style="color:#b58900">range</span>(<span style="color:#b58900">len</span>(beta_1)):
-        a <span style="color:#719e07">=</span> beta_0[i]
-        b <span style="color:#719e07">=</span> beta_1[j]
-        y <span style="color:#719e07">=</span> st<span style="color:#719e07">.</span>beta(a, b)<span style="color:#719e07">.</span>pdf(x)
-        axarr[i, j]<span style="color:#719e07">.</span>plot(x, y)
-        axarr[i, j]<span style="color:#719e07">.</span>axes<span style="color:#719e07">.</span>yaxis<span style="color:#719e07">.</span>set_ticklabels([])
-        axarr[i, j]<span style="color:#719e07">.</span>set_title(<span style="color:#2aa198">r</span><span style="color:#2aa198">&#39;$\beta_0 =$ &#39;</span> <span style="color:#719e07">+</span> <span style="color:#b58900">str</span>(a) <span style="color:#719e07">+</span> <span style="color:#2aa198">r</span><span style="color:#2aa198">&#39;, $\beta_1 =$ &#39;</span> <span style="color:#719e07">+</span> <span style="color:#b58900">str</span>(b))
+for i in range(len(beta_0)):
+    for j in range(len(beta_1)):
+        a = beta_0[i]
+        b = beta_1[j]
+        y = st.beta(a, b).pdf(x)
+        axarr[i, j].plot(x, y)
+        axarr[i, j].axes.yaxis.set_ticklabels([])
+        axarr[i, j].set_title(r&#39;$\beta_0 =$ &#39; + str(a) + r&#39;, $\beta_1 =$ &#39; + str(b))
 
-f<span style="color:#719e07">.</span>subplots_adjust(hspace<span style="color:#719e07">=</span><span style="color:#2aa198">0.3</span>)
-f<span style="color:#719e07">.</span>suptitle(<span style="color:#2aa198">r</span><span style="color:#2aa198">&#39;Beta Distributions for $\theta$&#39;</span>, fontsize<span style="color:#719e07">=</span><span style="color:#2aa198">20</span>)</code></pre></div>
+f.subplots_adjust(hspace=0.3)
+f.suptitle(r&#39;Beta Distributions for $\theta$&#39;, fontsize=20)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Text(0.5, 0.98, &#39;Beta Distributions for $\\theta$&#39;)</code></pre></div>
 
 
 
 <figure>
     
-        <img src="https://mathformachines.com/posts/bayesian-topic-modeling/obipy-resources/14366i60.png"/> </figure>
+        <img src="https://mathformachines.com/posts/bayesian-topic-modeling/./obipy-resources/14366hAi.png"/> </figure>
 
 
-<p>Values near 0 will favor &ldquo;blue&rdquo; and values near 1 will favor &ldquo;red&rdquo;. We can choose \(\beta_0\) and \(\beta_1\) to generate the kinds of documents we like. (The notation is a bit backwards here: \(\beta_0\) is the <strong>pseudo-count</strong> for &ldquo;red&rdquo;, whose probability is toward 1, on the right of the graph. So \(\beta_0 &gt; \beta_1\) means more &ldquo;red&rdquo;s, and vice versa.)</p>
+<p>Values near 0 will favor &ldquo;blue&rdquo; and values near 1 will favor &ldquo;red&rdquo;. We can choose \(\beta_0\) and \(\beta_1\) to generate the kinds of documents we like. (The notation is a bit backwards here: \(\beta_0\) is the <em>pseudo-count</em> for &ldquo;red&rdquo;, whose probability is toward 1, on the right of the graph. So \(\beta_0 &gt; \beta_1\) means more &ldquo;red&rdquo;s, and vice versa.)</p>
 
 <p>Let&rsquo;s generate some documents with this expanded model. We&rsquo;ll set \(\beta_0 = 0.8\) and \(\beta_1 = 0.8\). We would expect most of our documents to favor one word or the other, but overall to occur equally often.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">beta_0 <span style="color:#719e07">=</span> <span style="color:#2aa198">0.8</span>
-beta_1 <span style="color:#719e07">=</span> <span style="color:#2aa198">0.8</span>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">beta_0 = 0.8
+beta_1 = 0.8
 
-thetas <span style="color:#719e07">=</span> st<span style="color:#719e07">.</span>beta<span style="color:#719e07">.</span>rvs(beta_0, beta_1, size <span style="color:#719e07">=</span> <span style="color:#2aa198">6</span>)
+thetas = st.beta.rvs(beta_0, beta_1, size = 6)
 
-W <span style="color:#719e07">=</span> <span style="color:#2aa198">10</span>  <span style="color:#586e75"># number of tokens in each document</span>
+W = 10  # number of tokens in each document
 
-<span style="color:#719e07">for</span> t <span style="color:#719e07">in</span> thetas:
-    <span style="color:#b58900">print</span>(<span style="color:#2aa198">&#39;Theta: &#39;</span>, t)
-    tokens <span style="color:#719e07">=</span> st<span style="color:#719e07">.</span>bernoulli<span style="color:#719e07">.</span>rvs(t, size <span style="color:#719e07">=</span> W)
-    <span style="color:#b58900">print</span>(<span style="color:#2aa198">&#39;Document: &#39;</span> <span style="color:#719e07">+</span> <span style="color:#2aa198">&#39; &#39;</span><span style="color:#719e07">.</span>join(<span style="color:#b58900">str</span>(w) <span style="color:#719e07">for</span> w <span style="color:#719e07">in</span> [coding[i] <span style="color:#719e07">for</span> i <span style="color:#719e07">in</span> tokens]) <span style="color:#719e07">+</span> <span style="color:#2aa198">&#39;</span><span style="color:#cb4b16">\n</span><span style="color:#2aa198">&#39;</span>)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Theta:  0.9302363695290435
-Document: red red red red blue red red red red red
+for t in thetas:
+    print(&#39;Theta: &#39;, t)
+    tokens = st.bernoulli.rvs(t, size = W)
+    print(&#39;Document: &#39; + &#39; &#39;.join(str(w) for w in [coding[i] for i in tokens]) + &#39;\n&#39;)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Theta:  0.2376299911870814
+Document: blue red blue blue red red blue blue blue blue
 
-Theta:  0.11860480575148062
-Document: blue blue blue blue red blue blue blue blue blue
+Theta:  0.768902025579346
+Document: red red red red blue red red red blue red
 
-Theta:  0.6974233440265667
-Document: blue red blue blue red red red blue red blue
+Theta:  0.6339386112711662
+Document: red blue red blue red blue blue blue red blue
 
-Theta:  0.8751016129026872
-Document: red red red red red red red red red red
+Theta:  0.889248394241369
+Document: red red red blue red red red red red red
 
-Theta:  0.49876849418291125
-Document: red blue red blue red red red red red red
+Theta:  0.7522981849896823
+Document: red red red red blue blue red red red red
 
-Theta:  0.18083582294749095
-Document: blue red blue blue red red red blue red blue</code></pre></div>
+Theta:  0.18416659985533126
+Document: blue red red blue blue blue red red blue blue</code></pre></div>
 <p>(We could also assign a distribution to W, the number of tokens in each document. (Blei 2003) uses a Poisson distribution.)</p>
 
 <p>Let&rsquo;s look at a couple more.</p>
@@ -243,46 +249,46 @@ Document: blue red blue blue red red red blue red blue</code></pre></div>
 <p>Words from Topic 0: \(W_1 \sim Bernoulli(\phi_0)\)</p>
 
 <p>Words from Topic 1: \(W_2 \sim Bernoulli(\phi_1)\)</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">coding_0 <span style="color:#719e07">=</span> {<span style="color:#2aa198">0</span>:<span style="color:#2aa198">&#39;blue&#39;</span>, <span style="color:#2aa198">1</span>:<span style="color:#2aa198">&#39;red&#39;</span>}  <span style="color:#586e75"># words in topic 0</span>
-coding_1 <span style="color:#719e07">=</span> {<span style="color:#2aa198">0</span>:<span style="color:#2aa198">&#39;dogs&#39;</span>, <span style="color:#2aa198">1</span>:<span style="color:#2aa198">&#39;cats&#39;</span>}  <span style="color:#586e75"># words in topic 1</span>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">coding_0 = {0:&#39;blue&#39;, 1:&#39;red&#39;}  # words in topic 0
+coding_1 = {0:&#39;dogs&#39;, 1:&#39;cats&#39;}  # words in topic 1
 
-D <span style="color:#719e07">=</span> <span style="color:#2aa198">15</span>  <span style="color:#586e75"># number of documents in corpus</span>
-W <span style="color:#719e07">=</span> <span style="color:#2aa198">10</span>  <span style="color:#586e75"># number of tokens in each document</span>
+D = 15  # number of documents in corpus
+W = 10  # number of tokens in each document
 
-alpha_0, alpha_1 <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span>, <span style="color:#2aa198">1.5</span>
-beta_0, beta_1 <span style="color:#719e07">=</span> <span style="color:#2aa198">0.8</span>, <span style="color:#2aa198">0.8</span>
+alpha_0, alpha_1 = 1, 1.5
+beta_0, beta_1 = 0.8, 0.8
 
-theta <span style="color:#719e07">=</span> st<span style="color:#719e07">.</span>beta<span style="color:#719e07">.</span>rvs(alpha_0, alpha_1, size <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span>)[<span style="color:#2aa198">0</span>]  <span style="color:#586e75"># choose a distribution of topics to documents</span>
-phi_0 <span style="color:#719e07">=</span> st<span style="color:#719e07">.</span>beta<span style="color:#719e07">.</span>rvs(beta_0, beta_1, size <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span>)[<span style="color:#2aa198">0</span>] <span style="color:#586e75"># choose distribution of words in topic 0</span>
-phi_1 <span style="color:#719e07">=</span> st<span style="color:#719e07">.</span>beta<span style="color:#719e07">.</span>rvs(beta_0, beta_1, size <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span>)[<span style="color:#2aa198">0</span>] <span style="color:#586e75"># choose distribution of words in topic 1</span>
+theta = st.beta.rvs(alpha_0, alpha_1, size = 1)[0]  # choose a distribution of topics to documents
+phi_0 = st.beta.rvs(beta_0, beta_1, size = 1)[0] # choose distribution of words in topic 0
+phi_1 = st.beta.rvs(beta_0, beta_1, size = 1)[0] # choose distribution of words in topic 1
 
-topics <span style="color:#719e07">=</span> st<span style="color:#719e07">.</span>bernoulli<span style="color:#719e07">.</span>rvs(theta, size <span style="color:#719e07">=</span> D)  <span style="color:#586e75"># choose a topic for each document</span>
+topics = st.bernoulli.rvs(theta, size = D)  # choose a topic for each document
 
-<span style="color:#b58900">print</span>(<span style="color:#2aa198">&#39;Theta: </span><span style="color:#2aa198">{:.3f}</span><span style="color:#2aa198">  Phi_0: </span><span style="color:#2aa198">{:.3f}</span><span style="color:#2aa198">  Phi_1: </span><span style="color:#2aa198">{:.3f}</span><span style="color:#2aa198">&#39;</span><span style="color:#719e07">.</span><span style="color:#b58900">format</span>(theta, phi_0, phi_1))
-<span style="color:#719e07">for</span> i <span style="color:#719e07">in</span> <span style="color:#b58900">range</span>(D):
-    <span style="color:#719e07">if</span> topics[i] <span style="color:#719e07">==</span> <span style="color:#2aa198">0</span>:
-        tokens <span style="color:#719e07">=</span> st<span style="color:#719e07">.</span>bernoulli<span style="color:#719e07">.</span>rvs(phi_0, size <span style="color:#719e07">=</span> W)
-        <span style="color:#b58900">print</span>(<span style="color:#2aa198">&#39;Document: &#39;</span> <span style="color:#719e07">+</span> <span style="color:#2aa198">&#39; &#39;</span><span style="color:#719e07">.</span>join(<span style="color:#b58900">str</span>(w)
-              <span style="color:#719e07">for</span> w <span style="color:#719e07">in</span> [coding_0[i] <span style="color:#719e07">for</span> i <span style="color:#719e07">in</span> tokens]))
-    <span style="color:#719e07">else</span>:
-        tokens <span style="color:#719e07">=</span> st<span style="color:#719e07">.</span>bernoulli<span style="color:#719e07">.</span>rvs(phi_1, size <span style="color:#719e07">=</span> W)
-        <span style="color:#b58900">print</span>(<span style="color:#2aa198">&#39;Document: &#39;</span> <span style="color:#719e07">+</span> <span style="color:#2aa198">&#39; &#39;</span><span style="color:#719e07">.</span>join(<span style="color:#b58900">str</span>(w)
-              <span style="color:#719e07">for</span> w <span style="color:#719e07">in</span> [coding_1[i] <span style="color:#719e07">for</span> i <span style="color:#719e07">in</span> tokens]))</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Theta: 0.040  Phi_0: 0.574  Phi_1: 0.431
-Document: red blue red blue blue blue blue blue red red
-Document: blue blue red red blue blue blue blue red blue
-Document: blue red blue red red red red blue blue red
-Document: red blue blue blue blue red red blue red blue
-Document: blue red red red red red blue blue blue red
-Document: red blue blue red blue red red red blue red
-Document: red blue red blue red blue red red blue blue
-Document: red blue red red blue blue blue blue red red
-Document: red blue red blue blue red blue red blue red
-Document: cats cats dogs dogs cats cats cats dogs cats dogs
-Document: blue red blue blue blue red red red blue blue
-Document: blue red red red blue red blue red red red
-Document: red red blue blue red blue red blue blue blue
-Document: blue red blue red blue red blue red red red
-Document: blue red red blue red red blue red blue blue</code></pre></div>
+print(&#39;Theta: {:.3f}  Phi_0: {:.3f}  Phi_1: {:.3f}&#39;.format(theta, phi_0, phi_1))
+for i in range(D):
+    if topics[i] == 0:
+        tokens = st.bernoulli.rvs(phi_0, size = W)
+        print(&#39;Document: &#39; + &#39; &#39;.join(str(w)
+              for w in [coding_0[i] for i in tokens]))
+    else:
+        tokens = st.bernoulli.rvs(phi_1, size = W)
+        print(&#39;Document: &#39; + &#39; &#39;.join(str(w)
+              for w in [coding_1[i] for i in tokens]))</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Theta: 0.114  Phi_0: 0.973  Phi_1: 0.637
+Document: red red red red red red red red red red
+Document: red red red blue red red red red red red
+Document: red red red red red red red red red red
+Document: red red red red red red red red red red
+Document: red red red red red red red red red red
+Document: red red red red red red red red red red
+Document: red red red red red red red red red red
+Document: red red red red red red red red red red
+Document: dogs dogs cats cats cats cats cats dogs cats dogs
+Document: red red red red red red red red red red
+Document: red red red red red red red red red red
+Document: red red red red red red red red red red
+Document: red red blue red red red red red red red
+Document: red red red red red red red red red red
+Document: red red red red red red red red red red</code></pre></div>
 <h3 id="latent-dirichlet-allocation">Latent Dirichlet Allocation</h3>
 
 <p>This time, instead of choosing a single topic for each document, we&rsquo;ll choose a topic for each word. This will make our model much more flexible and its behavior more realistic.</p>
@@ -298,46 +304,46 @@ Document: blue red red blue red red blue red blue blue</code></pre></div>
 <p>Words from Topic 0: \(W_1 \sim Bernoulli(\phi_0)\)</p>
 
 <p>Words from Topic 1: \(W_2 \sim Bernoulli(\phi_1)\)</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">coding_0 <span style="color:#719e07">=</span> {<span style="color:#2aa198">0</span>:<span style="color:#2aa198">&#39;blue&#39;</span>, <span style="color:#2aa198">1</span>:<span style="color:#2aa198">&#39;red&#39;</span>}  <span style="color:#586e75"># words in topic 0</span>
-coding_1 <span style="color:#719e07">=</span> {<span style="color:#2aa198">0</span>:<span style="color:#2aa198">&#39;dogs&#39;</span>, <span style="color:#2aa198">1</span>:<span style="color:#2aa198">&#39;cats&#39;</span>}  <span style="color:#586e75"># words in topic 1</span>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">coding_0 = {0:&#39;blue&#39;, 1:&#39;red&#39;}  # words in topic 0
+coding_1 = {0:&#39;dogs&#39;, 1:&#39;cats&#39;}  # words in topic 1
 
-D <span style="color:#719e07">=</span> <span style="color:#2aa198">15</span>
-W <span style="color:#719e07">=</span> <span style="color:#2aa198">10</span>  <span style="color:#586e75"># number of tokens in each document</span>
+D = 15
+W = 10  # number of tokens in each document
 
-alpha_0, alpha_1 <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span>, <span style="color:#2aa198">1.5</span>
-beta_0, beta_1 <span style="color:#719e07">=</span> <span style="color:#2aa198">0.8</span>, <span style="color:#2aa198">0.8</span>
+alpha_0, alpha_1 = 1, 1.5
+beta_0, beta_1 = 0.8, 0.8
 
-theta <span style="color:#719e07">=</span> st<span style="color:#719e07">.</span>beta<span style="color:#719e07">.</span>rvs(alpha_0, alpha_1, size <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span>)[<span style="color:#2aa198">0</span>]  <span style="color:#586e75"># choose a distribution of topics to documents</span>
-phi_0 <span style="color:#719e07">=</span> st<span style="color:#719e07">.</span>beta<span style="color:#719e07">.</span>rvs(beta_0, beta_1, size <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span>)[<span style="color:#2aa198">0</span>]  <span style="color:#586e75"># choose distribution of words in topic 0</span>
-phi_1 <span style="color:#719e07">=</span> st<span style="color:#719e07">.</span>beta<span style="color:#719e07">.</span>rvs(beta_0, beta_1, size <span style="color:#719e07">=</span> <span style="color:#2aa198">1</span>)[<span style="color:#2aa198">0</span>]  <span style="color:#586e75"># choose distribution of words in topic 1</span>
+theta = st.beta.rvs(alpha_0, alpha_1, size = 1)[0]  # choose a distribution of topics to documents
+phi_0 = st.beta.rvs(beta_0, beta_1, size = 1)[0]  # choose distribution of words in topic 0
+phi_1 = st.beta.rvs(beta_0, beta_1, size = 1)[0]  # choose distribution of words in topic 1
 
-<span style="color:#b58900">print</span>(<span style="color:#2aa198">&#39;Theta: </span><span style="color:#2aa198">{:.3f}</span><span style="color:#2aa198">  Phi_0: </span><span style="color:#2aa198">{:.3f}</span><span style="color:#2aa198">  Phi_1: </span><span style="color:#2aa198">{:.3f}</span><span style="color:#2aa198">&#39;</span><span style="color:#719e07">.</span><span style="color:#b58900">format</span>(theta, phi_0, phi_1))
-<span style="color:#719e07">for</span> i <span style="color:#719e07">in</span> <span style="color:#b58900">range</span>(D):
-    <span style="color:#b58900">print</span>(<span style="color:#2aa198">&#39;Document: &#39;</span>, end<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;&#39;</span>)
-    topics <span style="color:#719e07">=</span> st<span style="color:#719e07">.</span>bernoulli<span style="color:#719e07">.</span>rvs(theta, size<span style="color:#719e07">=</span>W)  <span style="color:#586e75"># choose topics for each word</span>
-    <span style="color:#719e07">for</span> j <span style="color:#719e07">in</span> <span style="color:#b58900">range</span>(W):
-        <span style="color:#719e07">if</span> topics[j] <span style="color:#719e07">==</span> <span style="color:#2aa198">0</span>:
-            token <span style="color:#719e07">=</span> st<span style="color:#719e07">.</span>bernoulli<span style="color:#719e07">.</span>rvs(phi_0, size<span style="color:#719e07">=</span><span style="color:#2aa198">1</span>)[<span style="color:#2aa198">0</span>]  <span style="color:#586e75"># choose a word from topic 0</span>
-            <span style="color:#b58900">print</span>(coding_0[token], end<span style="color:#719e07">=</span><span style="color:#2aa198">&#39; &#39;</span>)
-        <span style="color:#719e07">else</span>:
-            token <span style="color:#719e07">=</span> st<span style="color:#719e07">.</span>bernoulli<span style="color:#719e07">.</span>rvs(phi_1, size<span style="color:#719e07">=</span><span style="color:#2aa198">1</span>)[<span style="color:#2aa198">0</span>]  <span style="color:#586e75"># choose a word from topic 1</span>
-            <span style="color:#b58900">print</span>(coding_1[token], end<span style="color:#719e07">=</span><span style="color:#2aa198">&#39; &#39;</span>)
-    <span style="color:#b58900">print</span>()</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Theta: 0.517  Phi_0: 0.509  Phi_1: 0.681
-Document: red red blue blue cats red cats red dogs cats
-Document: dogs red blue blue red dogs dogs cats cats red
-Document: cats blue cats red cats red cats blue red red
-Document: red red cats cats red cats dogs blue blue dogs
-Document: cats red blue dogs cats red dogs red cats cats
-Document: red dogs cats red cats cats cats red cats blue
-Document: blue dogs blue cats red red dogs dogs red blue
-Document: red dogs blue cats blue red red cats cats red
-Document: red cats cats red dogs blue cats cats cats cats
-Document: cats dogs dogs dogs cats cats cats blue red red
-Document: red blue dogs red red cats red cats cats cats
-Document: dogs dogs blue dogs cats cats cats cats blue dogs
-Document: red dogs cats blue red blue blue blue blue cats
-Document: cats blue blue cats cats blue cats cats cats cats
-Document: red blue blue dogs cats blue cats blue dogs cats</code></pre></div>
+print(&#39;Theta: {:.3f}  Phi_0: {:.3f}  Phi_1: {:.3f}&#39;.format(theta, phi_0, phi_1))
+for i in range(D):
+    print(&#39;Document: &#39;, end=&#39;&#39;)
+    topics = st.bernoulli.rvs(theta, size=W)  # choose topics for each word
+    for j in range(W):
+        if topics[j] == 0:
+            token = st.bernoulli.rvs(phi_0, size=1)[0]  # choose a word from topic 0
+            print(coding_0[token], end=&#39; &#39;)
+        else:
+            token = st.bernoulli.rvs(phi_1, size=1)[0]  # choose a word from topic 1
+            print(coding_1[token], end=&#39; &#39;)
+    print()</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Theta: 0.384  Phi_0: 0.127  Phi_1: 0.028
+Document: dogs blue blue blue dogs blue dogs blue blue blue
+Document: blue dogs blue blue dogs dogs dogs dogs blue cats
+Document: blue dogs blue blue blue dogs red dogs blue blue
+Document: dogs dogs red dogs dogs blue dogs blue blue blue
+Document: blue dogs dogs blue blue dogs red dogs dogs red
+Document: dogs blue blue red dogs blue dogs blue blue blue
+Document: blue blue blue dogs blue dogs blue dogs dogs blue
+Document: dogs red dogs red dogs blue dogs dogs blue blue
+Document: dogs dogs blue dogs blue dogs blue blue blue dogs
+Document: dogs blue blue blue blue red blue blue dogs dogs
+Document: dogs dogs blue red dogs dogs blue blue blue blue
+Document: blue blue blue red dogs blue blue blue blue red
+Document: blue blue blue dogs blue dogs red dogs blue dogs
+Document: dogs blue blue dogs dogs dogs blue dogs dogs blue
+Document: dogs dogs dogs red blue dogs red dogs dogs dogs</code></pre></div>
 <h3 id="the-dirichlet-distribution">The Dirichlet Distribution</h3>
 
 <p>Before we go on, we need to generalize our model a bit to be able to handle arbitrary numbers of words and topics, instead of being limited to just two. The multivariate generalization of the Bernoulli distribution is the <a href="https://en.wikipedia.org/wiki/Categorical%5Fdistribution">categorical distribution</a>, which simply gives a probability to each of some number of categories. The generalization of the beta distribution is a little trickier. It is called the <a href="https://en.wikipedia.org/wiki/Dirichlet%5Fdistribution">Dirichlet distribution</a>. And just like samples from the beta distribution will give parameters for a Bernoulli RV, samples from the Dirichlet distribution will give parameters for the categorical RV.</p>
@@ -347,25 +353,25 @@ Document: red blue blue dogs cats blue cats blue dogs cats</code></pre></div>
 <p>As sampled from the distribution, these values will form <a href="https://en.wikipedia.org/wiki/Barycentric%5Fcoordinate%5Fsystem">barycentric coordinates</a> on the simplex. This just means that the coordinates tell you how far the point is from the center of the simplex, instead of how far it is from the origin, like with Cartesian coordinates.</p>
 
 <p>The 3-dimensional Dirichlet returns barycentric coordinates on the 2-simplex, a triangle. We can visualize the surface of the Dirichlet pdf as existing over a triangle; that is, its domain is the simplex.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#719e07">import</span> simplex_plots <span style="color:#719e07">as</span> sp
-<span style="color:#586e75"># from https://gist.github.com/tboggs/8778945</span>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">import simplex_plots as sp
+# from https://gist.github.com/tboggs/8778945
 
-alphas <span style="color:#719e07">=</span> [[<span style="color:#2aa198">0.999</span>, <span style="color:#2aa198">0.999</span>, <span style="color:#2aa198">0.999</span>], [<span style="color:#2aa198">1</span>, <span style="color:#2aa198">2</span>, <span style="color:#2aa198">1</span>], [<span style="color:#2aa198">1</span>, <span style="color:#2aa198">2</span>, <span style="color:#2aa198">3</span>],
-          [<span style="color:#2aa198">2</span>, <span style="color:#2aa198">0.999</span>, <span style="color:#2aa198">1</span>], [<span style="color:#2aa198">10</span>, <span style="color:#2aa198">3</span>, <span style="color:#2aa198">4</span>], [<span style="color:#2aa198">0.999</span>, <span style="color:#2aa198">1</span>, <span style="color:#2aa198">1</span>]]
+alphas = [[0.999, 0.999, 0.999], [1, 2, 1], [1, 2, 3],
+          [2, 0.999, 1], [10, 3, 4], [0.999, 1, 1]]
 
-fig <span style="color:#719e07">=</span> plt<span style="color:#719e07">.</span>figure(figsize<span style="color:#719e07">=</span>(<span style="color:#2aa198">12</span>, <span style="color:#2aa198">8</span>))
-fig<span style="color:#719e07">.</span>suptitle(<span style="color:#2aa198">&#39;The Dirichlet Distribution&#39;</span>, fontsize<span style="color:#719e07">=</span><span style="color:#2aa198">16</span>)
-<span style="color:#719e07">for</span> i, a <span style="color:#719e07">in</span> <span style="color:#b58900">enumerate</span>(alphas):
-    plt<span style="color:#719e07">.</span>subplot(<span style="color:#2aa198">2</span>, <span style="color:#b58900">len</span>(alphas)<span style="color:#719e07">/</span><span style="color:#2aa198">2</span>, i <span style="color:#719e07">+</span> <span style="color:#2aa198">1</span>)
-    sp<span style="color:#719e07">.</span>draw_pdf_contours(sp<span style="color:#719e07">.</span>Dirichlet(a), border<span style="color:#719e07">=</span><span style="color:#cb4b16">True</span>, cmap<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;Blues&#39;</span>)
-    title <span style="color:#719e07">=</span> <span style="color:#2aa198">r</span><span style="color:#2aa198">&#39;$\alpha = $ = (</span><span style="color:#2aa198">{0[0]:.3f}</span><span style="color:#2aa198">, </span><span style="color:#2aa198">{0[1]:.3f}</span><span style="color:#2aa198">, </span><span style="color:#2aa198">{0[2]:.3f}</span><span style="color:#2aa198">)&#39;</span><span style="color:#719e07">.</span><span style="color:#b58900">format</span>(a)
-    plt<span style="color:#719e07">.</span>title(title, fontdict<span style="color:#719e07">=</span>{<span style="color:#2aa198">&#39;fontsize&#39;</span>: <span style="color:#2aa198">14</span>})</code></pre></div>
+fig = plt.figure(figsize=(12, 8))
+fig.suptitle(&#39;The Dirichlet Distribution&#39;, fontsize=16)
+for i, a in enumerate(alphas):
+    plt.subplot(2, len(alphas)/2, i + 1)
+    sp.draw_pdf_contours(sp.Dirichlet(a), border=True, cmap=&#39;Blues&#39;)
+    title = r&#39;$\alpha = $ = ({0[0]:.3f}, {0[1]:.3f}, {0[2]:.3f})&#39;.format(a)
+    plt.title(title, fontdict={&#39;fontsize&#39;: 14})</code></pre></div>
 
 
 
 <figure>
     
-        <img src="https://mathformachines.com/posts/bayesian-topic-modeling/obipy-resources/14366UEE.png"/> </figure>
+        <img src="https://mathformachines.com/posts/bayesian-topic-modeling/./obipy-resources/14366uKo.png"/> </figure>
 
 
 <p>Each corner of the triangle will favor a particular category (a word or a topic), just like either side of the domain of the beta distribution favored a category.</p>
@@ -374,54 +380,54 @@ fig<span style="color:#719e07">.</span>suptitle(<span style="color:#2aa198">&#39
 
 <p>Now let&rsquo;s start developing our models.</p>
 
-<h2 id="data-preparation">Data Preparation</h2>
+<h3 id="data-preparation">Data Preparation</h3>
 
 <p>First we&rsquo;ll make up a corpus and put it into an encoding that our models can use. To simplify things, we&rsquo;ll let all of our documents have the same number of tokens and flatten the encoded data structure.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#719e07">from</span> sklearn.preprocessing <span style="color:#719e07">import</span> LabelEncoder
-<span style="color:#719e07">from</span> sklearn.feature_extraction.text <span style="color:#719e07">import</span> CountVectorizer
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">from sklearn.preprocessing import LabelEncoder
+from sklearn.feature_extraction.text import CountVectorizer
 
-corpus <span style="color:#719e07">=</span> [
-    <span style="color:#2aa198">&#39;Red blue green. Green blue blue? Red, red, blue, yellow.&#39;</span>,
-    <span style="color:#2aa198">&#39;Car light red stop. Stop car. Car drive green, yellow.&#39;</span>,
-    <span style="color:#2aa198">&#39;Car engine gas stop! Battery engine drive, car. Electric, gas.&#39;</span>,
-    <span style="color:#2aa198">&#39;Watt, volt, volt, amp. Battery, watt, volt, electric volt charge. &#39;</span>,
+corpus = [
+    &#39;Red blue green. Green blue blue? Red, red, blue, yellow.&#39;,
+    &#39;Car light red stop. Stop car. Car drive green, yellow.&#39;,
+    &#39;Car engine gas stop! Battery engine drive, car. Electric, gas.&#39;,
+    &#39;Watt, volt, volt, amp. Battery, watt, volt, electric volt charge. &#39;,
 ]
 
-tokenizer <span style="color:#719e07">=</span> CountVectorizer(lowercase<span style="color:#719e07">=</span><span style="color:#cb4b16">True</span>)<span style="color:#719e07">.</span>build_analyzer()
-encoder <span style="color:#719e07">=</span> LabelEncoder()
+tokenizer = CountVectorizer(lowercase=True).build_analyzer()
+encoder = LabelEncoder()
 
-corpus_tokenized <span style="color:#719e07">=</span> np<span style="color:#719e07">.</span>array([tokenizer(doc) <span style="color:#719e07">for</span> doc <span style="color:#719e07">in</span> corpus])  <span style="color:#586e75"># assign a number to each word</span>
-encoder<span style="color:#719e07">.</span>fit(corpus_tokenized<span style="color:#719e07">.</span>ravel())
-vocab <span style="color:#719e07">=</span> <span style="color:#b58900">list</span>(encoder<span style="color:#719e07">.</span>classes_)  <span style="color:#586e75"># the vocabulary</span>
+corpus_tokenized = np.array([tokenizer(doc) for doc in corpus])  # assign a number to each word
+encoder.fit(corpus_tokenized.ravel())
+vocab = list(encoder.classes_)  # the vocabulary
 
-<span style="color:#586e75"># The number of documents and their length</span>
-D, W <span style="color:#719e07">=</span> corpus_tokenized<span style="color:#719e07">.</span>shape
-<span style="color:#586e75"># The number of words in the vocabulary</span>
-V <span style="color:#719e07">=</span> <span style="color:#b58900">len</span>(vocab)
+# The number of documents and their length
+D, W = corpus_tokenized.shape
+# The number of words in the vocabulary
+V = len(vocab)
 
-<span style="color:#586e75"># Flatten and encode the corpus, and create an index.</span>
-data <span style="color:#719e07">=</span> corpus_tokenized<span style="color:#719e07">.</span>ravel()
-data <span style="color:#719e07">=</span> encoder<span style="color:#719e07">.</span>transform(data)
-data_index <span style="color:#719e07">=</span> np<span style="color:#719e07">.</span>repeat(np<span style="color:#719e07">.</span>arange(D), W)</code></pre></div>
+# Flatten and encode the corpus, and create an index.
+data = corpus_tokenized.ravel()
+data = encoder.transform(data)
+data_index = np.repeat(np.arange(D), W)</code></pre></div>
 <p>Now a couple of diagnostic functions.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#719e07">def</span> <span style="color:#268bd2">print_top_words</span>(vocab, phis, n):
-    <span style="color:#2aa198">&#39;&#39;&#39;Prints the top words occuring within a topic.&#39;&#39;&#39;</span>
-    <span style="color:#719e07">for</span> i, p <span style="color:#719e07">in</span> <span style="color:#b58900">enumerate</span>(phis):
-        z <span style="color:#719e07">=</span> <span style="color:#b58900">list</span>(<span style="color:#b58900">zip</span>(vocab, p))
-        z<span style="color:#719e07">.</span>sort(key <span style="color:#719e07">=</span> <span style="color:#719e07">lambda</span> x: x[<span style="color:#2aa198">1</span>], reverse<span style="color:#719e07">=</span><span style="color:#cb4b16">True</span>)
-        z <span style="color:#719e07">=</span> z[<span style="color:#2aa198">0</span>:n]
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">def print_top_words(vocab, phis, n):
+    &#39;&#39;&#39;Prints the top words occuring within a topic.&#39;&#39;&#39;
+    for i, p in enumerate(phis):
+        z = list(zip(vocab, p))
+        z.sort(key = lambda x: x[1], reverse=True)
+        z = z[0:n]
 
-        <span style="color:#719e07">for</span> word, percent <span style="color:#719e07">in</span> z:
-            <span style="color:#b58900">print</span>(f<span style="color:#2aa198">&#39;Topic: </span><span style="color:#2aa198">{i:2}</span><span style="color:#2aa198">  Word: </span><span style="color:#2aa198">{word:10}</span><span style="color:#2aa198">  Percent: </span><span style="color:#2aa198">{percent:0.3f}</span><span style="color:#2aa198">&#39;</span>)
+        for word, percent in z:
+            print(f&#39;Topic: {i:2}  Word: {word:10}  Percent: {percent:0.3f}&#39;)
 
-        <span style="color:#b58900">print</span>()
+        print()
 
-<span style="color:#719e07">def</span> <span style="color:#268bd2">print_corpus_topics</span>(corpus_tokenized, zs):
-    <span style="color:#2aa198">&#39;&#39;&#39;Prints the corpus together with the topic assigned to each word.&#39;&#39;&#39;</span>
-    <span style="color:#719e07">for</span> d <span style="color:#719e07">in</span> <span style="color:#b58900">range</span>(zs<span style="color:#719e07">.</span>shape[<span style="color:#2aa198">0</span>]):  <span style="color:#586e75"># the document index</span>
-        <span style="color:#719e07">for</span> w <span style="color:#719e07">in</span> <span style="color:#b58900">range</span>(zs<span style="color:#719e07">.</span>shape[<span style="color:#2aa198">1</span>]):  <span style="color:#586e75"># the word index</span>
-            <span style="color:#b58900">print</span>(f<span style="color:#2aa198">&#39;(</span><span style="color:#2aa198">{corpus_tokenized[d, w]}</span><span style="color:#2aa198">, </span><span style="color:#2aa198">{zs[d, w]}</span><span style="color:#2aa198">)&#39;</span>, end<span style="color:#719e07">=</span><span style="color:#2aa198">&#39; &#39;</span>)
-        <span style="color:#b58900">print</span>(<span style="color:#2aa198">&#39;</span><span style="color:#cb4b16">\n</span><span style="color:#2aa198">&#39;</span>)</code></pre></div>
+def print_corpus_topics(corpus_tokenized, zs):
+    &#39;&#39;&#39;Prints the corpus together with the topic assigned to each word.&#39;&#39;&#39;
+    for d in range(zs.shape[0]):  # the document index
+        for w in range(zs.shape[1]):  # the word index
+            print(f&#39;({corpus_tokenized[d, w]}, {zs[d, w]})&#39;, end=&#39; &#39;)
+        print(&#39;\n&#39;)</code></pre></div>
 <h3 id="the-unigram-model">The Unigram Model</h3>
 
 <p>In this model, words from every document are drawn from a single categorical distribution.</p>
@@ -433,37 +439,37 @@ data_index <span style="color:#719e07">=</span> np<span style="color:#719e07">.<
 <p><a href="https://en.wikipedia.org/wiki/Markov%5Fchain%5FMonte%5FCarlo">Markov-Chain Monte Carlo</a> is a technique for sampling a model to discover its posterior parameters statistically. When models become complex, it is often the case that analytic solutions for the parameters are intractable. We will use the <a href="https://docs.pymc.io/">PyMC3</a> package.</p>
 
 <p>First we describe the model.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#586e75"># Pseudo-counts for each vocab word occuring in the documents.</span>
-beta <span style="color:#719e07">=</span> np<span style="color:#719e07">.</span>ones(V)
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython"># Pseudo-counts for each vocab word occuring in the documents.
+beta = np.ones(V)
 
-<span style="color:#719e07">with</span> pm<span style="color:#719e07">.</span>Model() <span style="color:#719e07">as</span> unigram_model:
+with pm.Model() as unigram_model:
 
-    <span style="color:#586e75"># Distribution of word-types in the corpus.</span>
-    phi <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>Dirichlet(<span style="color:#2aa198">&#39;phi&#39;</span>, a <span style="color:#719e07">=</span> beta)
+    # Distribution of word-types in the corpus.
+    phi = pm.Dirichlet(&#39;phi&#39;, a = beta)
 
-    <span style="color:#586e75"># The distribution of words.</span>
-    w <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>Categorical(<span style="color:#2aa198">&#39;w&#39;</span>, p <span style="color:#719e07">=</span> phi, observed <span style="color:#719e07">=</span> data)</code></pre></div>
+    # The distribution of words.
+    w = pm.Categorical(&#39;w&#39;, p = phi, observed = data)</code></pre></div>
 <p>Next we sample the model to create the posterior distribution.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#719e07">with</span> unigram_model:
-    draw <span style="color:#719e07">=</span> <span style="color:#2aa198">5000</span>
-    unigram_trace <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>sample(<span style="color:#2aa198">5000</span>, tune<span style="color:#719e07">=</span><span style="color:#2aa198">1000</span>, chains<span style="color:#719e07">=</span><span style="color:#2aa198">4</span>, progressbar<span style="color:#719e07">=</span><span style="color:#cb4b16">False</span>)</code></pre></div>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">with unigram_model:
+    draw = 5000
+    unigram_trace = pm.sample(5000, tune=1000, chains=4, progressbar=False)</code></pre></div>
 <p>And now we can see what the model determined the proportion of each word in the corpus was.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">print_top_words(vocab, [unigram_trace<span style="color:#719e07">.</span>get_values(<span style="color:#2aa198">&#39;phi&#39;</span>)[draw<span style="color:#719e07">-</span><span style="color:#2aa198">1</span>]], <span style="color:#b58900">len</span>(vocab))</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Topic:  0  Word: drive       Percent: 0.137
-Topic:  0  Word: red         Percent: 0.132
-Topic:  0  Word: car         Percent: 0.101
-Topic:  0  Word: volt        Percent: 0.094
-Topic:  0  Word: stop        Percent: 0.078
-Topic:  0  Word: light       Percent: 0.066
-Topic:  0  Word: engine      Percent: 0.060
-Topic:  0  Word: blue        Percent: 0.060
-Topic:  0  Word: green       Percent: 0.053
-Topic:  0  Word: charge      Percent: 0.046
-Topic:  0  Word: amp         Percent: 0.045
-Topic:  0  Word: yellow      Percent: 0.032
-Topic:  0  Word: electric    Percent: 0.029
-Topic:  0  Word: gas         Percent: 0.028
-Topic:  0  Word: watt        Percent: 0.027
-Topic:  0  Word: battery     Percent: 0.013</code></pre></div>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">print_top_words(vocab, [unigram_trace.get_values(&#39;phi&#39;)[draw-1]], len(vocab))</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Topic:  0  Word: red         Percent: 0.150
+Topic:  0  Word: watt        Percent: 0.145
+Topic:  0  Word: car         Percent: 0.117
+Topic:  0  Word: green       Percent: 0.080
+Topic:  0  Word: battery     Percent: 0.073
+Topic:  0  Word: volt        Percent: 0.068
+Topic:  0  Word: yellow      Percent: 0.067
+Topic:  0  Word: drive       Percent: 0.059
+Topic:  0  Word: electric    Percent: 0.054
+Topic:  0  Word: gas         Percent: 0.053
+Topic:  0  Word: stop        Percent: 0.048
+Topic:  0  Word: blue        Percent: 0.030
+Topic:  0  Word: engine      Percent: 0.025
+Topic:  0  Word: charge      Percent: 0.021
+Topic:  0  Word: light       Percent: 0.011
+Topic:  0  Word: amp         Percent: 0.002</code></pre></div>
 <h3 id="mixture-of-unigrams--naive-bayes">Mixture of Unigrams (Naive Bayes)</h3>
 
 <p>In this model, each document is assigned a topic and each topic has its own distribution of words.</p>
@@ -475,49 +481,49 @@ Topic:  0  Word: battery     Percent: 0.013</code></pre></div>
 <p>The topics: \(T \sim Categorical(\vec{\theta})\)</p>
 
 <p>The tokens: \(W \sim Categorical(\vec{\phi})\)</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#586e75"># Number of topics</span>
-K <span style="color:#719e07">=</span> <span style="color:#2aa198">3</span>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython"># Number of topics
+K = 3
 
-<span style="color:#586e75"># Pseudo-counts for topics and words.</span>
-alpha <span style="color:#719e07">=</span> np<span style="color:#719e07">.</span>ones(K)<span style="color:#719e07">*</span><span style="color:#2aa198">0.8</span>
-beta <span style="color:#719e07">=</span> np<span style="color:#719e07">.</span>ones(V)<span style="color:#719e07">*</span><span style="color:#2aa198">0.8</span>
+# Pseudo-counts for topics and words.
+alpha = np.ones(K)*0.8
+beta = np.ones(V)*0.8
 
-<span style="color:#719e07">with</span> pm<span style="color:#719e07">.</span>Model() <span style="color:#719e07">as</span> naive_model:
-    <span style="color:#586e75"># Global topic distribution</span>
-    theta <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>Dirichlet(<span style="color:#2aa198">&#34;theta&#34;</span>, a<span style="color:#719e07">=</span>alpha)
+with pm.Model() as naive_model:
+    # Global topic distribution
+    theta = pm.Dirichlet(&#34;theta&#34;, a=alpha)
 
-    <span style="color:#586e75"># Word distributions for K topics</span>
-    phi <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>Dirichlet(<span style="color:#2aa198">&#34;phi&#34;</span>, a<span style="color:#719e07">=</span>beta, shape<span style="color:#719e07">=</span>(K, V))
+    # Word distributions for K topics
+    phi = pm.Dirichlet(&#34;phi&#34;, a=beta, shape=(K, V))
 
-    <span style="color:#586e75"># Topic of documents</span>
-    z <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>Categorical(<span style="color:#2aa198">&#34;z&#34;</span>, p<span style="color:#719e07">=</span>theta, shape<span style="color:#719e07">=</span>D)
+    # Topic of documents
+    z = pm.Categorical(&#34;z&#34;, p=theta, shape=D)
 
-    <span style="color:#586e75"># Words in documents</span>
-    p <span style="color:#719e07">=</span> phi[z][data_index]
-    w <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>Categorical(<span style="color:#2aa198">&#34;w&#34;</span>, p<span style="color:#719e07">=</span>p, observed<span style="color:#719e07">=</span>data)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#719e07">with</span> naive_model:
-    draw <span style="color:#719e07">=</span> <span style="color:#2aa198">5000</span>
-    naive_trace <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>sample(draw, tune<span style="color:#719e07">=</span><span style="color:#2aa198">1000</span>, chains<span style="color:#719e07">=</span><span style="color:#2aa198">4</span>, progressbar<span style="color:#719e07">=</span><span style="color:#cb4b16">False</span>)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">print_top_words(vocab, naive_trace[<span style="color:#2aa198">&#39;phi&#39;</span>][draw<span style="color:#719e07">-</span><span style="color:#2aa198">1</span>], <span style="color:#2aa198">5</span>)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Topic:  0  Word: car         Percent: 0.198
-Topic:  0  Word: amp         Percent: 0.193
-Topic:  0  Word: gas         Percent: 0.150
-Topic:  0  Word: electric    Percent: 0.141
-Topic:  0  Word: volt        Percent: 0.087
+    # Words in documents
+    p = phi[z][data_index]
+    w = pm.Categorical(&#34;w&#34;, p=p, observed=data)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">with naive_model:
+    draw = 5000
+    naive_trace = pm.sample(draw, tune=1000, chains=4, progressbar=False)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">print_top_words(vocab, naive_trace[&#39;phi&#39;][draw-1], 5)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Topic:  0  Word: drive       Percent: 0.177
+Topic:  0  Word: car         Percent: 0.166
+Topic:  0  Word: red         Percent: 0.126
+Topic:  0  Word: blue        Percent: 0.108
+Topic:  0  Word: green       Percent: 0.086
 
-Topic:  1  Word: volt        Percent: 0.196
-Topic:  1  Word: drive       Percent: 0.186
-Topic:  1  Word: battery     Percent: 0.135
-Topic:  1  Word: red         Percent: 0.108
-Topic:  1  Word: blue        Percent: 0.063
+Topic:  1  Word: car         Percent: 0.238
+Topic:  1  Word: green       Percent: 0.192
+Topic:  1  Word: watt        Percent: 0.180
+Topic:  1  Word: blue        Percent: 0.070
+Topic:  1  Word: red         Percent: 0.045
 
-Topic:  2  Word: green       Percent: 0.250
-Topic:  2  Word: stop        Percent: 0.139
-Topic:  2  Word: engine      Percent: 0.108
-Topic:  2  Word: drive       Percent: 0.100
-Topic:  2  Word: red         Percent: 0.078</code></pre></div>
+Topic:  2  Word: volt        Percent: 0.161
+Topic:  2  Word: car         Percent: 0.123
+Topic:  2  Word: engine      Percent: 0.113
+Topic:  2  Word: electric    Percent: 0.094
+Topic:  2  Word: gas         Percent: 0.081</code></pre></div>
 <p>We can also see the topic the model assigned to each document.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#719e07">for</span> d, t <span style="color:#719e07">in</span> <span style="color:#b58900">enumerate</span>(naive_trace[<span style="color:#2aa198">&#39;z&#39;</span>][draw<span style="color:#719e07">-</span><span style="color:#2aa198">1</span>]):
-    <span style="color:#b58900">print</span>(<span style="color:#2aa198">&#39;Document: </span><span style="color:#2aa198">{}</span><span style="color:#2aa198">  Topic: </span><span style="color:#2aa198">{}</span><span style="color:#2aa198">&#39;</span><span style="color:#719e07">.</span><span style="color:#b58900">format</span>(d, t))</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Document: 0  Topic: 1
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">for d, t in enumerate(naive_trace[&#39;z&#39;][draw-1]):
+    print(&#39;Document: {}  Topic: {}&#39;.format(d, t))</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Document: 0  Topic: 0
 Document: 1  Topic: 2
-Document: 2  Topic: 0
+Document: 2  Topic: 2
 Document: 3  Topic: 1</code></pre></div>
 <h3 id="latent-dirichlet-allocation-1">Latent Dirichlet Allocation</h3>
 
@@ -530,111 +536,98 @@ Document: 3  Topic: 1</code></pre></div>
 <p>The topics: \(T \sim Categorical(\vec{\theta})\)</p>
 
 <p>The tokens: \(W \sim Categorical(\vec{\phi})\)</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#586e75"># Number of topics</span>
-K <span style="color:#719e07">=</span> <span style="color:#2aa198">3</span>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython"># Number of topics
+K = 3
 
-<span style="color:#586e75"># Pseudo-counts. Sparse to encourage separation.</span>
-alpha <span style="color:#719e07">=</span> np<span style="color:#719e07">.</span>ones((<span style="color:#2aa198">1</span>, K))<span style="color:#719e07">*</span><span style="color:#2aa198">0.5</span>
-beta <span style="color:#719e07">=</span> np<span style="color:#719e07">.</span>ones((<span style="color:#2aa198">1</span>, V))<span style="color:#719e07">*</span><span style="color:#2aa198">0.5</span>
+# Pseudo-counts. Sparse to encourage separation.
+alpha = np.ones((1, K))*0.5
+beta = np.ones((1, V))*0.5
 
-<span style="color:#719e07">with</span> pm<span style="color:#719e07">.</span>Model() <span style="color:#719e07">as</span> lda_model:
-    <span style="color:#586e75"># Distribution of topics within each document</span>
-    theta <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>Dirichlet(<span style="color:#2aa198">&#34;theta&#34;</span>, a<span style="color:#719e07">=</span>alpha, shape<span style="color:#719e07">=</span>(D, K))
+with pm.Model() as lda_model:
+    # Distribution of topics within each document
+    theta = pm.Dirichlet(&#34;theta&#34;, a=alpha, shape=(D, K))
 
-    <span style="color:#586e75"># Distribution of words within each topic</span>
-    phi <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>Dirichlet(<span style="color:#2aa198">&#34;phi&#34;</span>, a<span style="color:#719e07">=</span>beta, shape<span style="color:#719e07">=</span>(K, V))
+    # Distribution of words within each topic
+    phi = pm.Dirichlet(&#34;phi&#34;, a=beta, shape=(K, V))
 
-    <span style="color:#586e75"># The topic for each word</span>
-    z <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>Categorical(<span style="color:#2aa198">&#34;z&#34;</span>, p<span style="color:#719e07">=</span>theta, shape<span style="color:#719e07">=</span>(W, D))
+    # The topic for each word
+    z = pm.Categorical(&#34;z&#34;, p=theta, shape=(W, D))
 
-    <span style="color:#586e75"># Words in documents</span>
-    p <span style="color:#719e07">=</span> phi[z]<span style="color:#719e07">.</span>reshape((D<span style="color:#719e07">*</span>W, V))
-    w <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>Categorical(<span style="color:#2aa198">&#34;w&#34;</span>, p<span style="color:#719e07">=</span>p, observed<span style="color:#719e07">=</span>data)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#719e07">with</span> lda_model:
-    draw <span style="color:#719e07">=</span> <span style="color:#2aa198">5000</span>
-    lda_trace <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>sample(draw, tune<span style="color:#719e07">=</span><span style="color:#2aa198">1000</span>, chains<span style="color:#719e07">=</span><span style="color:#2aa198">4</span>, progressbar<span style="color:#719e07">=</span><span style="color:#cb4b16">False</span>)
+    # Words in documents
+    p = phi[z].reshape((D*W, V))
+    w = pm.Categorical(&#34;w&#34;, p=p, observed=data)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">with lda_model:
+    draw = 5000
+    lda_trace = pm.sample(draw, tune=1000, chains=4, progressbar=False)
 
-print_top_words(tokens, lda_trace<span style="color:#719e07">.</span>get_values(<span style="color:#2aa198">&#39;phi&#39;</span>)[draw<span style="color:#719e07">-</span><span style="color:#2aa198">1</span>], <span style="color:#2aa198">4</span>)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Topic:  0  Word:          0  Percent: 0.134
-Topic:  0  Word:          1  Percent: 0.129
-Topic:  0  Word:          1  Percent: 0.052
-Topic:  0  Word:          1  Percent: 0.014
-
-Topic:  1  Word:          1  Percent: 0.156
-Topic:  1  Word:          1  Percent: 0.126
-Topic:  1  Word:          0  Percent: 0.112
-Topic:  1  Word:          1  Percent: 0.081
-
-Topic:  2  Word:          0  Percent: 0.291
-Topic:  2  Word:          0  Percent: 0.163
-Topic:  2  Word:          0  Percent: 0.135
-Topic:  2  Word:          0  Percent: 0.087</code></pre></div>
+print_top_words(tokens, lda_trace.get_values(&#39;phi&#39;)[draw-1], 4)</code></pre></div>
 <p>At the cost of some complexity, we can rewrite our model to handle a corpus with documents of varying lengths.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">alpha <span style="color:#719e07">=</span> np<span style="color:#719e07">.</span>ones([D, K])<span style="color:#719e07">*</span><span style="color:#2aa198">0.5</span>  <span style="color:#586e75"># prior weights for the topics in each document (pseudo-counts)</span>
-beta  <span style="color:#719e07">=</span> np<span style="color:#719e07">.</span>ones([K, V])<span style="color:#719e07">*</span><span style="color:#2aa198">0.5</span>  <span style="color:#586e75"># prior weights for the vocab words in each topic (pseudo-counts)</span>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">alpha = np.ones([D, K])*0.5  # prior weights for the topics in each document (pseudo-counts)
+beta  = np.ones([K, V])*0.5  # prior weights for the vocab words in each topic (pseudo-counts)
 
-sequence_data <span style="color:#719e07">=</span> np<span style="color:#719e07">.</span>reshape(np<span style="color:#719e07">.</span>array(data), (D,W))
-N <span style="color:#719e07">=</span> np<span style="color:#719e07">.</span>repeat(W, D)  <span style="color:#586e75"># this model needs a list of document lengths</span>
+sequence_data = np.reshape(np.array(data), (D,W))
+N = np.repeat(W, D)  # this model needs a list of document lengths
 
-<span style="color:#719e07">with</span> pm<span style="color:#719e07">.</span>Model() <span style="color:#719e07">as</span> sequence_model:
+with pm.Model() as sequence_model:
 
-    <span style="color:#586e75"># distribution of the topics occuring in a particular document</span>
-    theta   <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>Dirichlet(<span style="color:#2aa198">&#39;theta&#39;</span>, a<span style="color:#719e07">=</span>alpha, shape<span style="color:#719e07">=</span>(D, K))
+    # distribution of the topics occuring in a particular document
+    theta   = pm.Dirichlet(&#39;theta&#39;, a=alpha, shape=(D, K))
 
-    <span style="color:#586e75"># distribution of the vocab words occuring in a particular topic</span>
-    phi     <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>Dirichlet(<span style="color:#2aa198">&#39;phi&#39;</span>, a<span style="color:#719e07">=</span>beta, shape<span style="color:#719e07">=</span>(K, V))
+    # distribution of the vocab words occuring in a particular topic
+    phi     = pm.Dirichlet(&#39;phi&#39;, a=beta, shape=(K, V))
 
-    <span style="color:#586e75"># the topic for a particular word in a particular document: shape = (D, N[d])</span>
-    <span style="color:#586e75"># theta[d] is the vector of category probabilities for each topic in</span>
-    <span style="color:#586e75"># document d.</span>
-    z <span style="color:#719e07">=</span> [pm<span style="color:#719e07">.</span>Categorical(<span style="color:#2aa198">&#39;z_</span><span style="color:#2aa198">{}</span><span style="color:#2aa198">&#39;</span><span style="color:#719e07">.</span><span style="color:#b58900">format</span>(d), p <span style="color:#719e07">=</span> theta[d], shape<span style="color:#719e07">=</span>N[d])
-          <span style="color:#719e07">for</span> d <span style="color:#719e07">in</span> <span style="color:#b58900">range</span>(D)]
+    # the topic for a particular word in a particular document: shape = (D, N[d])
+    # theta[d] is the vector of category probabilities for each topic in
+    # document d.
+    z = [pm.Categorical(&#39;z_{}&#39;.format(d), p = theta[d], shape=N[d])
+          for d in range(D)]
 
-    <span style="color:#586e75"># the word occuring at position n, in a particular document d: shape = (D, N[d])</span>
-    <span style="color:#586e75"># z[d] is the vector of topics for document d</span>
-    <span style="color:#586e75"># z[d][n] is the topic for word n in document d</span>
-    <span style="color:#586e75"># phi[z[d][n]] is the distribution of words for topic z[d][n]</span>
-    <span style="color:#586e75"># [d][n] is the n-th word observed in document d</span>
-    w <span style="color:#719e07">=</span> [pm<span style="color:#719e07">.</span>Categorical(<span style="color:#2aa198">&#39;w_</span><span style="color:#2aa198">{}</span><span style="color:#2aa198">_</span><span style="color:#2aa198">{}</span><span style="color:#2aa198">&#39;</span><span style="color:#719e07">.</span><span style="color:#b58900">format</span>(d, n), p<span style="color:#719e07">=</span>phi[z[d][n]],
-                        observed <span style="color:#719e07">=</span> sequence_data[d][n])
-         <span style="color:#719e07">for</span> d <span style="color:#719e07">in</span> <span style="color:#b58900">range</span>(D) <span style="color:#719e07">for</span> n <span style="color:#719e07">in</span> <span style="color:#b58900">range</span>(N[d])]
+    # the word occuring at position n, in a particular document d: shape = (D, N[d])
+    # z[d] is the vector of topics for document d
+    # z[d][n] is the topic for word n in document d
+    # phi[z[d][n]] is the distribution of words for topic z[d][n]
+    # [d][n] is the n-th word observed in document d
+    w = [pm.Categorical(&#39;w_{}_{}&#39;.format(d, n), p=phi[z[d][n]],
+                        observed = sequence_data[d][n])
+         for d in range(D) for n in range(N[d])]
 
-<span style="color:#719e07">with</span> sequence_model:
-    draw <span style="color:#719e07">=</span> <span style="color:#2aa198">5000</span>
-    sequence_trace <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>sample(draw, tune<span style="color:#719e07">=</span><span style="color:#2aa198">1000</span>, chains<span style="color:#719e07">=</span><span style="color:#2aa198">4</span>, progressbar<span style="color:#719e07">=</span><span style="color:#cb4b16">False</span>)
+with sequence_model:
+    draw = 5000
+    sequence_trace = pm.sample(draw, tune=1000, chains=4, progressbar=False)
 
-print_top_words(tokens, sequence_trace<span style="color:#719e07">.</span>get_values(<span style="color:#2aa198">&#39;phi&#39;</span>)[<span style="color:#2aa198">4999</span>], <span style="color:#2aa198">4</span>)</code></pre></div>
+print_top_words(tokens, sequence_trace.get_values(&#39;phi&#39;)[4999], 4)</code></pre></div>
 <p>And here we can see what topic the model assigned to each token in the corpus.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">zs <span style="color:#719e07">=</span> [sequence_trace<span style="color:#719e07">.</span>get_values(<span style="color:#2aa198">&#39;z_</span><span style="color:#2aa198">{}</span><span style="color:#2aa198">&#39;</span><span style="color:#719e07">.</span><span style="color:#b58900">format</span>(d))[draw<span style="color:#719e07">-</span><span style="color:#2aa198">1</span>] <span style="color:#719e07">for</span> d <span style="color:#719e07">in</span> <span style="color:#b58900">range</span>(D)]
-zs <span style="color:#719e07">=</span> np<span style="color:#719e07">.</span>array(zs)
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">zs = [sequence_trace.get_values(&#39;z_{}&#39;.format(d))[draw-1] for d in range(D)]
+zs = np.array(zs)
 
-print_corpus_topics(corpus_tokenized, zs)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">(red, 2) (blue, 2) (green, 2) (green, 2) (blue, 2) (blue, 0) (red, 2) (red, 2) (blue, 2) (yellow, 2)
+print_corpus_topics(corpus_tokenized, zs)</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">(red, 2) (blue, 0) (green, 0) (green, 0) (blue, 0) (blue, 0) (red, 2) (red, 0) (blue, 0) (yellow, 0)
 
-(car, 0) (light, 1) (red, 0) (stop, 0) (stop, 2) (car, 0) (car, 1) (drive, 0) (green, 0) (yellow, 2)
+(car, 1) (light, 2) (red, 1) (stop, 1) (stop, 1) (car, 1) (car, 1) (drive, 1) (green, 2) (yellow, 1)
 
-(car, 0) (engine, 0) (gas, 0) (stop, 0) (battery, 0) (engine, 0) (drive, 0) (car, 0) (electric, 0) (gas, 0)
+(car, 1) (engine, 1) (gas, 1) (stop, 1) (battery, 1) (engine, 1) (drive, 1) (car, 0) (electric, 1) (gas, 1)
 
-(watt, 1) (volt, 1) (volt, 1) (amp, 1) (battery, 1) (watt, 1) (volt, 1) (electric, 0) (volt, 1) (charge, 0)</code></pre></div>
+(watt, 0) (volt, 0) (volt, 0) (amp, 1) (battery, 1) (watt, 0) (volt, 0) (electric, 0) (volt, 0) (charge, 0)</code></pre></div>
 <p>Since we chose to distribute words among three topics, we can examine the distributions of these topics to each document on a simplex. Below, each triangle represents a document and each corner represents a topic. Whenever the sampled points cluster at a corner, that means our model decided that that document was predominantly about the corresponding topic.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#719e07">with</span> sequence_model:
-    pps <span style="color:#719e07">=</span> pm<span style="color:#719e07">.</span>sample_posterior_predictive(sequence_trace, <span style="color:#b58900">vars</span><span style="color:#719e07">=</span>[theta], samples<span style="color:#719e07">=</span><span style="color:#2aa198">1000</span>, progressbar<span style="color:#719e07">=</span><span style="color:#cb4b16">False</span>)
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ipython" data-lang="ipython">with sequence_model:
+    pps = pm.sample_posterior_predictive(sequence_trace, vars=[theta], samples=1000, progressbar=False)
 
-var <span style="color:#719e07">=</span> pps[<span style="color:#2aa198">&#39;theta&#39;</span>]
-thetas <span style="color:#719e07">=</span> sequence_trace[<span style="color:#2aa198">&#39;theta&#39;</span>][<span style="color:#2aa198">4999</span>]
-nthetas <span style="color:#719e07">=</span> thetas<span style="color:#719e07">.</span>shape[<span style="color:#2aa198">0</span>]
+var = pps[&#39;theta&#39;]
+thetas = sequence_trace[&#39;theta&#39;][4999]
+nthetas = thetas.shape[0]
 
-blue <span style="color:#719e07">=</span> sns<span style="color:#719e07">.</span>color_palette(<span style="color:#2aa198">&#39;Blues_r&#39;</span>)[<span style="color:#2aa198">0</span>]
-fig <span style="color:#719e07">=</span> plt<span style="color:#719e07">.</span>figure(figsize<span style="color:#719e07">=</span>(<span style="color:#2aa198">8</span>, <span style="color:#2aa198">8</span>))
-fig<span style="color:#719e07">.</span>suptitle(<span style="color:#2aa198">&#39;Distribution of Topics to Documents&#39;</span>, fontsize<span style="color:#719e07">=</span><span style="color:#2aa198">16</span>)
-<span style="color:#719e07">for</span> i, ts <span style="color:#719e07">in</span> <span style="color:#b58900">enumerate</span>(thetas):
-    plt<span style="color:#719e07">.</span>subplot(<span style="color:#2aa198">2</span>, nthetas<span style="color:#719e07">/</span><span style="color:#2aa198">2</span>, i <span style="color:#719e07">+</span> <span style="color:#2aa198">1</span>)
-    sp<span style="color:#719e07">.</span>plot_points(var[:,i], color<span style="color:#719e07">=</span>blue, marker<span style="color:#719e07">=</span><span style="color:#2aa198">&#39;o&#39;</span>, alpha<span style="color:#719e07">=</span><span style="color:#2aa198">0.1</span>, markersize<span style="color:#719e07">=</span><span style="color:#2aa198">3</span>)
-    title <span style="color:#719e07">=</span> <span style="color:#2aa198">r</span><span style="color:#2aa198">&#39;$\theta_</span><span style="color:#2aa198">{0}</span><span style="color:#2aa198">$ = (</span><span style="color:#2aa198">{1[0]:.3f}</span><span style="color:#2aa198">, </span><span style="color:#2aa198">{1[1]:.3f}</span><span style="color:#2aa198">, </span><span style="color:#2aa198">{1[2]:.3f}</span><span style="color:#2aa198">)&#39;</span><span style="color:#719e07">.</span><span style="color:#b58900">format</span>(i,ts)
-    plt<span style="color:#719e07">.</span>title(title, fontdict<span style="color:#719e07">=</span>{<span style="color:#2aa198">&#39;fontsize&#39;</span>: <span style="color:#2aa198">14</span>})</code></pre></div>
+blue = sns.color_palette(&#39;Blues_r&#39;)[0]
+fig = plt.figure()
+fig.suptitle(&#39;Distribution of Topics to Documents&#39;, fontsize=16)
+for i, ts in enumerate(thetas):
+    plt.subplot(2, nthetas/2, i + 1)
+    sp.plot_points(var[:,i], color=blue, marker=&#39;o&#39;, alpha=0.1, markersize=3)
+    title = r&#39;$\theta_{0}$ = ({1[0]:.3f}, {1[1]:.3f}, {1[2]:.3f})&#39;.format(i,ts)
+    plt.title(title, fontdict={&#39;fontsize&#39;: 14})</code></pre></div>
 
 
 
 <figure>
     
-        <img src="https://mathformachines.com/posts/bayesian-topic-modeling/obipy-resources/14366hOK.png"/> </figure>
+        <img src="https://mathformachines.com/posts/bayesian-topic-modeling/./obipy-resources/14366U9P.png"/> </figure>
 
 
 <p>That&rsquo;s all for now!</p>
@@ -674,9 +667,7 @@ fig<span style="color:#719e07">.</span>suptitle(<span style="color:#2aa198">&#39
 <li><a href="#mixture-of-unigrams">Mixture of Unigrams</a></li>
 <li><a href="#latent-dirichlet-allocation">Latent Dirichlet Allocation</a></li>
 <li><a href="#the-dirichlet-distribution">The Dirichlet Distribution</a></li>
-</ul></li>
-<li><a href="#data-preparation">Data Preparation</a>
-<ul>
+<li><a href="#data-preparation">Data Preparation</a></li>
 <li><a href="#the-unigram-model">The Unigram Model</a></li>
 <li><a href="#mixture-of-unigrams--naive-bayes">Mixture of Unigrams (Naive Bayes)</a></li>
 <li><a href="#latent-dirichlet-allocation-1">Latent Dirichlet Allocation</a></li>

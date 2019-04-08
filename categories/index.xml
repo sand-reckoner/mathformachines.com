@@ -11,5 +11,23 @@
 	<atom:link href="https://mathformachines.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
+    <item>
+      <title>Journal Club</title>
+      <link>https://mathformachines.com/categories/journal-club/</link>
+      <pubDate>Mon, 08 Apr 2019 06:47:00 -0500</pubDate>
+      
+      <guid>https://mathformachines.com/categories/journal-club/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tutorial</title>
+      <link>https://mathformachines.com/categories/tutorial/</link>
+      <pubDate>Mon, 18 Mar 2019 07:28:00 -0500</pubDate>
+      
+      <guid>https://mathformachines.com/categories/tutorial/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>
