@@ -128,6 +128,29 @@ if (!doNotTrack) {
   </div>
 </div>
 <article>
+
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Table of Contents</b>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#a-model-of-associative-memory">A Model of Associative Memory</a></li>
+<li><a href="#symmetric-threshold-linear-networks--a-dot-k-dot-a-dot-symmetric-rectifier-networks">Symmetric Threshold-Linear Networks (a.k.a. Symmetric Rectifier Networks)</a></li>
+<li><a href="#three-theorems">Three Theorems</a>
+<ul>
+<li><a href="#theorem-1-steady-states">Theorem 1 - Steady States</a></li>
+<li><a href="#theorems-2-and-3-permitted-and-forbidden-sets">Theorems 2 and 3 - Permitted and Forbidden Sets</a></li>
+</ul></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#appendix-computing-permitted-sets-in-julia">Appendix - Computing Permitted Sets in Julia</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+  
+    
   
   <section class="pb-6 mb-3 border-bottom">
     
@@ -417,17 +440,11 @@ set is forbidden.</p>
             </figcaption></figure>
 
 
-<p>And here is the network transitioning through stable states as activations change.</p>
+<p>And here is a (different) network transitioning through stable states as activations change.</p>
 
+<video controls loop src="stability.mp4"></video>
 
-
-
-<figure>
-    
-        <img src="https://mathformachines.com/posts/permitted-and-forbidden-sets/transition.gif"/> </figure>
-
-
-<h2 id="summary">Summary</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>If a connection pattern in a network is a memory, then multistability allows the brain to store memories much more efficiently. Patterns of activation can overlap within a network. One neuron can partake of several memories, much like a single gene can be implicated in the expression of a multitude of traits or behaviors. I imagine that whatever process the brain uses for memory storage, it must make a tradeoff between robustness and efficiency. It wants to minimize the cost of storing memories and so should use as few neurons as possible to do so, yet the death of a single neuron shouldn&rsquo;t disrupt the system as a whole. The model of overlapping patterns seems to me like a plausible solution.</p>
 
@@ -513,28 +530,6 @@ set is forbidden.</p>
       <div id="side" class="pr-1 bg-white">
         <aside class="pr-3">
           
-  
-    <div id="toc" class="Box Box--blue mb-3">
-      <b>MFM Journal Club: Permitted and Forbidden Sets in STLNs</b>
-      <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#a-model-of-associative-memory">A Model of Associative Memory</a></li>
-<li><a href="#symmetric-threshold-linear-networks--a-dot-k-dot-a-dot-symmetric-rectifier-networks">Symmetric Threshold-Linear Networks (a.k.a. Symmetric Rectifier Networks)</a></li>
-<li><a href="#three-theorems">Three Theorems</a>
-<ul>
-<li><a href="#theorem-1-steady-states">Theorem 1 - Steady States</a></li>
-<li><a href="#theorems-2-and-3-permitted-and-forbidden-sets">Theorems 2 and 3 - Permitted and Forbidden Sets</a></li>
-</ul></li>
-<li><a href="#summary">Summary</a></li>
-<li><a href="#appendix-computing-permitted-sets-in-julia">Appendix - Computing Permitted Sets in Julia</a></li>
-</ul></li>
-</ul>
-</nav>
-    </div>
-  
-
   
     <div>
       

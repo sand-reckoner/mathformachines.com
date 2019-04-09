@@ -29,6 +29,12 @@ figure.aligncenter {
     width: 30%;
 }
 
+video {
+    width: 100%  !important;
+    height: auto !important;
+}
+
+
 /* custom css here */
 html,
 body {
@@ -100,15 +106,17 @@ aside {
 
 /* TOC */
 #toc {
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
   padding: 0.7rem;
 }
+/* #toc * { */
+/*   list-style: none; */
+/*   display: block; */
+/*   overflow: hidden; */
+/*   text-overflow: ellipsis; */
+/* } */
 #toc * {
-  list-style: none;
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    list-style: none;
 }
 #toc ul {
   padding-left: 0.8rem;
