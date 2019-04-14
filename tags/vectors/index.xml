@@ -18,8 +18,28 @@
       <pubDate>Mon, 18 Mar 2019 07:28:00 -0500</pubDate>
       
       <guid>https://mathformachines.com/posts/change-of-basis/</guid>
-      <description>We share a philosophy about linear algebra: we think basis-free, we write basis-free, but when the chips are down we close the office door and compute with matrices like fury.
- - Irving Kaplansky  mathoverflow.net/questions/...    Often, the first step in analyzing a problem is to transform it into something more amenable to our analysis. We would like the representation of our problem to reflect as naturally as possible whatever features of it we are most interested in.</description>
+      <description>&lt;blockquote&gt;
+  &lt;p&gt;We share a philosophy about linear algebra: we think basis-free, we write basis-free, but when the chips are down we close the office door and compute with matrices like fury.&lt;/p&gt;
+  &lt;footer&gt;
+    &lt;strong&gt;- Irving Kaplansky&lt;/strong&gt;
+    
+      
+        &lt;cite&gt;
+          &lt;a href=&#34;#ZgotmplZ&#34; title=&#34;&amp;lt;https://mathoverflow.net/questions/11669/what-is-the-difference-between-matrix-theory-and-linear-algebra/19923&amp;gt;&#34;&gt;mathoverflow.net/questions/...&lt;/a&gt; 
+        &lt;/cite&gt;
+      
+    
+  &lt;/footer&gt;
+&lt;/blockquote&gt;
+
+
+&lt;p&gt;Often, the first step in analyzing a problem is to &lt;em&gt;transform&lt;/em&gt; it into something more amenable to our analysis. We would like the &lt;em&gt;representation&lt;/em&gt; of our problem to reflect as naturally as possible whatever features of it we are most interested in. We might normalize data through a scaling transform, for instance, to eliminate spurious differences among like quantities. Or we might rotate data to align some of its salient dimensions with the coordinate axes, simplifying computations. Many matrix decompositions take the form \(M = BNA\). When \(B\) and \(A\) are non-singular, we can think of \(N\) as being a simpler representation of \(M\) under coordinate transforms \(B\) and \(A\). The &lt;a href=&#34;https://en.wikipedia.org/wiki/Eigendecomposition%5Fof%5Fa%5Fmatrix&#34;&gt;spectral decomposition&lt;/a&gt; and the &lt;a href=&#34;https://en.wikipedia.org/wiki/Singular%5Fvalue%5Fdecomposition&#34;&gt;singular value decomposition&lt;/a&gt; are of this form.&lt;/p&gt;
+
+&lt;p&gt;All of these kinds of coordinate transformations are &lt;em&gt;linear&lt;/em&gt; transformations. Linear coordinate transformations come about from operations on basis vectors that leave any vectors represented by them &lt;a href=&#34;https://en.wikipedia.org/wiki/Active%5Fand%5Fpassive%5Ftransformation&#34;&gt;unchanged&lt;/a&gt;. They are, in other words, a change of basis.&lt;/p&gt;
+
+&lt;p&gt;This post came about from my frustration at not finding simple formulas for these transformations with simple explanations to go along with them. So here, I tried to give a simple exposition of coordinate transformations for vectors in vector spaces along with transformations of their cousins, the covectors in the dual space. I&amp;rsquo;ll get into matrices and some applications in a future post.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

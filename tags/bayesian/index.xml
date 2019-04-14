@@ -18,7 +18,12 @@
       <pubDate>Wed, 30 Jan 2019 05:57:00 -0600</pubDate>
       
       <guid>https://mathformachines.com/posts/bayesian-topic-modeling/</guid>
-      <description>Imagine we have some collection of documents. They could be novels, or tweets, or financial reports&amp;mdash;just any collection of text. We want an algorithm that can discover what they are about, and we would like our algorithm to do it automatically, without any hints. (That is, we want our algorithm to be unsupervised.) We will look at several models that probabilistically assign words to topics using Bayes&amp;rsquo; Theorem. They are all Bayesian Graphical Models.</description>
+      <description>&lt;p&gt;Imagine we have some collection of documents. They could be novels, or tweets, or financial reports&amp;mdash;just any collection of text. We want an algorithm that can discover what they are about, and we would like our algorithm to do it automatically, without any hints. (That is, we want our algorithm to be &lt;em&gt;unsupervised&lt;/em&gt;.) We will look at several models that probabilistically assign words to topics using &lt;a href=&#34;https://en.wikipedia.org/wiki/Bayes&#39;%5Ftheorem&#34;&gt;Bayes&amp;rsquo; Theorem&lt;/a&gt;. They are all &lt;a href=&#34;https://en.wikipedia.org/wiki/Bayesian%5Fnetwork&#34;&gt;Bayesian Graphical Models&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The basic problem in statistics is to infer some unobservable value from observable instances of it. In our case, we want to infer the &lt;em&gt;topics&lt;/em&gt; of a document from the actual words in the document. We want to be able to infer that our document is about &amp;ldquo;colors&amp;rdquo; if we observe &amp;ldquo;red&amp;rdquo; and &amp;ldquo;green&amp;rdquo; and &amp;ldquo;blue&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;Bayes&amp;rsquo; Theorem allows us to do this. It allows us to infer probabilities concerning the unobserved value from the observations that we can make. It allows us to reason backwards in some sense. So, when constructing a Bayesian model, it is helpful to &lt;em&gt;think&lt;/em&gt; backwards. Instead of first asking how words are distributed to topics and topics to documents, we will ask how we could &lt;em&gt;generate&lt;/em&gt; a document if we already knew these distributions. To construct our model, we will first reason from the unknown values to the known values so that we know how to do the converse when the time comes.
+&lt;/p&gt;</description>
     </item>
     
   </channel>

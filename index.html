@@ -132,8 +132,38 @@ if (!doNotTrack) {
   </div>
   <div class="text-gray">
     
-    A Model of Associative Memory How memories are encoded in neural matter is still an open question. The name for these supposed neural correlates of memory is &ldquo;engram&rdquo;, and papers about engrams tend to have titles like Finding the engram, Catching the Engram, In search of the engram, Continuing the search for the engram, which, though I&rsquo;m not an expert, makes me feel like the problem isn&rsquo;t well understood.
-    <a class="muted-link" href="/posts/permitted-and-forbidden-sets/">…</a>
+    <h2 id="a-model-of-associative-memory">A Model of Associative Memory</h2>
+
+<p>How memories are encoded in neural matter is still an open question. The name for these supposed neural correlates of memory is &ldquo;engram&rdquo;, and papers about engrams tend to have titles like <a href="https://jflab.ca/pdfs/josselyn-et-al-2015.pdf"><em>Finding the engram</em></a>, <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3462696/"><em>Catching the Engram</em></a>, <a href="https://psycnet.apa.org/record/1952-05966-020"><em>In search of the engram</em></a>, <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2895151/"><em>Continuing the search for the engram</em></a>, which, though I&rsquo;m not an expert, makes me feel like the problem isn&rsquo;t well understood.</p>
+
+<p>(Also, <a href="https://www.ncbi.nlm.nih.gov/pubmed/15450162"><em>Rite of passage of the engram</em></a> and <a href="http://www.jneurosci.org/content/34/42/14115"><em>Manipulating a cocaine engram</em></a>, making the practice of neuroscience sometimes sound like a fraternity hazing. Possibly related, while researching this post I learned that a typical experiment will usually involve things like shocking the feet of a fruit fly, sewing shut one eye of a barn owl, and shaving half the whiskers off a mouse.)</p>
+
+<p>A popular theory is that memories are encoded as patterns of synaptic connections. Perception creates neural activity. Neural activity leaves an impression upon the brain as a pattern of modified synaptic connections (perhaps by <a href="https://en.wikipedia.org/wiki/Dendritic%5Fspine#Importance%5Fto%5Flearning%5Fand%5Fmemory">dendritic spines</a>, which become larger and more numerous to make the connection stronger). A later perception might partly activate this pattern, but this partial activation is often enough to activate the rest of the pattern, too. This is supposed to be a neural model of associative memory. (The tradition is to cite <a href="https://en.wikipedia.org/wiki/In%5FSearch%5Fof%5FLost%5FTime#Memory">Proust</a> at this point; evidently, a <a href="https://en.wikipedia.org/wiki/Madeleine%5F(cake)">sponge cake</a> was sufficient to activate in him the neural substrate of a <a href="https://en.wikipedia.org/wiki/List%5Fof%5Flongest%5Fnovels">1,267,069</a> word novel. It&rsquo;s a remarkably illustrative, at least.)</p>
+
+<p>Artificial neural networks are often used to model the networks of the brain. <a href="https://en.wikipedia.org/wiki/Feedforward%5Fneural%5Fnetwork">Feedforward networks</a> have typically been used to model the visual system, while <a href="https://en.wikipedia.org/wiki/Recurrent%5Fneural%5Fnetwork">recurrent networks</a> have more often been used to model memory. When an input is applied to certain of these recurrent networks, the neural activity will always converge to a stable <a href="https://en.wikipedia.org/wiki/Steady%5Fstate">steady state</a>. This stable pattern of activity is supposed to be a memory, stored within the connections of the network.</p>
+
+<p>Some of the most studied networks are those that are <em>symmetrically</em> connected, like the <a href="https://en.wikipedia.org/wiki/Hopfield%5Fnetwork">Hopfield network</a>. A network is symmetrically connected if every neuron is connected with the same weight as whatever is connected to it. A symmetrically connected network with a <em>linear</em> <a href="https://en.wikipedia.org/wiki/Activation%5Ffunction">activation function</a> can, for a given set of connection weights, be activated only to a <em>single</em> stable steady state (whose values depend upon the input to the network). The drawback of these networks then is that the activity at future states will be independent of the activity at past states. Past recall cannot influence future recall.</p>
+
+<p><a href="https://papers.nips.cc/paper/1793-permitted-and-forbidden-sets-in-symmetric-threshold-linear-networks.pdf">Hahnloser and Seung</a> present a model of associative memory in symmetrically connected networks using instead a <em>threshold-linear</em> activation function (or <a href="https://en.wikipedia.org/wiki/Rectifier%5F(neural%5Fnetworks)">rectified linear</a> function). 
+
+
+<figure class="floatright">
+    
+        <img src="https://mathformachines.com/posts/permitted-and-forbidden-sets/rectifier.png" alt="Graph of a rectified linear activation function."/> </figure>
+ They show that, due to some nice properties of the rectifier, such networks can in general represent multiple patterns of stable activation even for a single input. What pattern the network will fall into upon new input, depends upon what pattern it was in before. Memories linger.</p>
+
+<p>Their main contribution in this paper is in classifying neurons into what they call &ldquo;permitted&rdquo; and &ldquo;forbidden&rdquo; sets, which describe what sets of neurons may be activated together in a stable steady-state. They describe a method of determining what patterns of stable activity the network can achieve.</p>
+
+<blockquote>
+<p>The existence of permitted and forbidden sets suggests a new way of thinking about
+memory in neural networks. When an input is applied, the network must select a set
+of active neurons, and this selection is constrained to be one of the permitted sets.
+Therefore the permitted sets can be regarded as memories stored in the synaptic
+connections.</p>
+</blockquote>
+
+<p></p>
+    <a class="btn btn-outline" role="button" href="/posts/permitted-and-forbidden-sets/">Read More ➤</a>
   </div>
   <div class="Subhead-description mt-2">
     Reading time: 14 minutes<br>
@@ -180,9 +210,29 @@ if (!doNotTrack) {
   </div>
   <div class="text-gray">
     
-    We share a philosophy about linear algebra: we think basis-free, we write basis-free, but when the chips are down we close the office door and compute with matrices like fury.
- - Irving Kaplansky  mathoverflow.net/questions/...    Often, the first step in analyzing a problem is to transform it into something more amenable to our analysis. We would like the representation of our problem to reflect as naturally as possible whatever features of it we are most interested in.
-    <a class="muted-link" href="/posts/change-of-basis/">…</a>
+    <blockquote>
+  <p>We share a philosophy about linear algebra: we think basis-free, we write basis-free, but when the chips are down we close the office door and compute with matrices like fury.</p>
+  <footer>
+    <strong>- Irving Kaplansky</strong>
+    
+      
+        <cite>
+          <a href="#ZgotmplZ" title="&lt;https://mathoverflow.net/questions/11669/what-is-the-difference-between-matrix-theory-and-linear-algebra/19923&gt;">mathoverflow.net/questions/...</a> 
+        </cite>
+      
+    
+  </footer>
+</blockquote>
+
+
+<p>Often, the first step in analyzing a problem is to <em>transform</em> it into something more amenable to our analysis. We would like the <em>representation</em> of our problem to reflect as naturally as possible whatever features of it we are most interested in. We might normalize data through a scaling transform, for instance, to eliminate spurious differences among like quantities. Or we might rotate data to align some of its salient dimensions with the coordinate axes, simplifying computations. Many matrix decompositions take the form \(M = BNA\). When \(B\) and \(A\) are non-singular, we can think of \(N\) as being a simpler representation of \(M\) under coordinate transforms \(B\) and \(A\). The <a href="https://en.wikipedia.org/wiki/Eigendecomposition%5Fof%5Fa%5Fmatrix">spectral decomposition</a> and the <a href="https://en.wikipedia.org/wiki/Singular%5Fvalue%5Fdecomposition">singular value decomposition</a> are of this form.</p>
+
+<p>All of these kinds of coordinate transformations are <em>linear</em> transformations. Linear coordinate transformations come about from operations on basis vectors that leave any vectors represented by them <a href="https://en.wikipedia.org/wiki/Active%5Fand%5Fpassive%5Ftransformation">unchanged</a>. They are, in other words, a change of basis.</p>
+
+<p>This post came about from my frustration at not finding simple formulas for these transformations with simple explanations to go along with them. So here, I tried to give a simple exposition of coordinate transformations for vectors in vector spaces along with transformations of their cousins, the covectors in the dual space. I&rsquo;ll get into matrices and some applications in a future post.</p>
+
+<p></p>
+    <a class="btn btn-outline" role="button" href="/posts/change-of-basis/">Read More ➤</a>
   </div>
   <div class="Subhead-description mt-2">
     Reading time: 11 minutes<br>
@@ -229,9 +279,20 @@ if (!doNotTrack) {
   </div>
   <div class="text-gray">
     
-    Here are some notes on tensors, starting from elementary linear algebra. I&rsquo;ve tried to take a computational focus and to avoid formalism when possible. If you&rsquo;re interested in tensors applied to machine learning, or have wondered why arrays in Tensorflow are called tensors, you might find this useful. I&rsquo;ll do some computations in Sage and also in Numpy for illustration.
-Abstract Tensors First, let&rsquo;s take brief look at tensors in the abstract.
-    <a class="muted-link" href="/posts/a-tour-of-tensors/">…</a>
+    <p>Tensors have a fearsome reputation.</p>
+
+<p>I&rsquo;ve tried in these notes to take a computational focus and to avoid formalism when possible; I haven&rsquo;t assumed any more than what you might encounter in an undergraduate linear algebra course. If you&rsquo;re interested in tensors applied to machine learning, or have wondered why arrays in Tensorflow are called tensors, you might find this useful. I&rsquo;ll do some computations in <a href="http://www.sagemath.org/">Sage</a> and also in <a href="http://www.numpy.org/">Numpy</a> for illustration.</p>
+
+<h2 id="abstract-tensors">Abstract Tensors</h2>
+
+<p>First, let&rsquo;s take brief look at tensors in the abstract. This is just to give us an idea of what properties they have and how they function. I&rsquo;ll gloss over most of the details of the construction.</p>
+
+<p>A tensor is a vector. It is an element of a vector space. Being a vector, if we have a basis for the space we can write the tensor as a list of coordinates (or maybe something like a matrix or an array – we&rsquo;ll see how).</p>
+
+<p>A tensor is a vector in a product vector space. This means that part of it comes from one vector space and part of it comes from another. These parts combine in a way that fits with the usual notions of how products should work. Why would we want these tensors, these products of vectors? It turns out that lots of useful things are tensors. Matrices and linear maps are tensors, and so are determinants and inner products and cross products. Tensors give us power to express many useful ideas.</p>
+
+<p></p>
+    <a class="btn btn-outline" role="button" href="/posts/a-tour-of-tensors/">Read More ➤</a>
   </div>
   <div class="Subhead-description mt-2">
     Reading time: 12 minutes<br>
@@ -278,8 +339,13 @@ Abstract Tensors First, let&rsquo;s take brief look at tensors in the abstract.
   </div>
   <div class="text-gray">
     
-    Imagine we have some collection of documents. They could be novels, or tweets, or financial reports&mdash;just any collection of text. We want an algorithm that can discover what they are about, and we would like our algorithm to do it automatically, without any hints. (That is, we want our algorithm to be unsupervised.) We will look at several models that probabilistically assign words to topics using Bayes&rsquo; Theorem. They are all Bayesian Graphical Models.
-    <a class="muted-link" href="/posts/bayesian-topic-modeling/">…</a>
+    <p>Imagine we have some collection of documents. They could be novels, or tweets, or financial reports&mdash;just any collection of text. We want an algorithm that can discover what they are about, and we would like our algorithm to do it automatically, without any hints. (That is, we want our algorithm to be <em>unsupervised</em>.) We will look at several models that probabilistically assign words to topics using <a href="https://en.wikipedia.org/wiki/Bayes'%5Ftheorem">Bayes&rsquo; Theorem</a>. They are all <a href="https://en.wikipedia.org/wiki/Bayesian%5Fnetwork">Bayesian Graphical Models</a>.</p>
+
+<p>The basic problem in statistics is to infer some unobservable value from observable instances of it. In our case, we want to infer the <em>topics</em> of a document from the actual words in the document. We want to be able to infer that our document is about &ldquo;colors&rdquo; if we observe &ldquo;red&rdquo; and &ldquo;green&rdquo; and &ldquo;blue&rdquo;.</p>
+
+<p>Bayes&rsquo; Theorem allows us to do this. It allows us to infer probabilities concerning the unobserved value from the observations that we can make. It allows us to reason backwards in some sense. So, when constructing a Bayesian model, it is helpful to <em>think</em> backwards. Instead of first asking how words are distributed to topics and topics to documents, we will ask how we could <em>generate</em> a document if we already knew these distributions. To construct our model, we will first reason from the unknown values to the known values so that we know how to do the converse when the time comes.
+</p>
+    <a class="btn btn-outline" role="button" href="/posts/bayesian-topic-modeling/">Read More ➤</a>
   </div>
   <div class="Subhead-description mt-2">
     Reading time: 18 minutes<br>

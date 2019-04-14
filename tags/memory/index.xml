@@ -18,7 +18,37 @@
       <pubDate>Mon, 08 Apr 2019 06:47:00 -0500</pubDate>
       
       <guid>https://mathformachines.com/posts/permitted-and-forbidden-sets/</guid>
-      <description>A Model of Associative Memory How memories are encoded in neural matter is still an open question. The name for these supposed neural correlates of memory is &amp;ldquo;engram&amp;rdquo;, and papers about engrams tend to have titles like Finding the engram, Catching the Engram, In search of the engram, Continuing the search for the engram, which, though I&amp;rsquo;m not an expert, makes me feel like the problem isn&amp;rsquo;t well understood.</description>
+      <description>&lt;h2 id=&#34;a-model-of-associative-memory&#34;&gt;A Model of Associative Memory&lt;/h2&gt;
+
+&lt;p&gt;How memories are encoded in neural matter is still an open question. The name for these supposed neural correlates of memory is &amp;ldquo;engram&amp;rdquo;, and papers about engrams tend to have titles like &lt;a href=&#34;https://jflab.ca/pdfs/josselyn-et-al-2015.pdf&#34;&gt;&lt;em&gt;Finding the engram&lt;/em&gt;&lt;/a&gt;, &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3462696/&#34;&gt;&lt;em&gt;Catching the Engram&lt;/em&gt;&lt;/a&gt;, &lt;a href=&#34;https://psycnet.apa.org/record/1952-05966-020&#34;&gt;&lt;em&gt;In search of the engram&lt;/em&gt;&lt;/a&gt;, &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2895151/&#34;&gt;&lt;em&gt;Continuing the search for the engram&lt;/em&gt;&lt;/a&gt;, which, though I&amp;rsquo;m not an expert, makes me feel like the problem isn&amp;rsquo;t well understood.&lt;/p&gt;
+
+&lt;p&gt;(Also, &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pubmed/15450162&#34;&gt;&lt;em&gt;Rite of passage of the engram&lt;/em&gt;&lt;/a&gt; and &lt;a href=&#34;http://www.jneurosci.org/content/34/42/14115&#34;&gt;&lt;em&gt;Manipulating a cocaine engram&lt;/em&gt;&lt;/a&gt;, making the practice of neuroscience sometimes sound like a fraternity hazing. Possibly related, while researching this post I learned that a typical experiment will usually involve things like shocking the feet of a fruit fly, sewing shut one eye of a barn owl, and shaving half the whiskers off a mouse.)&lt;/p&gt;
+
+&lt;p&gt;A popular theory is that memories are encoded as patterns of synaptic connections. Perception creates neural activity. Neural activity leaves an impression upon the brain as a pattern of modified synaptic connections (perhaps by &lt;a href=&#34;https://en.wikipedia.org/wiki/Dendritic%5Fspine#Importance%5Fto%5Flearning%5Fand%5Fmemory&#34;&gt;dendritic spines&lt;/a&gt;, which become larger and more numerous to make the connection stronger). A later perception might partly activate this pattern, but this partial activation is often enough to activate the rest of the pattern, too. This is supposed to be a neural model of associative memory. (The tradition is to cite &lt;a href=&#34;https://en.wikipedia.org/wiki/In%5FSearch%5Fof%5FLost%5FTime#Memory&#34;&gt;Proust&lt;/a&gt; at this point; evidently, a &lt;a href=&#34;https://en.wikipedia.org/wiki/Madeleine%5F(cake)&#34;&gt;sponge cake&lt;/a&gt; was sufficient to activate in him the neural substrate of a &lt;a href=&#34;https://en.wikipedia.org/wiki/List%5Fof%5Flongest%5Fnovels&#34;&gt;1,267,069&lt;/a&gt; word novel. It&amp;rsquo;s a remarkably illustrative, at least.)&lt;/p&gt;
+
+&lt;p&gt;Artificial neural networks are often used to model the networks of the brain. &lt;a href=&#34;https://en.wikipedia.org/wiki/Feedforward%5Fneural%5Fnetwork&#34;&gt;Feedforward networks&lt;/a&gt; have typically been used to model the visual system, while &lt;a href=&#34;https://en.wikipedia.org/wiki/Recurrent%5Fneural%5Fnetwork&#34;&gt;recurrent networks&lt;/a&gt; have more often been used to model memory. When an input is applied to certain of these recurrent networks, the neural activity will always converge to a stable &lt;a href=&#34;https://en.wikipedia.org/wiki/Steady%5Fstate&#34;&gt;steady state&lt;/a&gt;. This stable pattern of activity is supposed to be a memory, stored within the connections of the network.&lt;/p&gt;
+
+&lt;p&gt;Some of the most studied networks are those that are &lt;em&gt;symmetrically&lt;/em&gt; connected, like the &lt;a href=&#34;https://en.wikipedia.org/wiki/Hopfield%5Fnetwork&#34;&gt;Hopfield network&lt;/a&gt;. A network is symmetrically connected if every neuron is connected with the same weight as whatever is connected to it. A symmetrically connected network with a &lt;em&gt;linear&lt;/em&gt; &lt;a href=&#34;https://en.wikipedia.org/wiki/Activation%5Ffunction&#34;&gt;activation function&lt;/a&gt; can, for a given set of connection weights, be activated only to a &lt;em&gt;single&lt;/em&gt; stable steady state (whose values depend upon the input to the network). The drawback of these networks then is that the activity at future states will be independent of the activity at past states. Past recall cannot influence future recall.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://papers.nips.cc/paper/1793-permitted-and-forbidden-sets-in-symmetric-threshold-linear-networks.pdf&#34;&gt;Hahnloser and Seung&lt;/a&gt; present a model of associative memory in symmetrically connected networks using instead a &lt;em&gt;threshold-linear&lt;/em&gt; activation function (or &lt;a href=&#34;https://en.wikipedia.org/wiki/Rectifier%5F(neural%5Fnetworks)&#34;&gt;rectified linear&lt;/a&gt; function). 
+
+
+&lt;figure class=&#34;floatright&#34;&gt;
+    
+        &lt;img src=&#34;https://mathformachines.com/posts/permitted-and-forbidden-sets/rectifier.png&#34; alt=&#34;Graph of a rectified linear activation function.&#34;/&gt; &lt;/figure&gt;
+ They show that, due to some nice properties of the rectifier, such networks can in general represent multiple patterns of stable activation even for a single input. What pattern the network will fall into upon new input, depends upon what pattern it was in before. Memories linger.&lt;/p&gt;
+
+&lt;p&gt;Their main contribution in this paper is in classifying neurons into what they call &amp;ldquo;permitted&amp;rdquo; and &amp;ldquo;forbidden&amp;rdquo; sets, which describe what sets of neurons may be activated together in a stable steady-state. They describe a method of determining what patterns of stable activity the network can achieve.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The existence of permitted and forbidden sets suggests a new way of thinking about
+memory in neural networks. When an input is applied, the network must select a set
+of active neurons, and this selection is constrained to be one of the permitted sets.
+Therefore the permitted sets can be regarded as memories stored in the synaptic
+connections.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

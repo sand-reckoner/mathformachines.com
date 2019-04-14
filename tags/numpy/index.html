@@ -118,9 +118,20 @@ if (!doNotTrack) {
   </div>
   <div class="text-gray">
     
-    Here are some notes on tensors, starting from elementary linear algebra. I&rsquo;ve tried to take a computational focus and to avoid formalism when possible. If you&rsquo;re interested in tensors applied to machine learning, or have wondered why arrays in Tensorflow are called tensors, you might find this useful. I&rsquo;ll do some computations in Sage and also in Numpy for illustration.
-Abstract Tensors First, let&rsquo;s take brief look at tensors in the abstract.
-    <a class="muted-link" href="/posts/a-tour-of-tensors/">…</a>
+    <p>Tensors have a fearsome reputation.</p>
+
+<p>I&rsquo;ve tried in these notes to take a computational focus and to avoid formalism when possible; I haven&rsquo;t assumed any more than what you might encounter in an undergraduate linear algebra course. If you&rsquo;re interested in tensors applied to machine learning, or have wondered why arrays in Tensorflow are called tensors, you might find this useful. I&rsquo;ll do some computations in <a href="http://www.sagemath.org/">Sage</a> and also in <a href="http://www.numpy.org/">Numpy</a> for illustration.</p>
+
+<h2 id="abstract-tensors">Abstract Tensors</h2>
+
+<p>First, let&rsquo;s take brief look at tensors in the abstract. This is just to give us an idea of what properties they have and how they function. I&rsquo;ll gloss over most of the details of the construction.</p>
+
+<p>A tensor is a vector. It is an element of a vector space. Being a vector, if we have a basis for the space we can write the tensor as a list of coordinates (or maybe something like a matrix or an array – we&rsquo;ll see how).</p>
+
+<p>A tensor is a vector in a product vector space. This means that part of it comes from one vector space and part of it comes from another. These parts combine in a way that fits with the usual notions of how products should work. Why would we want these tensors, these products of vectors? It turns out that lots of useful things are tensors. Matrices and linear maps are tensors, and so are determinants and inner products and cross products. Tensors give us power to express many useful ideas.</p>
+
+<p></p>
+    <a class="btn btn-outline" role="button" href="/posts/a-tour-of-tensors/">Read More ➤</a>
   </div>
   <div class="Subhead-description mt-2">
     Reading time: 12 minutes<br>

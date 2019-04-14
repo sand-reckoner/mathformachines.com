@@ -24,8 +24,13 @@ if (!doNotTrack) {
     </title>
     
     
-    <meta name="description" property="og:description" content="Here are some notes on tensors, starting from elementary linear algebra. I&amp;rsquo;ve tried to take a computational focus and to avoid formalism when possible. If you&amp;rsquo;re interested in tensors applied to machine learning, or have wondered why arrays in Tensorflow are called tensors, you might find this useful. I&amp;rsquo;ll do some computations in Sage and also in Numpy for illustration.
-Abstract Tensors First, let&amp;rsquo;s take brief look at tensors in the abstract.|It&#39;s about math, for machines.">
+    <meta name="description" property="og:description" content="Tensors have a fearsome reputation.
+I&amp;rsquo;ve tried in these notes to take a computational focus and to avoid formalism when possible; I haven&amp;rsquo;t assumed any more than what you might encounter in an undergraduate linear algebra course. If you&amp;rsquo;re interested in tensors applied to machine learning, or have wondered why arrays in Tensorflow are called tensors, you might find this useful. I&amp;rsquo;ll do some computations in Sage and also in Numpy for illustration.
+Abstract Tensors First, let&amp;rsquo;s take brief look at tensors in the abstract. This is just to give us an idea of what properties they have and how they function. I&amp;rsquo;ll gloss over most of the details of the construction.
+A tensor is a vector. It is an element of a vector space. Being a vector, if we have a basis for the space we can write the tensor as a list of coordinates (or maybe something like a matrix or an array – we&amp;rsquo;ll see how).
+A tensor is a vector in a product vector space. This means that part of it comes from one vector space and part of it comes from another. These parts combine in a way that fits with the usual notions of how products should work. Why would we want these tensors, these products of vectors? It turns out that lots of useful things are tensors. Matrices and linear maps are tensors, and so are determinants and inner products and cross products. Tensors give us power to express many useful ideas.
+
+|It&#39;s about math, for machines.">
     
 
     
@@ -105,9 +110,9 @@ Abstract Tensors First, let&amp;rsquo;s take brief look at tensors in the abstra
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2019-04-07. Published: 2019-02-05.">
+      <span title="Lastmod: 2019-04-13. Published: 2019-02-05.">
         Published: 2019-02-05<br>
-        Last Modified: 2019-04-07
+        Last Modified: 2019-04-13
         
         
         
@@ -140,9 +145,9 @@ Abstract Tensors First, let&amp;rsquo;s take brief look at tensors in the abstra
     
   
   <section class="pb-6 mb-3 border-bottom">
-    
+    <p>Tensors have a fearsome reputation.</p>
 
-<p>Here are some notes on tensors, starting from elementary linear algebra. I&rsquo;ve tried to take a computational focus and to avoid formalism when possible. If you&rsquo;re interested in tensors applied to machine learning, or have wondered why arrays in Tensorflow are called tensors, you might find this useful. I&rsquo;ll do some computations in <a href="http://www.sagemath.org/">Sage</a> and also in <a href="http://www.numpy.org/">Numpy</a> for illustration.</p>
+<p>I&rsquo;ve tried in these notes to take a computational focus and to avoid formalism when possible; I haven&rsquo;t assumed any more than what you might encounter in an undergraduate linear algebra course. If you&rsquo;re interested in tensors applied to machine learning, or have wondered why arrays in Tensorflow are called tensors, you might find this useful. I&rsquo;ll do some computations in <a href="http://www.sagemath.org/">Sage</a> and also in <a href="http://www.numpy.org/">Numpy</a> for illustration.</p>
 
 <h2 id="abstract-tensors">Abstract Tensors</h2>
 
@@ -151,6 +156,8 @@ Abstract Tensors First, let&amp;rsquo;s take brief look at tensors in the abstra
 <p>A tensor is a vector. It is an element of a vector space. Being a vector, if we have a basis for the space we can write the tensor as a list of coordinates (or maybe something like a matrix or an array – we&rsquo;ll see how).</p>
 
 <p>A tensor is a vector in a product vector space. This means that part of it comes from one vector space and part of it comes from another. These parts combine in a way that fits with the usual notions of how products should work. Why would we want these tensors, these products of vectors? It turns out that lots of useful things are tensors. Matrices and linear maps are tensors, and so are determinants and inner products and cross products. Tensors give us power to express many useful ideas.</p>
+
+<p></p>
 
 <p>A simple product of vectors looks like \(v \otimes w\) and the product space looks like \(V \otimes W\), where \(V\) and \(W\) are vector spaces. The elements of \(V \otimes W\) are linear combinations of these simple products. So, a typical element of \(V \otimes W\) might look like \(v_1 \otimes w_2 + 5(v_4 \otimes w_1) + 3(v_3 \otimes w_2)\).</p>
 
@@ -421,7 +428,6 @@ np<span style="color:#719e07">.</span>einsum(<span style="color:#2aa198">&#39;ij
 <h2 id="conclusion">Conclusion</h2>
 
 <p>That&rsquo;s all for now! For anyone reading, I hope you found it informative. Tensors can be hard to get started on, but once you see the idea, I think you&rsquo;ll find them a pleasure to work with.</p>
-
   </section>
 
   <section>

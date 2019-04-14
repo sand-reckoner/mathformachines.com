@@ -24,7 +24,9 @@ if (!doNotTrack) {
     </title>
     
     
-    <meta name="description" property="og:description" content="Imagine we have some collection of documents. They could be novels, or tweets, or financial reports&amp;mdash;just any collection of text. We want an algorithm that can discover what they are about, and we would like our algorithm to do it automatically, without any hints. (That is, we want our algorithm to be unsupervised.) We will look at several models that probabilistically assign words to topics using Bayes&amp;rsquo; Theorem. They are all Bayesian Graphical Models.|It&#39;s about math, for machines.">
+    <meta name="description" property="og:description" content="Imagine we have some collection of documents. They could be novels, or tweets, or financial reports&amp;mdash;just any collection of text. We want an algorithm that can discover what they are about, and we would like our algorithm to do it automatically, without any hints. (That is, we want our algorithm to be unsupervised.) We will look at several models that probabilistically assign words to topics using Bayes&amp;rsquo; Theorem. They are all Bayesian Graphical Models.
+The basic problem in statistics is to infer some unobservable value from observable instances of it. In our case, we want to infer the topics of a document from the actual words in the document. We want to be able to infer that our document is about &amp;ldquo;colors&amp;rdquo; if we observe &amp;ldquo;red&amp;rdquo; and &amp;ldquo;green&amp;rdquo; and &amp;ldquo;blue&amp;rdquo;.
+Bayes&amp;rsquo; Theorem allows us to do this. It allows us to infer probabilities concerning the unobserved value from the observations that we can make. It allows us to reason backwards in some sense. So, when constructing a Bayesian model, it is helpful to think backwards. Instead of first asking how words are distributed to topics and topics to documents, we will ask how we could generate a document if we already knew these distributions. To construct our model, we will first reason from the unknown values to the known values so that we know how to do the converse when the time comes. |It&#39;s about math, for machines.">
     
 
     
@@ -104,9 +106,9 @@ if (!doNotTrack) {
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2019-04-07. Published: 2019-01-30.">
+      <span title="Lastmod: 2019-04-13. Published: 2019-01-30.">
         Published: 2019-01-30<br>
-        Last Modified: 2019-04-07
+        Last Modified: 2019-04-13
         
         
         
@@ -144,13 +146,12 @@ if (!doNotTrack) {
     
   
   <section class="pb-6 mb-3 border-bottom">
-    
-
-<p>Imagine we have some collection of documents. They could be novels, or tweets, or financial reports&mdash;just any collection of text. We want an algorithm that can discover what they are about, and we would like our algorithm to do it automatically, without any hints. (That is, we want our algorithm to be <em>unsupervised</em>.) We will look at several models that probabilistically assign words to topics using <a href="https://en.wikipedia.org/wiki/Bayes'%5Ftheorem">Bayes&rsquo; Theorem</a>. They are all <a href="https://en.wikipedia.org/wiki/Bayesian%5Fnetwork">Bayesian Graphical Models</a>.</p>
+    <p>Imagine we have some collection of documents. They could be novels, or tweets, or financial reports&mdash;just any collection of text. We want an algorithm that can discover what they are about, and we would like our algorithm to do it automatically, without any hints. (That is, we want our algorithm to be <em>unsupervised</em>.) We will look at several models that probabilistically assign words to topics using <a href="https://en.wikipedia.org/wiki/Bayes'%5Ftheorem">Bayes&rsquo; Theorem</a>. They are all <a href="https://en.wikipedia.org/wiki/Bayesian%5Fnetwork">Bayesian Graphical Models</a>.</p>
 
 <p>The basic problem in statistics is to infer some unobservable value from observable instances of it. In our case, we want to infer the <em>topics</em> of a document from the actual words in the document. We want to be able to infer that our document is about &ldquo;colors&rdquo; if we observe &ldquo;red&rdquo; and &ldquo;green&rdquo; and &ldquo;blue&rdquo;.</p>
 
-<p>Bayes&rsquo; Theorem allows us to do this. It allows us to infer probabilities concerning the unobserved value from the observations that we can make. It allows us to reason backwards in some sense. So, when constructing a Bayesian model, it is helpful to <em>think</em> backwards. Instead of first asking how words are distributed to topics and topics to documents, we will ask how we could <em>generate</em> a document if we already knew these distributions. To construct our model, we will first reason from the unknown values to the known values so that we know how to do the converse when the time comes.</p>
+<p>Bayes&rsquo; Theorem allows us to do this. It allows us to infer probabilities concerning the unobserved value from the observations that we can make. It allows us to reason backwards in some sense. So, when constructing a Bayesian model, it is helpful to <em>think</em> backwards. Instead of first asking how words are distributed to topics and topics to documents, we will ask how we could <em>generate</em> a document if we already knew these distributions. To construct our model, we will first reason from the unknown values to the known values so that we know how to do the converse when the time comes.
+</p>
 
 <h2 id="some-simple-generative-examples">Some Simple Generative Examples</h2>
 
@@ -665,7 +666,6 @@ for i, ts in enumerate(thetas):
 <p><a href="https://stackoverflow.com/questions/31473459/pymc3-how-to-implement-latent-dirichlet-allocation">https://stackoverflow.com/questions/31473459/pymc3-how-to-implement-latent-dirichlet-allocation</a></p>
 
 <p><a href="https://github.com/junpenglao/Planet%5FSakaar%5FData%5FScience/blob/master/PyMC3QnA/discourse%5F2314.ipynb">https://github.com/junpenglao/Planet%5FSakaar%5FData%5FScience/blob/master/PyMC3QnA/discourse%5F2314.ipynb</a></p>
-
   </section>
 
   <section>
