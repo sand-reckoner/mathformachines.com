@@ -31,9 +31,27 @@ Bayes&amp;rsquo; Theorem allows us to do this. It allows us to infer probabiliti
 
     
     
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="Bayesian Topic Modeling | Math for Machines">
+    <meta name="twitter:description" content="Imagine we have some collection of documents. They could be novels, or tweets, or financial reports&mdash;just any collection of text. We want an algorithm that can discover what they are about, and we would like our algorithm to do it automatically, without any hints. (That is, we want our algorithm to be unsupervised.) We will look at several models that probabilistically assign words to topics using Bayes&rsquo; Theorem. They are all Bayesian Graphical Models.
+
+The basic problem in statistics is to infer some unobservable value from observable instances of it. In our case, we want to infer the topics of a document from the actual words in the document. We want to be able to infer that our document is about &ldquo;colors&rdquo; if we observe &ldquo;red&rdquo; and &ldquo;green&rdquo; and &ldquo;blue&rdquo;.
+
+Bayes&rsquo; Theorem allows us to do this. It allows us to infer probabilities concerning the unobserved value from the observations that we can make. It allows us to reason backwards in some sense. So, when constructing a Bayesian model, it is helpful to think backwards. Instead of first asking how words are distributed to topics and topics to documents, we will ask how we could generate a document if we already knew these distributions. To construct our model, we will first reason from the unknown values to the known values so that we know how to do the converse when the time comes.
+|It&#39;s about math, for machines.">
+    <meta name="twitter:image" content="https://mathformachines.com/twitter-card.png">
+    
 
 
-    <link rel="stylesheet" href="/assets/syntax.css">
+    
     <link rel="stylesheet" href="/assets/primer-build.css">
     <link rel="stylesheet" href="/assets/style.css">
   </head>
@@ -744,8 +762,9 @@ for i, ts in enumerate(thetas):
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'UA-133546767-1');
+      gtag('config', 'UA-133546767-1', { 'optimize_id': 'GTM-T3XD3JM'});
     </script>
+
     
   </body>
 </html>
