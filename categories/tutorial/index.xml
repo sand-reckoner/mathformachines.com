@@ -48,9 +48,7 @@
       <pubDate>Tue, 05 Feb 2019 12:59:00 -0600</pubDate>
       
       <guid>https://mathformachines.com/posts/a-tour-of-tensors/</guid>
-      <description>&lt;p&gt;Tensors have a fearsome reputation.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve tried in these notes to take a computational focus and to avoid formalism when possible; I haven&amp;rsquo;t assumed any more than what you might encounter in an undergraduate linear algebra course. If you&amp;rsquo;re interested in tensors applied to machine learning, or have wondered why arrays in Tensorflow are called tensors, you might find this useful. I&amp;rsquo;ll do some computations in &lt;a href=&#34;http://www.sagemath.org/&#34;&gt;Sage&lt;/a&gt; and also in &lt;a href=&#34;http://www.numpy.org/&#34;&gt;Numpy&lt;/a&gt; for illustration.&lt;/p&gt;
+      <description>&lt;p&gt;Tensors can sometimes have a fearsome reputation. They are at heart, however, no more difficult to define than polynomials. I&amp;rsquo;ve tried in these notes to take a computational focus and to avoid formalism when possible; I haven&amp;rsquo;t assumed any more than what you might encounter in an undergraduate linear algebra course. If you&amp;rsquo;re interested in tensors applied to machine learning, or have wondered why arrays in Tensorflow are called tensors, you might find this useful. I&amp;rsquo;ll do some computations in &lt;a href=&#34;http://www.sagemath.org/&#34;&gt;Sage&lt;/a&gt; and also in &lt;a href=&#34;http://www.numpy.org/&#34;&gt;Numpy&lt;/a&gt; for illustration.&lt;/p&gt;
 
 &lt;h2 id=&#34;abstract-tensors&#34;&gt;Abstract Tensors&lt;/h2&gt;
 
