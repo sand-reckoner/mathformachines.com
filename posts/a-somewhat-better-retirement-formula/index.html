@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-133546767-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  A Somewhat Better Retirement Formula (with Calculator!) &ndash; Math for Machines
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="This is based off a lesson I put together for a class I teach about general mathematics. I wanted a retirement savings formula that was simple enough for an ordinary person to use on their own, but also flexible enough to account for varied goals or circumstances.
+My formula agrees pretty well with what appear to be experts recommend, and it seems to be fairly robust in simulation. This simulation {PDF}, based on historical data, says that a plan like this would have succeeded about 97% of the time with typical investments, and even lacking social security {PDF} would have succeeded about 76% of the time. A warning, however: I not a financial expert, so caveat emptor.
+The biggest financial problem in anyone’s life is how to provide for oneself in retirement. If you retire in your 60’s, you have a good chance of living for another several decades. Even someone used to living on a modest income of $40,000 a year, could need over half a million dollars saved up to keep from running out of money. &amp;ldquo;Half a million dollars‽&amp;rdquo; you cry. &amp;ldquo;I can barely afford my monthly subscription services!&amp;rdquo; Fortunately, by taking advantage of the most powerful force in the universe it’s easier than you think, especially if you get started early.
+The Formula After thinking about it really hard for a while, you come up with the following goal: &amp;ldquo;I want to retire at 67 with enough savings to live for 20 years at 80% of my usual income.&amp;rdquo; What can you do to have a fair chance of meeting this goal? How much you need to save depends most of all on what age you start saving at. Under some reasonable assumptions, the percent \(p\) of your income you would need to save if you started saving at age \(A\) would be: \[\formbox{p = 12\times0.8\left(\frac{0.03}{1.03^N - 1}\right)}\] where \(N=67-A\). If you wanted to type it in to a calculator, the keypresses would likely be something like this:
+12 * 0.8 * 0.03 ÷ ( 1.03 ^ N - 1 ) Or you could use the fancy Javascript calculator below.
+Example For instance, say you start saving at 25. Then, assuming no prolonged periods of unemployment, you would be saving for \(N=67-25=42\) years. Plugging this in to the formula, we get
+\[ p = 12 \times 0.8 \left(\frac{0.03}{1.03^{42} - 1}\right) = 0.117 \]
+So you would need to put about 12% of your paycheck into some kind of retirement fund in order to meet your goal. If you make $50,000 a year, 12% of your income comes to $6000 a year, or $500 a month. Many employers, however, will offer to match a portion of your contributions. If your employer matches1 3%, then you would only need to contribute the other 9%. At $50,000 a year, this is a contribution of $375 a month. |It&#39;s about math, for machines.">
+    
+
+    
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="images/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="imags/mstile-144x144.png" />
+    
+
+    
+    
+
+
+    
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions text-gray h1" href="https://mathformachines.com/">
+    Math for Machines
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body text-bold">
+    
+    
+    <a class="UnderlineNav-item " href="/pages/about">
+      
+      <span>About</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="/posts">
+      
+      <span>Archive</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">A Somewhat Better Retirement Formula (with Calculator!)</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+<a href='/tags/finance' class="muted-link">
+  <span class="Label Label--gray">finance</span>
+</a>
+
+<a href='/tags/retirement' class="muted-link">
+  <span class="Label Label--gray">retirement</span>
+</a>
+
+<a href='/tags/calculator' class="muted-link">
+  <span class="Label Label--gray">calculator</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2019-05-14. Published: 2019-05-14.">
+        Published: 2019-05-14<br>
+        Last Modified: 2019-05-14
+        
+        
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Table of Contents</b>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#the-formula">The Formula</a>
+<ul>
+<li><a href="#example">Example</a></li>
+</ul></li>
+<li><a href="#the-importance-of-starting-early">The Importance of Starting Early</a></li>
+<li><a href="#assumptions">Assumptions</a>
+<ul>
+<li><a href="#retire-at-67">Retire at 67</a></li>
+<li><a href="#12-years-of-savings">12 years of savings</a></li>
+<li><a href="#80-of-working-income">80% of working income</a></li>
+<li><a href="#3-annual-return">3% annual return</a></li>
+</ul></li>
+<li><a href="#appendix-calculator">Appendix - Calculator</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+  
+    
+  
+  <section class="pb-6 mb-3 border-bottom">
+    <p><em>This is based off a lesson I put together for a class I teach about general mathematics. I wanted a retirement savings formula that was simple enough for an ordinary person to use on their own, but also flexible enough to account for varied goals or circumstances.</em></p>
+
+<p><em>My formula <a href="https://www.investopedia.com/articles/personal-finance/092414/retirement-what-percentage-salary-save.asp">agrees pretty well</a> with what appear to be experts recommend, and it seems to be fairly robust in simulation. <a href="https://www.portfoliovisualizer.com/financial-goals?s=y&amp;stages=2&amp;careerYears=41&amp;mode=1&amp;initialAmount=12000&amp;years=70&amp;simulationModel=1&amp;historicalVolatility=true&amp;fullHistory=true&amp;startYear=1972&amp;endYear=2018&amp;bootstrapModel=1&amp;bootstrapMinYears=1&amp;bootstrapMaxYears=20&amp;circularBootstrap=true&amp;distribution=1&amp;dof=30&amp;meanReturn=7.0&amp;volatility=12.0&amp;sequenceStressTest=0&amp;stressTestRetirement=true&amp;inflationModel=1&amp;inflationMean=4.26&amp;inflationVolatility=3.13&amp;customIntervals=false&amp;percentileList=10%2C+25%2C+50%2C+75%2C+90&amp;returnList=0%2C+2.5%2C+5%2C+7.5%2C+10%2C+12.5&amp;asset1=TotalStockMarket&amp;allocation1%5F1=90&amp;asset2=TotalBond&amp;allocation2%5F1=10&amp;total1=100&amp;endasset1=TotalStockMarket&amp;endallocation1%5F1=30&amp;endasset2=TotalBond&amp;endallocation2%5F1=50&amp;endasset3=ShortTreasury&amp;endallocation3%5F1=20&amp;endtotal1=100&amp;cfname1=Saving&amp;cftype1=1&amp;cfamount1=12000&amp;cfinfadj1=true&amp;%5F%5Fcheckbox%5Fcfinfadj1=true&amp;cfstart1=1&amp;cffrequency1=4&amp;cfoccurs1=1&amp;cfname2=Retirement&amp;cftype2=2&amp;cfamount2=48000&amp;cfinfadj2=true&amp;%5F%5Fcheckbox%5Fcfinfadj2=true&amp;cfstart2=2&amp;cffrequency2=4&amp;cfoccurs2=2&amp;cftype3=2&amp;%5F%5Fcheckbox%5Fcfinfadj3=true&amp;cfstart3=3&amp;cffrequency3=4&amp;cfoccurs3=3">This simulation</a> <a href="/WithSS.pdf">{PDF}</a>, based on historical data, says that a plan like this would have succeeded about 97% of the time with typical investments, and <a href="https://www.portfoliovisualizer.com/financial-goals?s=y&amp;stages=2&amp;careerYears=41&amp;mode=1&amp;initialAmount=12000&amp;years=70&amp;simulationModel=1&amp;historicalVolatility=true&amp;fullHistory=true&amp;startYear=1972&amp;endYear=2018&amp;bootstrapModel=1&amp;bootstrapMinYears=1&amp;bootstrapMaxYears=20&amp;circularBootstrap=true&amp;distribution=1&amp;dof=30&amp;meanReturn=7.0&amp;volatility=12.0&amp;sequenceStressTest=0&amp;stressTestRetirement=true&amp;inflationModel=1&amp;inflationMean=4.26&amp;inflationVolatility=3.13&amp;customIntervals=false&amp;percentileList=10%2C+25%2C+50%2C+75%2C+90&amp;returnList=0%2C+2.5%2C+5%2C+7.5%2C+10%2C+12.5&amp;asset1=TotalStockMarket&amp;allocation1%5F1=90&amp;asset2=TotalBond&amp;allocation2%5F1=10&amp;total1=100&amp;endasset1=TotalStockMarket&amp;endallocation1%5F1=30&amp;endasset2=TotalBond&amp;endallocation2%5F1=50&amp;endasset3=ShortTreasury&amp;endallocation3%5F1=20&amp;endtotal1=100&amp;cfname1=Saving&amp;cftype1=1&amp;cfamount1=12000&amp;cfinfadj1=true&amp;%5F%5Fcheckbox%5Fcfinfadj1=true&amp;cfstart1=1&amp;cffrequency1=4&amp;cfoccurs1=1&amp;cfname2=Retirement&amp;cftype2=2&amp;cfamount2=80000&amp;cfinfadj2=true&amp;%5F%5Fcheckbox%5Fcfinfadj2=true&amp;cfstart2=2&amp;cffrequency2=4&amp;cfoccurs2=2&amp;cftype3=2&amp;%5F%5Fcheckbox%5Fcfinfadj3=true&amp;cfstart3=3&amp;cffrequency3=4&amp;cfoccurs3=3">even lacking social security</a> <a href="/WithoutSS.pdf">{PDF}</a> would have succeeded about 76% of the time. A warning, however: I not a financial expert, so caveat emptor.</em></p>
+
+<p>The biggest financial problem in anyone’s life is how to provide for oneself in retirement. If you retire in your 60’s, you have a good chance of living for another several decades. Even someone used to living on a modest income of $40,000 a year, could need over half a million dollars saved up to keep from running out of money. &ldquo;Half a million dollars‽&rdquo; you cry. &ldquo;I can barely afford my <a href="https://www.waterstonegroup.com/insights-and-news/americas-relationship-with-subscription-services/">monthly subscription services</a>!&rdquo; Fortunately, by taking advantage of the <a href="https://www.snopes.com/fact-check/compound-interest/">most powerful force in the universe</a> it’s easier than you think, especially if you get started early.</p>
+
+<h2 id="the-formula">The Formula</h2>
+
+<p>After thinking about it really hard for a while, you come up with the following goal: &ldquo;I want to retire at 67 with enough savings to live for 20 years at 80% of my usual income.&rdquo; What can you do to have a fair chance of meeting this goal? How much you need to save depends most of all on what age you start saving at. Under some reasonable assumptions, the percent \(p\) of your income you would need to save if you started saving at age \(A\) would be:
+\[\formbox{p = 12\times0.8\left(\frac{0.03}{1.03^N - 1}\right)}\]
+where \(N=67-A\). If you wanted to type it in to a <a href="https://en.wikipedia.org/wiki/TI-30">calculator</a>, the keypresses would likely be something like this:</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nil" data-lang="nil">12 * 0.8 * 0.03 ÷ ( 1.03 ^ N - 1 )</code></pre></div>
+<p>Or you could use the fancy Javascript calculator <a href="#appendix-calculator">below</a>.</p>
+
+<h3 id="example">Example</h3>
+
+<p>For instance, say you start saving at 25. Then, assuming no prolonged periods of unemployment, you would be saving for \(N=67-25=42\) years. Plugging this in to the formula, we get</p>
+
+<p>\[
+p = 12 \times 0.8 \left(\frac{0.03}{1.03^{42} - 1}\right) = 0.117
+\]</p>
+
+<p>So you would need to put about 12% of your paycheck into some kind of <a href="https://investor.vanguard.com/mutual-funds/target-retirement/">retirement fund</a> in order to meet your goal. If you make $50,000 a year, 12% of your income comes to $6000 a year, or $500 a month. Many employers, however, will offer to <a href="https://www.investopedia.com/articles/personal-finance/120315/what-good-401k-match.asp">match</a> a portion of your contributions. If your employer matches<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> 3%, then you would only need to contribute the other 9%. At $50,000 a year, this is a contribution of $375 a month.
+</p>
+
+<h2 id="the-importance-of-starting-early">The Importance of Starting Early</h2>
+
+<p>Consider this table:</p>
+
+<table>
+<thead>
+<tr>
+<th>Age</th>
+<th>Percent Needed</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>25</td>
+<td>12%</td>
+</tr>
+
+<tr>
+<td>30</td>
+<td>15%</td>
+</tr>
+
+<tr>
+<td>35</td>
+<td>18%</td>
+</tr>
+
+<tr>
+<td>40</td>
+<td>24%</td>
+</tr>
+
+<tr>
+<td>45</td>
+<td>31%</td>
+</tr>
+
+<tr>
+<td>50</td>
+<td>44%</td>
+</tr>
+
+<tr>
+<td>55</td>
+<td>68%</td>
+</tr>
+</tbody>
+</table>
+
+<p>If you put your contributions off until you’re 45, you would have to put back over a third of your income to maintain the lifestyle that you’re used to. Realistically, you’re going to have to make some adjustments. If you wait until you’re 55, things are going to be painful.</p>
+
+<h2 id="assumptions">Assumptions</h2>
+
+<p>Let’s take a look at what assumptions went into our formula and the reasons for them. Feel free to play around with the numbers, but let me try to explain why I think these are good defaults.</p>
+
+<p>We’re assuming that you will retire at age 67, that you will need 12 years of savings in retirement, that you will be living on 80% of your working income, and that while you are working your investments will earn a 3% annual return (adjusted for inflation).</p>
+
+<p>The goal in saving for retirement is to not have to worry about money after you’re not able to earn it any more. The penalty for failing to meet this goal is much greater than the sacrifice needed to achieve it. It is much worse to have $2500 less a month in retirement than it is to have $500 less a month while working. Failure means having to make decisions like whether you’ll pay for your medicine, buy groceries, or keep the lights on once your Social Security check comes in. We want a low chance of failure. These assumptions reflect that goal.</p>
+
+<h3 id="retire-at-67">Retire at 67</h3>
+
+<p>In the United States, 67 is the age when a person is <a href="https://www.ssa.gov/planners/retire/agereduction.html">eligible</a> for full Social Security benefits. <a href="https://dqydj.com/average-retirement-age-in-the-united-states/">These data</a> show that healthy people usually decide to work until 70, when you get enhanced benefits, while unhealthy people retire as soon as they can, at 62, if they can hold out for even that long. Plan for a healthy old age, but consider <a href="https://www.investopedia.com/terms/d/disability-insurance.asp">disability insurance</a>.</p>
+
+<h3 id="12-years-of-savings">12 years of savings</h3>
+
+<p>The current <a href="https://www.ssa.gov/oact/STATS/table4c6.html">life expectancy</a> for someone who makes it to age 67 is about 20 years more. Social Security, in its current state, will pay for about 8 years worth of that,<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup> so you, the retiree, will have to come up with the other 12. If you want to plan for a retirement with <a href="https://www.ssa.gov/policy/docs/ssb/v70n3/v70n3p111.html">reduced benefits</a>, or if you are very averse to the risk of living to an advanced age while being very poor, or if you want to retire early, add on a few years. If you plan on dying before you reach 67, congratulations! You’re off the hook.</p>
+
+<h3 id="80-of-working-income">80% of working income</h3>
+
+<p>The percentage of your income that you will need to maintain your lifestyle in retirement is called your <em>replacement ratio</em>. Generally, it will be less than your working income. Why? Though some costs will have increased (medical, perpetually), typically your financial obligations will be fewer: you don’t have to save money anymore (can’t take it with you), the kids have moved out (let us pray), the mortgage is paid off (at long last)&hellip; <a href="https://personal.vanguard.com/pdf/ISGRR.pdf">This study</a> claims your replacement ratio will usually be between 70% to 85%, depending on circumstances. If you plan on being rich and in good health, you may wish to choose the lower number; if you plan on being poor and in bad health, you may wish to choose the higher. In either case, 80% seems a cautious default.</p>
+
+<h3 id="3-annual-return">3% annual return</h3>
+
+<p><em>Question:</em> The stock market has historically had about a 7% inflation adjusted return. Even if you put half your money in bonds, you could still get well above 3% annually. So isn’t 3% way too conservative?</p>
+
+<p><em>Answer:</em> No. Because you, as an individual, don’t get an average return; you get whatever the market gives you. If your retirement years begin with a financial crisis followed by a prolonged recession, it doesn’t matter if the market recovers ten years later, you’ve already spent all your money and you’re not dead yet; as a variation on <a href="https://en.wikiquote.org/wiki/John%5FMaynard%5FKeynes">Keynes</a>: markets can remain depressed longer than you can remain solvent. Assuming a 3% average return will give you a much better chance of avoiding the worst scenarios, and if you start saving early, isn’t much of an additional burden.</p>
+
+<h2 id="appendix-calculator">Appendix - Calculator</h2>
+
+<form onsubmit="return false">
+  <ul class="form-group">
+    <li class="d-inline-block col-5"><label>Starting Age</label></li>
+    <li class="d-inline-block col-5"><input size="3" type="text" id="startage" aria-label="startage" value="25" onchange="computePercent()" /> years</li>
+  </ul>
+
+<ul class="form-group">
+  <li class="d-inline-block col-5"><label>Retirement Age</label></li>
+  <li class="d-inline-block col-5"><input size="3" type="text" id="retirementage" aria-label="retirementage" value="67" onchange="computePercent()" /> years</li>
+</ul>
+
+<ul class="form-group">
+  <li class="d-inline-block col-5"><label>Years of Savings Needed</label></li>
+  <li class="d-inline-block col-5"><input size="3" type="text" id="yearsofsavings" aria-label="yearsofsavings" value="12" onchange="computePercent()" /> years</li>
+</ul>
+
+<ul class="form-group">
+  <li class="d-inline-block col-5"><label>Percent of Working Income Needed</label></li>
+  <li class="d-inline-block col-5"><input size="3" type="text" id="percentofincome" aria-label="percentofincome" value="80" onchange="computePercent()" /> %</li>
+</ul>
+
+<ul class="form-group">
+  <li class="d-inline-block col-5"><label>Rate of Return</label></li>
+  <li class="d-inline-block col-5"><input size="3" type="text" id="rateofreturn" aria-label="rateofreturn" value="3" onchange="computePercent()" /> % per year</li>
+</ul>
+
+    <ul>
+      <div class="text-red">
+      <li class="d-inline-block col-5"><label>You Need to Save:
+      <li class="d-inline-block col-5" id="percenttosave"></li>
+      </div>
+    </ul>
+</form>
+
+<script src="retirement.js"></script>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">Unless it is a matter of putting a roof over your head or food on the table, you should always contribute at least up to your employer match. This is an investment with a guaranteed 100% return. You’ll never do better.
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2">I don’t mean to say that Social Security pays out for eight years and then stops. I mean that it will pay for around <sup>8</sup>&frasl;<sub>20</sub> = 40% of your expenses during those 20 years.
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+</ol>
+</div>
+  </section>
+
+    
+  <section class="pb-6 mb-3 border-bottom">
+    <div class="h4 mt-3 mb-1">Leave a Comment</div>
+    <script>talkyardServerUrl='https:\/\/comments-for-mathformachines-com.talkyard.net';</script>
+    <script async defer src="https://c1.ty-cdn.net/-/talkyard-comments.min.js"></script>
+    
+    <div class="talkyard-comments" data-discussion-id="" style="margin-top: 45px;">
+      <noscript>Please enable Javascript to view comments.</noscript>
+      <p style="margin-top: 25px; opacity: 0.9; font-size: 96%">Comments powered by
+        <a href="https://www.talkyard.io">Talkyard</a>.</p>
+    </div>
+  </section>
+
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div>
+      
+    </div>
+
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    &copy;Ryan Holbrook 2019 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+
+    
+    
+    
+    
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    
+    
+    
+    
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+         "HTML-CSS": { scale: 90, linebreaks: { automatic: true } },
+          SVG: { linebreaks: { automatic:true } },
+      });
+      MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+      MathJax.Hub.Config({
+        TeX: {
+          Macros: {
+            formbox: ["\\bbox[15px, border:1px solid PowderBlue]{#1}", 1],
+            qed: "\\tag*{$\\Box$}"
+          }
+        }
+      });
+    </script>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133546767-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-133546767-1', { 'optimize_id': 'GTM-T3XD3JM'});
+    </script>
+
+    
+  </body>
+</html>

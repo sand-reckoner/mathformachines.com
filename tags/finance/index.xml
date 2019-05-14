@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Finance on Math for Machines</title>
+    <link>https://mathformachines.com/tags/finance/</link>
+    <description>Recent content in Finance on Math for Machines</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy;Ryan Holbrook 2019</copyright>
+    <lastBuildDate>Tue, 14 May 2019 15:19:00 -0500</lastBuildDate>
+    
+	<atom:link href="https://mathformachines.com/tags/finance/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A Somewhat Better Retirement Formula (with Calculator!)</title>
+      <link>https://mathformachines.com/posts/a-somewhat-better-retirement-formula/</link>
+      <pubDate>Tue, 14 May 2019 15:19:00 -0500</pubDate>
+      
+      <guid>https://mathformachines.com/posts/a-somewhat-better-retirement-formula/</guid>
+      <description>&lt;p&gt;&lt;em&gt;This is based off a lesson I put together for a class I teach about general mathematics. I wanted a retirement savings formula that was simple enough for an ordinary person to use on their own, but also flexible enough to account for varied goals or circumstances.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;My formula &lt;a href=&#34;https://www.investopedia.com/articles/personal-finance/092414/retirement-what-percentage-salary-save.asp&#34;&gt;agrees pretty well&lt;/a&gt; with what appear to be experts recommend, and it seems to be fairly robust in simulation. &lt;a href=&#34;https://www.portfoliovisualizer.com/financial-goals?s=y&amp;amp;stages=2&amp;amp;careerYears=41&amp;amp;mode=1&amp;amp;initialAmount=12000&amp;amp;years=70&amp;amp;simulationModel=1&amp;amp;historicalVolatility=true&amp;amp;fullHistory=true&amp;amp;startYear=1972&amp;amp;endYear=2018&amp;amp;bootstrapModel=1&amp;amp;bootstrapMinYears=1&amp;amp;bootstrapMaxYears=20&amp;amp;circularBootstrap=true&amp;amp;distribution=1&amp;amp;dof=30&amp;amp;meanReturn=7.0&amp;amp;volatility=12.0&amp;amp;sequenceStressTest=0&amp;amp;stressTestRetirement=true&amp;amp;inflationModel=1&amp;amp;inflationMean=4.26&amp;amp;inflationVolatility=3.13&amp;amp;customIntervals=false&amp;amp;percentileList=10%2C+25%2C+50%2C+75%2C+90&amp;amp;returnList=0%2C+2.5%2C+5%2C+7.5%2C+10%2C+12.5&amp;amp;asset1=TotalStockMarket&amp;amp;allocation1%5F1=90&amp;amp;asset2=TotalBond&amp;amp;allocation2%5F1=10&amp;amp;total1=100&amp;amp;endasset1=TotalStockMarket&amp;amp;endallocation1%5F1=30&amp;amp;endasset2=TotalBond&amp;amp;endallocation2%5F1=50&amp;amp;endasset3=ShortTreasury&amp;amp;endallocation3%5F1=20&amp;amp;endtotal1=100&amp;amp;cfname1=Saving&amp;amp;cftype1=1&amp;amp;cfamount1=12000&amp;amp;cfinfadj1=true&amp;amp;%5F%5Fcheckbox%5Fcfinfadj1=true&amp;amp;cfstart1=1&amp;amp;cffrequency1=4&amp;amp;cfoccurs1=1&amp;amp;cfname2=Retirement&amp;amp;cftype2=2&amp;amp;cfamount2=48000&amp;amp;cfinfadj2=true&amp;amp;%5F%5Fcheckbox%5Fcfinfadj2=true&amp;amp;cfstart2=2&amp;amp;cffrequency2=4&amp;amp;cfoccurs2=2&amp;amp;cftype3=2&amp;amp;%5F%5Fcheckbox%5Fcfinfadj3=true&amp;amp;cfstart3=3&amp;amp;cffrequency3=4&amp;amp;cfoccurs3=3&#34;&gt;This simulation&lt;/a&gt; &lt;a href=&#34;https://mathformachines.com/WithSS.pdf&#34;&gt;{PDF}&lt;/a&gt;, based on historical data, says that a plan like this would have succeeded about 97% of the time with typical investments, and &lt;a href=&#34;https://www.portfoliovisualizer.com/financial-goals?s=y&amp;amp;stages=2&amp;amp;careerYears=41&amp;amp;mode=1&amp;amp;initialAmount=12000&amp;amp;years=70&amp;amp;simulationModel=1&amp;amp;historicalVolatility=true&amp;amp;fullHistory=true&amp;amp;startYear=1972&amp;amp;endYear=2018&amp;amp;bootstrapModel=1&amp;amp;bootstrapMinYears=1&amp;amp;bootstrapMaxYears=20&amp;amp;circularBootstrap=true&amp;amp;distribution=1&amp;amp;dof=30&amp;amp;meanReturn=7.0&amp;amp;volatility=12.0&amp;amp;sequenceStressTest=0&amp;amp;stressTestRetirement=true&amp;amp;inflationModel=1&amp;amp;inflationMean=4.26&amp;amp;inflationVolatility=3.13&amp;amp;customIntervals=false&amp;amp;percentileList=10%2C+25%2C+50%2C+75%2C+90&amp;amp;returnList=0%2C+2.5%2C+5%2C+7.5%2C+10%2C+12.5&amp;amp;asset1=TotalStockMarket&amp;amp;allocation1%5F1=90&amp;amp;asset2=TotalBond&amp;amp;allocation2%5F1=10&amp;amp;total1=100&amp;amp;endasset1=TotalStockMarket&amp;amp;endallocation1%5F1=30&amp;amp;endasset2=TotalBond&amp;amp;endallocation2%5F1=50&amp;amp;endasset3=ShortTreasury&amp;amp;endallocation3%5F1=20&amp;amp;endtotal1=100&amp;amp;cfname1=Saving&amp;amp;cftype1=1&amp;amp;cfamount1=12000&amp;amp;cfinfadj1=true&amp;amp;%5F%5Fcheckbox%5Fcfinfadj1=true&amp;amp;cfstart1=1&amp;amp;cffrequency1=4&amp;amp;cfoccurs1=1&amp;amp;cfname2=Retirement&amp;amp;cftype2=2&amp;amp;cfamount2=80000&amp;amp;cfinfadj2=true&amp;amp;%5F%5Fcheckbox%5Fcfinfadj2=true&amp;amp;cfstart2=2&amp;amp;cffrequency2=4&amp;amp;cfoccurs2=2&amp;amp;cftype3=2&amp;amp;%5F%5Fcheckbox%5Fcfinfadj3=true&amp;amp;cfstart3=3&amp;amp;cffrequency3=4&amp;amp;cfoccurs3=3&#34;&gt;even lacking social security&lt;/a&gt; &lt;a href=&#34;https://mathformachines.com/WithoutSS.pdf&#34;&gt;{PDF}&lt;/a&gt; would have succeeded about 76% of the time. A warning, however: I not a financial expert, so caveat emptor.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The biggest financial problem in anyone’s life is how to provide for oneself in retirement. If you retire in your 60’s, you have a good chance of living for another several decades. Even someone used to living on a modest income of $40,000 a year, could need over half a million dollars saved up to keep from running out of money. &amp;ldquo;Half a million dollars‽&amp;rdquo; you cry. &amp;ldquo;I can barely afford my &lt;a href=&#34;https://www.waterstonegroup.com/insights-and-news/americas-relationship-with-subscription-services/&#34;&gt;monthly subscription services&lt;/a&gt;!&amp;rdquo; Fortunately, by taking advantage of the &lt;a href=&#34;https://www.snopes.com/fact-check/compound-interest/&#34;&gt;most powerful force in the universe&lt;/a&gt; it’s easier than you think, especially if you get started early.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-formula&#34;&gt;The Formula&lt;/h2&gt;
+
+&lt;p&gt;After thinking about it really hard for a while, you come up with the following goal: &amp;ldquo;I want to retire at 67 with enough savings to live for 20 years at 80% of my usual income.&amp;rdquo; What can you do to have a fair chance of meeting this goal? How much you need to save depends most of all on what age you start saving at. Under some reasonable assumptions, the percent \(p\) of your income you would need to save if you started saving at age \(A\) would be:
+\[\formbox{p = 12\times0.8\left(\frac{0.03}{1.03^N - 1}\right)}\]
+where \(N=67-A\). If you wanted to type it in to a &lt;a href=&#34;https://en.wikipedia.org/wiki/TI-30&#34;&gt;calculator&lt;/a&gt;, the keypresses would likely be something like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-nil&#34; data-lang=&#34;nil&#34;&gt;12 * 0.8 * 0.03 ÷ ( 1.03 ^ N - 1 )&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Or you could use the fancy Javascript calculator &lt;a href=&#34;#appendix-calculator&#34;&gt;below&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;example&#34;&gt;Example&lt;/h3&gt;
+
+&lt;p&gt;For instance, say you start saving at 25. Then, assuming no prolonged periods of unemployment, you would be saving for \(N=67-25=42\) years. Plugging this in to the formula, we get&lt;/p&gt;
+
+&lt;p&gt;\[
+p = 12 \times 0.8 \left(\frac{0.03}{1.03^{42} - 1}\right) = 0.117
+\]&lt;/p&gt;
+
+&lt;p&gt;So you would need to put about 12% of your paycheck into some kind of &lt;a href=&#34;https://investor.vanguard.com/mutual-funds/target-retirement/&#34;&gt;retirement fund&lt;/a&gt; in order to meet your goal. If you make $50,000 a year, 12% of your income comes to $6000 a year, or $500 a month. Many employers, however, will offer to &lt;a href=&#34;https://www.investopedia.com/articles/personal-finance/120315/what-good-401k-match.asp&#34;&gt;match&lt;/a&gt; a portion of your contributions. If your employer matches&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; 3%, then you would only need to contribute the other 9%. At $50,000 a year, this is a contribution of $375 a month.
+&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

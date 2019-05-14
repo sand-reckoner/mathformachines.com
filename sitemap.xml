@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://mathformachines.com/posts/a-somewhat-better-retirement-formula/</loc>
+    <lastmod>2019-05-14T15:19:05-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://mathformachines.com/posts/permitted-and-forbidden-sets/</loc>
     <lastmod>2019-05-04T16:27:01-05:00</lastmod>
   </url>
@@ -28,12 +33,18 @@
   
   <url>
     <loc>https://mathformachines.com/posts/</loc>
-    <lastmod>2019-05-04T16:27:01-05:00</lastmod>
+    <lastmod>2019-05-14T15:19:05-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://mathformachines.com/tags/bayesian/</loc>
     <lastmod>2019-04-13T19:53:25-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mathformachines.com/tags/calculator/</loc>
+    <lastmod>2019-05-14T15:19:05-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -61,6 +72,12 @@
   </url>
   
   <url>
+    <loc>https://mathformachines.com/tags/finance/</loc>
+    <lastmod>2019-05-14T15:19:05-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://mathformachines.com/categories/journal-club/</loc>
     <lastmod>2019-05-04T16:27:01-05:00</lastmod>
     <priority>0</priority>
@@ -74,7 +91,7 @@
   
   <url>
     <loc>https://mathformachines.com/</loc>
-    <lastmod>2019-05-04T16:27:01-05:00</lastmod>
+    <lastmod>2019-05-14T15:19:05-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -122,6 +139,12 @@
   <url>
     <loc>https://mathformachines.com/tags/relus/</loc>
     <lastmod>2019-05-04T16:27:01-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://mathformachines.com/tags/retirement/</loc>
+    <lastmod>2019-05-14T15:19:05-05:00</lastmod>
     <priority>0</priority>
   </url>
   
